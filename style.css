@@ -32,13 +32,13 @@ body::-webkit-scrollbar {
 }
 
 body {
-  overflow-x: hidden;
   min-width: 320px;
+  overflow-x: hidden;
+  color: var(--text);
   background:
     radial-gradient(circle at 84% 8%, rgba(117, 36, 178, 0.15), transparent 28rem),
     radial-gradient(circle at 8% 45%, rgba(255, 136, 0, 0.08), transparent 28rem),
     var(--bg);
-  color: var(--text);
   font-family: "Rajdhani", sans-serif;
 }
 
@@ -48,7 +48,7 @@ body {
   inset: 0;
   opacity: 0.03;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
 .cursor-glow {
@@ -62,7 +62,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
-/* Верхняя панель */
+/* Navigation */
 .topbar {
   position: absolute;
   z-index: 30;
@@ -115,6 +115,56 @@ body {
   box-shadow: 0 0 18px rgba(255, 157, 0, 0.45);
 }
 
+/* Glitch */
+.glitch-logo {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-logo::before,
+.glitch-logo::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: attr(data-text);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.glitch-logo:hover::before {
+  left: 2px;
+  color: #ff4f53;
+  opacity: 0.75;
+  animation: glitchOne 0.3s infinite linear alternate-reverse;
+}
+
+.glitch-logo:hover::after {
+  left: -2px;
+  color: #3bb9ff;
+  opacity: 0.75;
+  animation: glitchTwo 0.3s infinite linear alternate-reverse;
+}
+
+@keyframes glitchOne {
+  0% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 1px); }
+  20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
+  40% { clip-path: inset(40% 0 30% 0); transform: translate(-1px, 2px); }
+  60% { clip-path: inset(80% 0 5% 0); transform: translate(1px, -2px); }
+  80% { clip-path: inset(10% 0 70% 0); transform: translate(-2px, 1px); }
+  100% { clip-path: inset(50% 0 20% 0); transform: translate(2px, -1px); }
+}
+
+@keyframes glitchTwo {
+  0% { clip-path: inset(10% 0 80% 0); transform: translate(2px, -1px); }
+  20% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 1px); }
+  40% { clip-path: inset(30% 0 40% 0); transform: translate(1px, -2px); }
+  60% { clip-path: inset(50% 0 30% 0); transform: translate(-1px, 2px); }
+  80% { clip-path: inset(20% 0 60% 0); transform: translate(2px, -1px); }
+  100% { clip-path: inset(60% 0 15% 0); transform: translate(-2px, 1px); }
+}
+
 /* Hero */
 .hero {
   position: relative;
@@ -131,10 +181,7 @@ body {
   position: absolute;
   z-index: -3;
   inset: 0;
-  background-image: url("assets/font.png?v=1");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: url("assets/font.png?v=1") center / cover no-repeat;
   filter: saturate(1.08) contrast(1.05) brightness(0.85);
   animation: heroZoom 20s ease-in-out infinite alternate;
 }
@@ -146,6 +193,15 @@ body {
   background:
     linear-gradient(90deg, rgba(4, 5, 9, 0.91) 0%, rgba(4, 5, 9, 0.68) 37%, rgba(4, 5, 9, 0.1) 73%, rgba(4, 5, 9, 0.35) 100%),
     linear-gradient(0deg, var(--bg) 0%, rgba(8, 10, 15, 0.02) 38%);
+}
+
+#heroParticles {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -242,7 +298,7 @@ body {
   animation: floatDown 1.5s infinite;
 }
 
-/* Контент */
+/* Layout */
 main {
   max-width: 1280px;
   margin: 0 auto;
@@ -277,9 +333,41 @@ main {
   margin-top: 0.2rem;
   font: 800 clamp(1.55rem, 3.6vw, 2.55rem) "Orbitron", sans-serif;
   letter-spacing: -0.065em;
+  text-shadow: 0 0 30px rgba(255, 157, 0, 0.08);
 }
 
-/* Общие карточки */
+/* Spotlight */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::after {
+  position: absolute;
+  z-index: 0;
+  top: var(--spotlight-y, 50%);
+  left: var(--spotlight-x, 50%);
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 157, 0, 0.2), rgba(146, 92, 255, 0.07) 35%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s ease;
+}
+
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+.spotlight-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Common cards */
 .social-card,
 .partner-card,
 .gear-card {
@@ -288,18 +376,22 @@ main {
   border: 1px solid var(--line);
   background: var(--panel);
   backdrop-filter: blur(11px);
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.14s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .social-card::before,
 .partner-card::before,
 .gear-card::before {
   position: absolute;
+  z-index: 1;
   top: 0;
   left: -85%;
   width: 42%;
   height: 100%;
   content: "";
+  pointer-events: none;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.09), transparent);
   transform: skewX(-22deg);
   transition: left 0.65s ease;
@@ -316,10 +408,9 @@ main {
 .gear-card:hover {
   border-color: rgba(255, 157, 0, 0.65);
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.35), 0 0 24px rgba(255, 157, 0, 0.1);
-  transform: translateY(-4px);
 }
 
-/* Соцсети */
+/* Socials */
 .socials-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -427,7 +518,7 @@ main {
   flex: 0 0 48px;
   place-items: center;
   border-radius: 13px;
-  color: white;
+  color: #fff;
   background: #5865f2;
   box-shadow: 0 0 20px rgba(88, 101, 242, 0.45);
   font-size: 1.5rem;
@@ -516,7 +607,7 @@ main {
   padding: 0.75rem 0.85rem;
   border: 1px solid rgba(120, 134, 255, 0.24);
   border-radius: 10px;
-  color: white;
+  color: #fff;
   background: rgba(88, 101, 242, 0.16);
   font-weight: 800;
   text-decoration: none;
@@ -542,7 +633,7 @@ main {
   color: #d3d9ff;
 }
 
-/* Визуальные карточки */
+/* Visual cards */
 .visual-grid {
   display: grid;
   grid-template-columns: 1.35fr 1fr;
@@ -561,7 +652,7 @@ main {
   border-radius: 18px;
   background-position: center;
   background-size: cover;
-  color: white;
+  color: #fff;
   text-decoration: none;
   transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease;
 }
@@ -630,18 +721,38 @@ main {
   font-weight: 800;
 }
 
-/* Партнёры */
+/* GearUP */
 .gearup-banner {
   position: relative;
   display: block;
+  isolation: isolate;
   overflow: hidden;
   margin-bottom: 1rem;
-  border: 1px solid rgba(38, 174, 255, 0.62);
+  border: 0;
   border-radius: 18px;
-  background: #060913;
-  box-shadow: 0 0 28px rgba(28, 118, 255, 0.16), inset 0 0 28px rgba(28, 118, 255, 0.08);
+  background: transparent;
+  box-shadow: 0 0 28px rgba(28, 118, 255, 0.16);
   text-decoration: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gradient-border::before {
+  position: absolute;
+  z-index: -2;
+  inset: -2px;
+  border-radius: 20px;
+  content: "";
+  background: conic-gradient(from 0deg, #ff9d00, #925cff, #16a2ff, #ff9d00);
+  animation: spinBorder 5s linear infinite;
+}
+
+.gradient-border::after {
+  position: absolute;
+  z-index: -1;
+  inset: 2px;
+  border-radius: 16px;
+  content: "";
+  background: #080b13;
 }
 
 .gearup-banner img {
@@ -664,17 +775,22 @@ main {
 
 .gearup-banner-cta {
   position: absolute;
+  z-index: 2;
   right: 1rem;
   bottom: 1rem;
   padding: 0.7rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.36);
   border-radius: 9px;
-  color: white;
+  color: #fff;
   background: rgba(6, 16, 38, 0.82);
   backdrop-filter: blur(7px);
   box-shadow: 0 0 18px rgba(31, 170, 255, 0.32);
   font: 800 0.75rem "Orbitron", sans-serif;
   letter-spacing: 0.04em;
+}
+
+@keyframes spinBorder {
+  to { transform: rotate(360deg); }
 }
 
 .partners-grid {
@@ -716,12 +832,14 @@ main {
 }
 
 .partner-card > span {
+  position: relative;
+  z-index: 2;
   margin-left: auto;
   color: var(--orange);
   font-size: 1.2rem;
 }
 
-/* Донаты */
+/* Support */
 .donate-grid {
   display: flex;
   flex-wrap: wrap;
@@ -736,7 +854,7 @@ main {
   gap: 0.55rem;
   padding: 0.85rem 1rem;
   border-radius: 11px;
-  color: white;
+  color: #fff;
   font-weight: 800;
   text-decoration: none;
   transition: transform 0.25s ease, filter 0.25s ease;
@@ -756,16 +874,13 @@ main {
   opacity: 0.76;
 }
 
-.paypal {
-  background: linear-gradient(135deg, #004bb2, #009dde);
-}
-
+.paypal { background: linear-gradient(135deg, #004bb2, #009dde); }
 .revolut {
   border: 1px solid #2c3443;
   background: linear-gradient(135deg, #252b37, #0a0c12);
 }
 
-/* Сетап */
+/* Setup */
 .affiliate-note {
   margin: -0.25rem 0 1rem;
   color: var(--sub);
@@ -790,10 +905,14 @@ main {
 }
 
 .gear-card > span {
+  position: relative;
+  z-index: 2;
   font-size: 1.45rem;
 }
 
 .gear-card b {
+  position: relative;
+  z-index: 2;
   margin-left: auto;
   color: var(--orange);
   font-size: 0.7rem;
@@ -830,7 +949,7 @@ footer p {
   font-size: 0.85rem;
 }
 
-/* Анимация появления */
+/* Animations */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
@@ -863,7 +982,7 @@ footer p {
   50% { transform: translateY(6px); }
 }
 
-/* Планшет */
+/* Tablet */
 @media (max-width: 900px) {
   .socials-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -874,7 +993,7 @@ footer p {
   }
 }
 
-/* Телефон */
+/* Mobile */
 @media (max-width: 680px) {
   .topbar {
     padding: 0.95rem 1rem;
@@ -959,7 +1078,14 @@ footer p {
   }
 }
 
-/* Доступность: отключает лишнее движение по настройкам системы */
+@media (hover: none), (pointer: coarse) {
+  .glitch-logo::before,
+  .glitch-logo::after,
+  .spotlight-card::after {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -974,147 +1100,8 @@ footer p {
     opacity: 1;
     transform: none;
   }
-}
 
-/* ===== GLITCH LOGO ===== */
-.glitch-logo {
-  position: relative;
-  display: inline-block;
-}
-.glitch-logo::before,
-.glitch-logo::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  pointer-events: none;
-}
-.glitch-logo:hover::before {
-  animation: glitch-1 0.35s infinite linear alternate-reverse;
-  color: #ff4f53;
-  left: 2px;
-  opacity: 0.85;
-}
-.glitch-logo:hover::after {
-  animation: glitch-2 0.35s infinite linear alternate-reverse;
-  color: #3bb9ff;
-  left: -2px;
-  opacity: 0.85;
-}
-@keyframes glitch-1 {
-  0% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 1px); }
-  20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
-  40% { clip-path: inset(40% 0 30% 0); transform: translate(-1px, 2px); }
-  60% { clip-path: inset(80% 0 5% 0); transform: translate(1px, -2px); }
-  80% { clip-path: inset(10% 0 70% 0); transform: translate(-2px, 1px); }
-  100% { clip-path: inset(50% 0 20% 0); transform: translate(2px, -1px); }
-}
-@keyframes glitch-2 {
-  0% { clip-path: inset(10% 0 80% 0); transform: translate(2px, -1px); }
-  20% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 1px); }
-  40% { clip-path: inset(30% 0 40% 0); transform: translate(1px, -2px); }
-  60% { clip-path: inset(50% 0 30% 0); transform: translate(-1px, 2px); }
-  80% { clip-path: inset(20% 0 60% 0); transform: translate(2px, -1px); }
-  100% { clip-path: inset(60% 0 15% 0); transform: translate(-2px, 1px); }
-}
-
-/* ===== HERO PARTICLES ===== */
-#heroParticles {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-/* ===== 3D TILT BASE ===== */
-.social-card,
-.partner-card,
-.gear-card,
-.discord-server-card,
-.visual-card {
-  transform-style: preserve-3d;
-}
-
-/* ===== SPOTLIGHT CARD ===== */
-.spotlight-card {
-  position: relative;
-  overflow: hidden;
-}
-.spotlight-card::after {
-  content: '';
-  position: absolute;
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle, rgba(255, 157, 0, 0.18), transparent 65%);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  left: var(--sx, 50%);
-  top: var(--sy, 50%);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  z-index: 2;
-}
-.spotlight-card:hover::after {
-  opacity: 1;
-}
-
-/* ===== GRADIENT BORDER ===== */
-.gradient-border {
-  position: relative;
-  z-index: 0;
-  border-radius: 18px;
-}
-.gradient-border::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  background: conic-gradient(from 0deg, #ff9d00, #925cff, #16a2ff, #ff9d00);
-  border-radius: 20px;
-  animation: spin-border 3.5s linear infinite;
-  z-index: -1;
-}
-.gradient-border::after {
-  content: '';
-  position: absolute;
-  inset: 2px;
-  background: #060913;
-  border-radius: 16px;
-  z-index: -1;
-}
-.gearup-banner.gradient-border::after {
-  background: #060913;
-}
-@keyframes spin-border {
-  to { transform: rotate(360deg); }
-}
-
-/* ===== GLOWING TITLES ===== */
-.section-title h2 {
-  text-shadow: 0 0 40px rgba(255, 157, 0, 0.06);
-}
-
-/* ===== ENHANCED HERO BUTTONS ===== */
-.hero-btn.primary {
-  position: relative;
-  overflow: hidden;
-}
-.hero-btn.primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.6s ease;
-}
-.hero-btn.primary:hover::before {
-  left: 150%;
+  .gradient-border::before {
+    animation: none;
+  }
 }
