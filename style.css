@@ -42,6 +42,10 @@ body {
   font-family: "Rajdhani", sans-serif;
 }
 
+a {
+  color: inherit;
+}
+
 .noise {
   position: fixed;
   z-index: 20;
@@ -114,7 +118,7 @@ body {
   box-shadow: 0 0 18px rgba(255, 157, 0, 0.45);
 }
 
-/* Glitch logo */
+/* Logo glitch */
 .glitch-logo {
   position: relative;
   display: inline-block;
@@ -296,7 +300,7 @@ body {
   animation: floatDown 1.5s infinite;
 }
 
-/* Layout */
+/* Main layout */
 main {
   max-width: 1280px;
   margin: 0 auto;
@@ -383,6 +387,7 @@ main {
   overflow: hidden;
   border: 1px solid var(--line);
   background: var(--panel);
+  color: var(--text);
   transform-style: preserve-3d;
   will-change: transform;
   transition: transform 0.14s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
@@ -432,7 +437,6 @@ main {
   gap: 0.85rem;
   padding: 1rem;
   border-radius: var(--radius);
-  color: var(--text);
   text-decoration: none;
 }
 
@@ -657,7 +661,7 @@ main {
   color: #d3d9ff;
 }
 
-/* Visual cards */
+/* Content visual cards */
 .visual-grid {
   display: grid;
   grid-template-columns: 1.35fr 1fr;
@@ -764,15 +768,20 @@ main {
   font-weight: 800;
 }
 
-/* GearUP: compact 9:16 card */
+/* Partners: GearUP banner left, actions right */
+.gearup-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
 .gearup-banner {
   position: relative;
   display: block;
   isolation: isolate;
-  width: min(100%, 300px);
-  margin: 0 0 1rem;
+  height: 400px;
   overflow: hidden;
-  border: 0;
   border-radius: 16px;
   background: #070a12;
   box-shadow: 0 0 24px rgba(28, 118, 255, 0.2);
@@ -802,15 +811,15 @@ main {
 .gearup-banner img {
   display: block;
   width: 100%;
-  aspect-ratio: 9 / 16;
-  background: #070a12;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
   transition: transform 0.45s ease, filter 0.45s ease;
 }
 
 .gearup-banner:hover {
   box-shadow: 0 0 36px rgba(31, 159, 255, 0.5), 0 0 25px rgba(145, 92, 255, 0.3);
-  transform: translateY(-6px) scale(1.02);
+  transform: translateY(-5px);
 }
 
 .gearup-banner:hover img {
@@ -821,47 +830,18 @@ main {
 .gearup-banner-cta {
   position: absolute;
   z-index: 2;
-  right: 0.55rem;
-  bottom: 0.55rem;
-  left: 0.55rem;
-  padding: 0.55rem 0.4rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  padding: 0.56rem 0.35rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   color: #fff;
   background: rgba(5, 11, 28, 0.9);
   box-shadow: 0 0 14px rgba(31, 170, 255, 0.28);
-  font: 800 0.56rem "Orbitron", sans-serif;
-  letter-spacing: 0.025em;
+  font: 800 0.55rem "Orbitron", sans-serif;
+  letter-spacing: 0.02em;
   text-align: center;
-}
-
-@keyframes spinBorder {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Блок партнёров: баннер слева, кнопки справа */
-.gearup-layout {
-  display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
-  align-items: stretch;
-  gap: 1rem;
-}
-
-.gearup-layout .gearup-banner {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  margin: 0;
-}
-
-.gearup-layout .gearup-banner img {
-  height: 100%;
-  min-height: 390px;
-  aspect-ratio: auto;
-  object-fit: cover;
-  object-position: center;
 }
 
 .partners-grid {
@@ -869,11 +849,65 @@ main {
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, 1fr);
   gap: 1rem;
+  min-width: 0;
 }
 
 .partner-card {
+  display: flex;
   min-height: 0;
-  height: 100%;
+  align-items: center;
+  gap: 0.95rem;
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  background: linear-gradient(120deg, rgba(115, 55, 225, 0.2), #111621);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.partner-card:visited,
+.partner-card strong {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.partner-icon {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  place-items: center;
+  border: 1px solid rgba(255, 157, 0, 0.45);
+  border-radius: 12px;
+  color: #ffb11a;
+  background: rgba(255, 157, 0, 0.1);
+  font-size: 1.45rem;
+}
+
+.partner-card strong {
+  font-size: 1.15rem;
+}
+
+.partner-card p {
+  margin-top: 0.24rem;
+  color: #aeb7c7;
+  font-size: 0.96rem;
+  line-height: 1.25;
+}
+
+.partner-card > span {
+  position: relative;
+  z-index: 2;
+  margin-left: auto;
+  color: var(--orange);
+  font-size: 1.3rem;
+}
+
+@keyframes spinBorder {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Support */
@@ -940,7 +974,6 @@ main {
   gap: 0.75rem;
   padding: 0.85rem;
   border-radius: 12px;
-  color: var(--text);
   text-decoration: none;
 }
 
@@ -989,7 +1022,7 @@ footer p {
   font-size: 0.85rem;
 }
 
-/* Animations */
+/* Reveal and animations */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
@@ -1002,48 +1035,28 @@ footer p {
 }
 
 @keyframes heroZoom {
-  to {
-    transform: scale(1.06);
-  }
+  to { transform: scale(1.06); }
 }
 
 @keyframes heroEnter {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes blink {
-  50% {
-    opacity: 0.35;
-    box-shadow: none;
-  }
+  50% { opacity: 0.35; box-shadow: none; }
 }
 
 @keyframes onlinePulse {
-  50% {
-    opacity: 0.42;
-    box-shadow: 0 0 2px #57e889;
-  }
+  50% { opacity: 0.42; box-shadow: 0 0 2px #57e889; }
 }
 
 @keyframes floatDown {
-  50% {
-    transform: translateY(6px);
-  }
+  50% { transform: translateY(6px); }
 }
 
 @keyframes titlePulse {
-  50% {
-    opacity: 0.35;
-    transform: scaleX(0.65);
-  }
+  50% { opacity: 0.35; transform: scaleX(0.65); }
 }
 
 /* Tablet */
@@ -1055,30 +1068,14 @@ footer p {
   .gear-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .gearup-layout {
+    grid-template-columns: 230px minmax(0, 1fr);
+  }
 }
 
 /* Mobile */
 @media (max-width: 680px) {
-  .gearup-layout {
-  grid-template-columns: 1fr;
-}
-
-.gearup-layout .gearup-banner {
-  width: min(100%, 260px);
-  height: auto;
-  margin: 0 auto;
-}
-
-.gearup-layout .gearup-banner img {
-  min-height: 0;
-  height: auto;
-  aspect-ratio: 9 / 16;
-  object-fit: contain;
-}
-
-.partners-grid {
-  grid-template-rows: auto;
-}
   .topbar {
     padding: 0.95rem 1rem;
   }
@@ -1121,7 +1118,6 @@ footer p {
 
   .socials-grid,
   .discord-servers-grid,
-  .partners-grid,
   .gear-grid,
   .visual-grid {
     grid-template-columns: 1fr;
@@ -1141,10 +1137,27 @@ footer p {
     gap: 1.6rem;
   }
 
+  .gearup-layout {
+    grid-template-columns: 1fr;
+  }
+
   .gearup-banner {
     width: min(100%, 260px);
-    margin-right: auto;
-    margin-left: auto;
+    height: auto;
+    aspect-ratio: 9 / 16;
+    margin: 0 auto;
+  }
+
+  .gearup-banner img {
+    object-fit: contain;
+  }
+
+  .partners-grid {
+    grid-template-rows: auto;
+  }
+
+  .partner-card {
+    min-height: 112px;
   }
 
   .donate-card {
