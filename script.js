@@ -1,24 +1,50 @@
-// Language switcher
-const LANGS = ['en', 'ru', 'de'];
-let currentLang = localStorage.getItem('gz-lang') || 'en';
+const LANGS = ["en", "ru", "de"];
+let currentLang = localStorage.getItem("gz-lang") || "en";
 
 function setLang(lang) {
   currentLang = lang;
-  localStorage.setItem('gz-lang', lang);
+  localStorage.setItem("gz-lang", lang);
   applyLang();
 }
 
 function applyLang() {
-  // Update all data-{lang} elements
-  document.querySelectorAll('[data-en]').forEach(el => {
-    const val = el.getAttribute('data-' + currentLang) || el.getAttribute('data-en');
-    el.textContent = val;
+  document.querySelectorAll("[data-en]").forEach((element) => {
+    element.textContent =
+      element.getAttribute(`data-${currentLang}`) ||
+      element.getAttribute("data-en");
   });
-  // Update buttons
-  LANGS.forEach(l => {
-    const btn = document.getElementById('btn-' + l);
-    if (btn) btn.classList.toggle('active', l === currentLang);
+
+  LANGS.forEach((lang) => {
+    document
+      .getElementById(`btn-${lang}`)
+      ?.classList.toggle("active", lang === currentLang);
   });
+
+  document.documentElement.lang = currentLang;
 }
 
-document.addEventListener('DOMContentLoaded', applyLang);
+document.addEventListener("DOMContentLoaded", () => {
+  applyLang();
+
+  const blocks = document.querySelectorAll(".reveal");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  blocks.forEach((block) => observer.observe(block));
+
+  const glow = document.querySelector(".cursor-glow");
+
+  window.addEventListener("pointermove", (event) => {
+    glow.style.left = `${event.clientX}px`;
+    glow.style.top = `${event.clientY}px`;
+  });
+});
