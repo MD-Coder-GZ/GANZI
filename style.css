@@ -109,13 +109,17 @@ body {
 }
 
 .hero-bg {
-  position: absolute;
-  z-index: -3;
-  inset: 0;
-  background-image: url("assets/ganzi-offline.jpg");
-  background-position: center;
-  background-size: cover;
-  filter: saturate(1.12) contrast(1.08);
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: -3 !important;
+
+  background-image: url("/GANZI/assets/ganzi-offline.jpg") !important;
+  background-position: center center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+
+  opacity: 1 !important;
+  filter: saturate(1.12) contrast(1.08) brightness(0.88) !important;
   animation: heroZoom 18s ease-in-out infinite alternate;
 }
 
