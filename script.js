@@ -1,6 +1,12 @@
 const LANGS = ["en", "ru", "de"];
 let currentLang = localStorage.getItem("gz-lang") || "en";
 
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+
 function setLang(lang) {
   currentLang = lang;
   localStorage.setItem("gz-lang", lang);
@@ -30,7 +36,7 @@ async function loadDiscordWidget(card) {
   const url = `https://discord.com/api/guilds/${guildId}/widget.json`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, { cache: "no-store" });
 
     if (!response.ok) {
       throw new Error("Discord widget unavailable");
@@ -48,7 +54,7 @@ async function loadDiscordWidget(card) {
     if (nameElement && data.name) {
       nameElement.textContent = data.name;
     }
-  } catch (error) {
+  } catch {
     const onlineElement = card.querySelector(".server-online");
 
     if (onlineElement) {
@@ -57,123 +63,232 @@ async function loadDiscordWidget(card) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  applyLang();
-
+function setupRevealAnimation() {
   const blocks = document.querySelectorAll(".reveal");
+
+  if (prefersReducedMotion) {
+    blocks.forEach((block) => block.classList.add("visible"));
+    return;
+  }
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
       });
     },
     { threshold: 0.1 }
   );
 
   blocks.forEach((block) => observer.observe(block));
+}
+
+function setupCursorGlow() {
+  const glow = document.querySelector(".cursor-glow");
+
+  if (!glow || !hasFinePointer || prefersReducedMotion) return;
+
+  window.addEventListener(
+    "pointermove",
+    (event) => {
+      glow.style.left = `${event.clientX}px`;
+      glow.style.top = `${event.clientY}px`;
+    },
+    { passive: true }
+  );
+}
+
+function setupSpotlights() {
+  if (!hasFinePointer || prefersReducedMotion) return;
+
+  document.querySelectorAll(".spotlight-card").forEach((card) => {
+    card.addEventListener(
+      "pointermove",
+      (event) => {
+        const rect = card.getBoundingClientRect();
+
+        card.style.setProperty(
+          "--spotlight-x",
+          `${event.clientX - rect.left}px`
+        );
+
+        card.style.setProperty(
+          "--spotlight-y",
+          `${event.clientY - rect.top}px`
+        );
+      },
+      { passive: true }
+    );
+  });
+}
+
+function setupTilt() {
+  if (!hasFinePointer || prefersReducedMotion) return;
+
+  const cards = document.querySelectorAll(
+    ".social-card, .partner-card, .gear-card"
+  );
+
+  cards.forEach((card) => {
+    card.addEventListener(
+      "pointermove",
+      (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const rotateX = ((y - rect.height / 2) / rect.height) * -7;
+        const rotateY = ((x - rect.width / 2) / rect.width) * 7;
+
+        card.style.transform =
+          `perspective(750px) rotateX(${rotateX}deg) ` +
+          `rotateY(${rotateY}deg) translateY(-4px)`;
+      },
+      { passive: true }
+    );
+
+    card.addEventListener("pointerleave", () => {
+      card.style.transform = "";
+    });
+  });
+}
+
+function setupHeroParticles() {
+  const canvas = document.getElementById("heroParticles");
+  const hero = document.querySelector(".hero");
+
+  if (!canvas || !hero || prefersReducedMotion) return;
+
+  const context = canvas.getContext("2d");
+
+  if (!context) return;
+
+  let width = 0;
+  let height = 0;
+  let particles = [];
+  let animationFrame = null;
+  let isDrawing = false;
+
+  const particleCount = window.innerWidth < 700 ? 16 : 34;
+
+  function resizeCanvas() {
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = hero.clientWidth;
+    height = hero.clientHeight;
+
+    canvas.width = width * pixelRatio;
+    canvas.height = height * pixelRatio;
+
+    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+  }
+
+  function createParticles() {
+    particles = Array.from({ length: particleCount }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.22,
+      vy: (Math.random() - 0.5) * 0.22,
+      radius: Math.random() * 1.1 + 0.35,
+      alpha: Math.random() * 0.26 + 0.08
+    }));
+  }
+
+  function drawParticles() {
+    if (!isDrawing) return;
+
+    context.clearRect(0, 0, width, height);
+
+    particles.forEach((particle) => {
+      particle.x += particle.vx;
+      particle.y += particle.vy;
+
+      if (particle.x < -5) particle.x = width + 5;
+      if (particle.x > width + 5) particle.x = -5;
+      if (particle.y < -5) particle.y = height + 5;
+      if (particle.y > height + 5) particle.y = -5;
+
+      context.beginPath();
+      context.arc(
+        particle.x,
+        particle.y,
+        particle.radius,
+        0,
+        Math.PI * 2
+      );
+
+      context.fillStyle = `rgba(255, 170, 50, ${particle.alpha})`;
+      context.fill();
+    });
+
+    for (let i = 0; i < particles.length; i += 1) {
+      for (let j = i + 1; j < particles.length; j += 1) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance >= 92) continue;
+
+        context.beginPath();
+        context.moveTo(particles[i].x, particles[i].y);
+        context.lineTo(particles[j].x, particles[j].y);
+        context.strokeStyle =
+          `rgba(146, 92, 255, ${0.06 * (1 - distance / 92)})`;
+        context.lineWidth = 0.45;
+        context.stroke();
+      }
+    }
+
+    animationFrame = requestAnimationFrame(drawParticles);
+  }
+
+  function restartParticles() {
+    resizeCanvas();
+    createParticles();
+  }
+
+  function startParticles() {
+    if (isDrawing) return;
+
+    isDrawing = true;
+    drawParticles();
+  }
+
+  function stopParticles() {
+    isDrawing = false;
+
+    if (animationFrame) {
+      cancelAnimationFrame(animationFrame);
+    }
+  }
+
+  restartParticles();
+  startParticles();
+
+  window.addEventListener("resize", restartParticles, { passive: true });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopParticles();
+    } else {
+      startParticles();
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  applyLang();
+  setupRevealAnimation();
 
   document
     .querySelectorAll(".discord-server-card[data-guild-id]")
     .forEach(loadDiscordWidget);
 
-  const glow = document.querySelector(".cursor-glow");
-
-  if (glow && window.matchMedia("(pointer: fine)").matches) {
-    window.addEventListener("pointermove", (event) => {
-      glow.style.left = `${event.clientX}px`;
-      glow.style.top = `${event.clientY}px`;
-    });
-  }
-}
-
-/* ===== 3D TILT EFFECT ===== */
-document.querySelectorAll('.social-card, .partner-card, .gear-card, .discord-server-card, .visual-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const rx = (y - cy) / cy * -7;
-    const ry = (x - cx) / cx * 7;
-    card.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px) scale(1.01)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
-});
-
-/* ===== SPOTLIGHT EFFECT ===== */
-document.querySelectorAll('.spotlight-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    card.style.setProperty('--sx', (e.clientX - rect.left) + 'px');
-    card.style.setProperty('--sy', (e.clientY - rect.top) + 'px');
-  });
-});
-
-/* ===== HERO PARTICLES ===== */
-const pCanvas = document.getElementById('heroParticles');
-if (pCanvas) {
-  const pCtx = pCanvas.getContext('2d');
-  let pW, pH;
-  const pList = [];
-
-  function resizeP() {
-    const hero = pCanvas.parentElement;
-    pW = pCanvas.width = hero.offsetWidth;
-    pH = pCanvas.height = hero.offsetHeight;
-  }
-  resizeP();
-  window.addEventListener('resize', resizeP);
-
-  for (let i = 0; i < 45; i++) {
-    pList.push({
-      x: Math.random() * pW,
-      y: Math.random() * pH,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      r: Math.random() * 1.3 + 0.4,
-      a: Math.random() * 0.4 + 0.12
-    });
-  }
-
-  function drawP() {
-    pCtx.clearRect(0, 0, pW, pH);
-    pList.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0) p.x = pW;
-      if (p.x > pW) p.x = 0;
-      if (p.y < 0) p.y = pH;
-      if (p.y > pH) p.y = 0;
-      pCtx.beginPath();
-      pCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      pCtx.fillStyle = `rgba(255, 157, 0, ${p.a})`;
-      pCtx.fill();
-    });
-
-    for (let i = 0; i < pList.length; i++) {
-      for (let j = i + 1; j < pList.length; j++) {
-        const dx = pList[i].x - pList[j].x;
-        const dy = pList[i].y - pList[j].y;
-        const d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 100) {
-          pCtx.beginPath();
-          pCtx.moveTo(pList[i].x, pList[i].y);
-          pCtx.lineTo(pList[j].x, pList[j].y);
-          pCtx.strokeStyle = `rgba(255, 157, 0, ${0.07 * (1 - d / 100)})`;
-          pCtx.lineWidth = 0.4;
-          pCtx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(drawP);
-  }
-  drawP();
-}
+  setupCursorGlow();
+  setupSpotlights();
+  setupTilt();
+  setupHeroParticles();
 });
