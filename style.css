@@ -1059,6 +1059,26 @@ footer p {
 
 /* Mobile */
 @media (max-width: 680px) {
+  .gearup-layout {
+  grid-template-columns: 1fr;
+}
+
+.gearup-layout .gearup-banner {
+  width: min(100%, 260px);
+  height: auto;
+  margin: 0 auto;
+}
+
+.gearup-layout .gearup-banner img {
+  min-height: 0;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+}
+
+.partners-grid {
+  grid-template-rows: auto;
+}
   .topbar {
     padding: 0.95rem 1rem;
   }
