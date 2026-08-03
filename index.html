@@ -3,162 +3,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GANZISQUAD</title>
+  <meta name="theme-color" content="#0b0d13">
+  <title>GANZISQUAD | Streamer · Delta Force</title>
+
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
+  <div class="noise"></div>
+  <div class="cursor-glow"></div>
 
-<div class="lang-switcher">
-  <button onclick="setLang('en')" id="btn-en" class="active">EN</button>
-  <button onclick="setLang('ru')" id="btn-ru">RU</button>
-  <button onclick="setLang('de')" id="btn-de">DE</button>
-</div>
-
-<header class="hero">
-  <img src="https://avatars.githubusercontent.com/u/125133177?v=4" alt="ganzisquad" class="avatar">
-  <h1>GANZISQUAD</h1>
-  <p class="tagline" data-en="🎮 Streamer · Delta Force · FPS" data-ru="🎮 Стример · Delta Force · FPS" data-de="🎮 Streamer · Delta Force · FPS">🎮 Streamer · Delta Force · FPS</p>
-  <div class="location">📍 Dresden, Germany</div>
-</header>
-
-<section class="section">
-  <h2 data-en="📡 Follow Me" data-ru="📡 Подписывайся" data-de="📡 Folge mir">📡 Follow Me</h2>
-  <div class="socials-grid">
-    <a href="https://www.twitch.tv/ganzisquad" target="_blank" class="social-card twitch">
-      <i class="fab fa-twitch"></i>
-      <span>Twitch</span>
-    </a>
-    <a href="https://www.youtube.com/@Ganzisquad" target="_blank" class="social-card youtube">
-      <i class="fab fa-youtube"></i>
-      <span>YouTube</span>
-    </a>
-    <a href="https://discord.com/invite/FrJbZvfPfm" target="_blank" class="social-card discord">
-      <i class="fab fa-discord"></i>
-      <span data-en="Discord Community" data-ru="Discord Сообщество" data-de="Discord Community">Discord Community</span>
-    </a>
-    <a href="https://t.me/boost/ganzisquad" target="_blank" class="social-card telegram">
-      <i class="fab fa-telegram"></i>
-      <span>Telegram</span>
-    </a>
-    <a href="https://discord.gg/U347WWhjUj" target="_blank" class="social-card discord-df">
-      <i class="fab fa-discord"></i>
-      <span data-en="Delta Force Server" data-ru="Сервер Delta Force" data-de="Delta Force Server">Delta Force Server</span>
-    </a>
+  <div class="lang-switcher">
+    <button onclick="setLang('en')" id="btn-en" class="active">EN</button>
+    <button onclick="setLang('ru')" id="btn-ru">RU</button>
+    <button onclick="setLang('de')" id="btn-de">DE</button>
   </div>
-</section>
 
-<section class="section">
-  <h2 data-en="🤝 Partners" data-ru="🤝 Партнёры" data-de="🤝 Partner">🤝 Partners</h2>
-  <div class="partners-grid">
-    <a href="https://gearupapp.pxf.io/GANZI" target="_blank" class="partner-card">
-      <div class="partner-logo">⚡</div>
-      <div class="partner-info">
-        <span class="partner-name">Gear UP Mobile</span>
-        <span class="partner-desc" data-en="Game booster for mobile games" data-ru="Бустер для мобильных игр" data-de="Game-Booster für Handyspiele">Game booster for mobile games</span>
-      </div>
-      <span class="partner-arrow">→</span>
-    </a>
-    <a href="https://gearup.sjv.io/GANZI" target="_blank" class="partner-card">
-      <div class="partner-logo">🖥️</div>
-      <div class="partner-info">
-        <span class="partner-name">Gear UP PC</span>
-        <span class="partner-desc" data-en="Lower ping & stable connection for PC games" data-ru="Ниже пинг и стабильное соединение для ПК" data-de="Niedrigerer Ping & stabile Verbindung für PC-Spiele">Lower ping & stable connection for PC games</span>
-      </div>
-      <span class="partner-arrow">→</span>
-    </a>
-  </div>
-</section>
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
 
-<section class="section">
-  <h2 data-en="💸 Support the Stream" data-ru="💸 Поддержать стрим" data-de="💸 Stream unterstützen">💸 Support the Stream</h2>
-  <div class="donate-grid">
-    <a href="https://paypal.me/ganzibank" target="_blank" class="donate-card paypal">
-      <i class="fab fa-paypal"></i>
-      <span>PayPal Donate</span>
-    </a>
-    <a href="https://www.revolut.me/ganzi/" target="_blank" class="donate-card revolut">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Revolut_logo.svg/200px-Revolut_logo.svg.png" alt="Revolut" style="height:22px;filter:brightness(0) invert(1)">
-      <span>Revolut Donate</span>
-    </a>
-  </div>
-</section>
+    <div class="hero-content">
+      <div class="status">
+        <span class="status-dot"></span>
+        <span data-en="DELTA FORCE · FPS STREAMER"
+          data-ru="DELTA FORCE · FPS СТРИМЕР"
+          data-de="DELTA FORCE · FPS-STREAMER">
+          DELTA FORCE · FPS STREAMER
+        </span>
+      </div>
 
-<section class="section">
-  <h2 data-en="🖥️ My PC Setup" data-ru="🖥️ Мой ПК" data-de="🖥️ Mein PC-Setup">🖥️ My PC Setup</h2>
-  <p class="section-sub" data-en="Affiliate links — I earn a small commission at no extra cost to you" data-ru="Партнёрские ссылки — небольшая комиссия за покупку по ссылке" data-de="Affiliate-Links — kleine Provision, kein Mehrpreis für dich">Affiliate links — I earn a small commission at no extra cost to you</p>
-  <div class="gear-grid">
-    <a href="https://link.amazon/B0gexae8W" target="_blank" class="gear-card">
-      <div class="gear-icon">🎮</div>
-      <div class="gear-info">
-        <span class="gear-name">RTX 5080</span>
-        <span class="gear-cat" data-en="GPU" data-ru="Видеокарта" data-de="Grafikkarte">GPU</span>
-      </div>
-      <span class="amazon-badge">Amazon →</span>
-    </a>
-    <a href="https://link.amazon/B009SceGY" target="_blank" class="gear-card">
-      <div class="gear-icon">⚡</div>
-      <div class="gear-info">
-        <span class="gear-name">AMD Ryzen 7 9800X3D</span>
-        <span class="gear-cat" data-en="CPU" data-ru="Процессор" data-de="Prozessor">CPU</span>
-      </div>
-      <span class="amazon-badge">Amazon →</span>
-    </a>
-    <a href="https://link.amazon/B0cMjxMGE" target="_blank" class="gear-card">
-      <div class="gear-icon">🖥️</div>
-      <div class="gear-info">
-        <span class="gear-name">MSI MAG 271QP QD-OLED</span>
-        <span class="gear-cat" data-en="Monitor" data-ru="Монитор" data-de="Monitor">Monitor</span>
-      </div>
-      <span class="amazon-badge">Amazon →</span>
-    </a>
-    <a href="https://link.amazon/B059M44e3" target="_blank" class="gear-card">
-      <div class="gear-icon">🎙️</div>
-      <div class="gear-info">
-        <span class="gear-name">Fifine AM8</span>
-        <span class="gear-cat" data-en="Microphone" data-ru="Микрофон" data-de="Mikrofon">Microphone</span>
-      </div>
-      <span class="amazon-badge">Amazon →</span>
-    </a>
-    <a href="https://link.amazon/B03Ky1cSb" target="_blank" class="gear-card">
-      <div class="gear-icon">🖱️</div>
-      <div class="gear-info">
-        <span class="gear-name">MCHOSE M7 Ultra</span>
-        <span class="gear-cat" data-en="Mouse" data-ru="Мышь" data-de="Maus">Mouse</span>
-      </div>
-      <span class="amazon-badge">Amazon →</span>
-    </a>
-    <a href="https://link.amazon/B038VnSL4" target="_blank" class="gear-card">
-      <div class="gear-icon">💾</div>
-      <div class="gear-info">
-        <span class="gear-name">Kingston FURY DDR5 32GB</span>
-        <span class="gear-cat" data-en="RAM" data-ru="Оперативная память" data-de="Arbeitsspeicher">RAM</span>
-      </div>
-      <span class="amazon-badge">Amazon →</span>
-    </a>
-    <a href="https://link.amazon/B0fbFJ1T8" target="_blank" class="gear-card">
-      <div class="gear-icon">⌨️</div>
-      <div class="gear-info">
-        <span class="gear-name">AULA HERO 84U</span>
-        <span class="gear-cat" data-en="Keyboard · 75% Magnetic" data-ru="Клавиатура · 75% Магнитная" data-de="Tastatur · 75% Magnetisch">Keyboard · 75% Magnetic</span>
-      </div>
-      <span class="amazon-badge">Amazon →</span>
-    </a>
-    <div class="gear-card no-link">
-      <div class="gear-icon">🪟</div>
-      <div class="gear-info">
-        <span class="gear-name">Windows 11 Pro</span>
-        <span class="gear-cat">OS</span>
+      <h1>GANZI<span>SQUAD</span></h1>
+
+      <p class="hero-text"
+        data-en="Low ping. High impact. Tactical gameplay."
+        data-ru="Низкий пинг. Высокий импакт. Тактический геймплей."
+        data-de="Niedriger Ping. Hoher Impact. Taktisches Gameplay.">
+        Low ping. High impact. Tactical gameplay.
+      </p>
+
+      <div class="hero-buttons">
+        <a class="hero-btn primary" href="https://www.twitch.tv/ganzisquad" target="_blank">
+          <i class="fab fa-twitch"></i>
+          <span data-en="Watch on Twitch" data-ru="Смотреть Twitch" data-de="Auf Twitch ansehen">
+            Watch on Twitch
+          </span>
+        </a>
+
+        <a class="hero-btn secondary" href="https://discord.com/invite/FrJbZvfPfm" target="_blank">
+          <i class="fab fa-discord"></i>
+          Discord
+        </a>
       </div>
     </div>
-  </div>
-</section>
 
-<footer>
-  <p>© 2026 GANZISQUAD · Dresden, Germany</p>
-  <p style="font-size:0.75rem;opacity:0.5" data-en="Affiliate links may generate commission" data-ru="Партнёрские ссылки могут приносить комиссию" data-de="Affiliate-Links können Provision generieren">Affiliate links may generate commission</p>
-</footer>
+    <a href="#socials" class="scroll-down" aria-label="Scroll down">
+      <span data-en="Explore" data-ru="Смотреть" data-de="Entdecken">Explore</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </header>
 
-<script src="script.js"></script>
+  <main>
+    <section id="socials" class="section reveal">
+      <div class="section-title">
+        <span class="section-number">01</span>
+        <div>
+          <p data-en="COMMUNITY" data-ru="СООБЩЕСТВО" data-de="COMMUNITY">COMMUNITY</p>
+          <h2 data-en="Follow the squad" data-ru="Присоединяйся к squad" data-de="Folge dem Squad">
+            Follow the squad
+          </h2>
+        </div>
+      </div>
+
+      <div class="socials-grid">
+        <a href="https://www.twitch.tv/ganzisquad" target="_blank" class="social-card twitch">
+          <i class="fab fa-twitch"></i>
+          <div><strong>Twitch</strong><small data-en="Live streams" data-ru="Прямые эфиры" data-de="Live-Streams">Live streams</small></div>
+          <span class="card-arrow">↗</span>
+        </a>
+
+        <a href="https://www.youtube.com/@Ganzisquad" target="_blank" class="social-card youtube">
+          <i class="fab fa-youtube"></i>
+          <div><strong>YouTube</strong><small data-en="Videos & highlights" data-ru="Видео и хайлайты" data-de="Videos & Highlights">Videos & highlights</small></div>
+          <span class="card-arrow">↗</span>
+        </a>
+
+        <a href="https://discord.com/invite/FrJbZvfPfm" target="_blank" class="social-card discord">
+          <i class="fab fa-discord"></i>
+          <div><strong>Discord</strong><small data-en="Community server" data-ru="Сообщество" data-de="Community-Server">Community server</small></div>
+          <span class="card-arrow">↗</span>
+        </a>
+
+        <a href="https://t.me/boost/ganzisquad" target="_blank" class="social-card telegram">
+          <i class="fab fa-telegram"></i>
+          <div><strong>Telegram</strong><small data-en="Updates & news" data-ru="Новости и обновления" data-de="News & Updates">Updates & news</small></div>
+          <span class="card-arrow">↗</span>
+        </a>
+
+        <a href="https://discord.gg/U347WWhjUj" target="_blank" class="social-card delta">
+          <i class="fa-solid fa-crosshairs"></i>
+          <div><strong>Delta Force</strong><small data-en="Dedicated Discord" data-ru="Сервер Delta Force" data-de="Delta Force Server">Dedicated Discord</small></div>
+          <span class="card-arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-title">
+        <span class="section-number">02</span>
+        <div>
+          <p data-en="PARTNERS" data-ru="ПАРТНЁРЫ" data-de="PARTNER">PARTNERS</p>
+          <h2 data-en="Boost your connection" data-ru="Улучши своё соединение" data-de="Verbessere deine Verbindung">
+            Boost your connection
+          </h2>
+        </div>
+      </div>
+
+      <div class="partners-grid">
+        <a href="https://gearupapp.pxf.io/GANZI" target="_blank" class="partner-card">
+          <div class="partner-icon">⚡</div>
+          <div>
+            <strong>Gear UP Mobile</strong>
+            <p data-en="Game booster for mobile games"
+              data-ru="Бустер для мобильных игр"
+              data-de="Game-Booster für mobile Spiele">
+              Game booster for mobile games
+            </p>
+          </div>
+          <span>↗</span>
+        </a>
+
+        <a href="https://gearup.sjv.io/GANZI" target="_blank" class="partner-card">
+          <div class="partner-icon">🖥️</div>
+          <div>
+            <strong>Gear UP PC</strong>
+            <p data-en="Lower ping. More stable connection."
+              data-ru="Ниже пинг. Стабильнее соединение."
+              data-de="Niedrigerer Ping. Stabilere Verbindung.">
+              Lower ping. More stable connection.
+            </p>
+          </div>
+          <span>↗</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-title">
+        <span class="section-number">03</span>
+        <div>
+          <p data-en="SUPPORT" data-ru="ПОДДЕРЖКА" data-de="SUPPORT">SUPPORT</p>
+          <h2 data-en="Support the stream" data-ru="Поддержать стрим" data-de="Stream unterstützen">
+            Support the stream
+          </h2>
+        </div>
+      </div>
+
+      <div class="donate-grid">
+        <a href="https://paypal.me/ganzibank" target="_blank" class="donate-card paypal">
+          <i class="fab fa-paypal"></i>
+          <span>PayPal</span>
+          <small data-en="Donate" data-ru="Донат" data-de="Spenden">Donate</small>
+        </a>
+
+        <a href="https://www.revolut.me/ganzi/" target="_blank" class="donate-card revolut">
+          <i class="fa-solid fa-heart"></i>
+          <span>Revolut</span>
+          <small data-en="Donate" data-ru="Донат" data-de="Spenden">Donate</small>
+        </a>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-title">
+        <span class="section-number">04</span>
+        <div>
+          <p data-en="LOADOUT" data-ru="СЕТАП" data-de="SETUP">LOADOUT</p>
+          <h2 data-en="My PC setup" data-ru="Мой ПК" data-de="Mein PC-Setup">My PC setup</h2>
+        </div>
+      </div>
+
+      <p class="affiliate-note"
+        data-en="Affiliate links: I may receive a small commission at no extra cost to you."
+        data-ru="Партнёрские ссылки: я могу получить небольшую комиссию без доплаты для тебя."
+        data-de="Affiliate-Links: Ich kann eine kleine Provision erhalten, ohne Mehrkosten für dich.">
+        Affiliate links: I may receive a small commission at no extra cost to you.
+      </p>
+
+      <div class="gear-grid">
+        <a href="https://link.amazon/B0gexae8W" target="_blank" class="gear-card"><span>🎮</span><div><strong>RTX 5080</strong><small>GPU</small></div><b>Amazon ↗</b></a>
+        <a href="https://link.amazon/B009SceGY" target="_blank" class="gear-card"><span>⚡</span><div><strong>AMD Ryzen 7 9800X3D</strong><small>CPU</small></div><b>Amazon ↗</b></a>
+        <a href="https://link.amazon/B0cMjxMGE" target="_blank" class="gear-card"><span>🖥️</span><div><strong>MSI MAG 271QP QD-OLED</strong><small>Monitor</small></div><b>Amazon ↗</b></a>
+        <a href="https://link.amazon/B059M44e3" target="_blank" class="gear-card"><span>🎙️</span><div><strong>Fifine AM8</strong><small>Microphone</small></div><b>Amazon ↗</b></a>
+        <a href="https://link.amazon/B03Ky1cSb" target="_blank" class="gear-card"><span>🖱️</span><div><strong>MCHOSE M7 Ultra</strong><small>Mouse</small></div><b>Amazon ↗</b></a>
+        <a href="https://link.amazon/B038VnSL4" target="_blank" class="gear-card"><span>💾</span><div><strong>Kingston FURY DDR5 32GB</strong><small>RAM</small></div><b>Amazon ↗</b></a>
+        <a href="https://link.amazon/B0fbFJ1T8" target="_blank" class="gear-card"><span>⌨️</span><div><strong>AULA HERO 84U</strong><small>75% Magnetic</small></div><b>Amazon ↗</b></a>
+        <div class="gear-card no-link"><span>🪟</span><div><strong>Windows 11 Pro</strong><small>OS</small></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-logo">GANZI<span>SQUAD</span></div>
+    <p>© 2026 GANZISQUAD · Dresden, Germany</p>
+    <p data-en="Affiliate links may generate commission."
+      data-ru="Партнёрские ссылки могут приносить комиссию."
+      data-de="Affiliate-Links können Provision generieren.">
+      Affiliate links may generate commission.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
