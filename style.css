@@ -1075,11 +1075,6 @@ footer p {
     border-radius: 12px;
   }
 
-  .gearup-banner img {
-    aspect-ratio: 4 / 3;
-    object-position: center;
-  }
-
   .gearup-banner-cta {
     right: 0.7rem;
     bottom: 0.7rem;
