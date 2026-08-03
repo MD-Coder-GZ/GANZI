@@ -11,8 +11,6 @@
   --youtube: #ff0000;
   --discord: #5865f2;
   --telegram: #229ed9;
-  --paypal: #003087;
-  --revolut: #191c1f;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,7 +23,6 @@ body {
   padding-bottom: 3rem;
 }
 
-/* LANG SWITCHER */
 .lang-switcher {
   position: fixed;
   top: 1rem;
@@ -51,7 +48,6 @@ body {
   border-color: var(--accent);
 }
 
-/* HERO */
 .hero {
   text-align: center;
   padding: 3.5rem 1rem 2rem;
@@ -74,37 +70,13 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.tagline {
-  color: var(--sub);
-  margin-top: 0.4rem;
-  font-size: 1rem;
-}
-.location {
-  color: var(--sub);
-  font-size: 0.85rem;
-  margin-top: 0.3rem;
-}
+.tagline { color: var(--sub); margin-top: 0.4rem; font-size: 1rem; }
+.location { color: var(--sub); font-size: 0.85rem; margin-top: 0.3rem; }
 
-/* SECTIONS */
-.section {
-  max-width: 860px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-.section h2 {
-  font-size: 1.15rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  letter-spacing: 1px;
-}
-.section-sub {
-  color: var(--sub);
-  font-size: 0.82rem;
-  margin-bottom: 1rem;
-  margin-top: -0.5rem;
-}
+.section { max-width: 860px; margin: 2rem auto; padding: 0 1rem; }
+.section h2 { font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: 1px; }
+.section-sub { color: var(--sub); font-size: 0.82rem; margin-bottom: 1rem; margin-top: -0.5rem; }
 
-/* SOCIALS */
 .socials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -130,12 +102,36 @@ body {
 .social-card.discord-df { background: #404eed; }
 .social-card.telegram { background: var(--telegram); }
 
-/* DONATE */
-.donate-grid {
-  display: flex;
+/* PARTNERS */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 0.75rem;
-  flex-wrap: wrap;
 }
+.partner-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, #1a1035, #0d1a2e);
+  border: 1px solid #2a3a5e;
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.partner-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(124,92,252,0.15);
+}
+.partner-logo { font-size: 2rem; flex-shrink: 0; }
+.partner-info { display: flex; flex-direction: column; flex: 1; }
+.partner-name { font-weight: 800; font-size: 1rem; color: #fff; }
+.partner-desc { color: var(--sub); font-size: 0.8rem; margin-top: 0.2rem; }
+.partner-arrow { color: var(--accent); font-size: 1.2rem; font-weight: 800; }
+
+.donate-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 .donate-card {
   display: flex;
   align-items: center;
@@ -153,7 +149,6 @@ body {
 .donate-card.revolut { background: #191c1f; border: 1px solid #333; }
 .donate-card i { font-size: 1.4rem; }
 
-/* GEAR */
 .gear-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -178,14 +173,8 @@ body {
 .gear-info { display: flex; flex-direction: column; flex: 1; }
 .gear-name { font-weight: 700; font-size: 0.9rem; }
 .gear-cat { color: var(--sub); font-size: 0.75rem; margin-top: 0.15rem; }
-.amazon-badge {
-  font-size: 0.72rem;
-  color: #ff9900;
-  font-weight: 700;
-  white-space: nowrap;
-}
+.amazon-badge { font-size: 0.72rem; color: #ff9900; font-weight: 700; white-space: nowrap; }
 
-/* FOOTER */
 footer {
   text-align: center;
   margin-top: 3rem;
@@ -199,4 +188,5 @@ footer {
   .hero h1 { font-size: 1.6rem; }
   .socials-grid { grid-template-columns: 1fr 1fr; }
   .gear-grid { grid-template-columns: 1fr; }
+  .partners-grid { grid-template-columns: 1fr; }
 }
