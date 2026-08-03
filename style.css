@@ -1,0 +1,202 @@
+:root {
+  --bg: #0d0f14;
+  --card: #161a23;
+  --card2: #1e2330;
+  --accent: #7c5cfc;
+  --accent2: #a67cff;
+  --text: #e8eaf0;
+  --sub: #8b90a0;
+  --radius: 14px;
+  --twitch: #9146ff;
+  --youtube: #ff0000;
+  --discord: #5865f2;
+  --telegram: #229ed9;
+  --paypal: #003087;
+  --revolut: #191c1f;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+
+/* LANG SWITCHER */
+.lang-switcher {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.4rem;
+  z-index: 100;
+}
+.lang-switcher button {
+  background: var(--card2);
+  color: var(--sub);
+  border: 1px solid #2a2f40;
+  border-radius: 8px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+.lang-switcher button.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 3.5rem 1rem 2rem;
+  background: radial-gradient(ellipse at top, #1a1035 0%, var(--bg) 70%);
+}
+.avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  margin-bottom: 1rem;
+  box-shadow: 0 0 30px rgba(124,92,252,0.4);
+}
+.hero h1 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.tagline {
+  color: var(--sub);
+  margin-top: 0.4rem;
+  font-size: 1rem;
+}
+.location {
+  color: var(--sub);
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+/* SECTIONS */
+.section {
+  max-width: 860px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.section h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+.section-sub {
+  color: var(--sub);
+  font-size: 0.82rem;
+  margin-bottom: 1rem;
+  margin-top: -0.5rem;
+}
+
+/* SOCIALS */
+.socials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+.social-card {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.social-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+.social-card i { font-size: 1.3rem; }
+.social-card.twitch { background: var(--twitch); }
+.social-card.youtube { background: var(--youtube); }
+.social-card.discord { background: var(--discord); }
+.social-card.discord-df { background: #404eed; }
+.social-card.telegram { background: var(--telegram); }
+
+/* DONATE */
+.donate-grid {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.donate-card {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: transform 0.2s;
+}
+.donate-card:hover { transform: translateY(-3px); }
+.donate-card.paypal { background: #009cde; }
+.donate-card.revolut { background: #191c1f; border: 1px solid #333; }
+.donate-card i { font-size: 1.4rem; }
+
+/* GEAR */
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem;
+}
+.gear-card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: var(--card);
+  border: 1px solid #222840;
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.gear-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.gear-card.no-link { cursor: default; }
+.gear-card.no-link:hover { transform: none; border-color: #222840; }
+.gear-icon { font-size: 1.6rem; flex-shrink: 0; }
+.gear-info { display: flex; flex-direction: column; flex: 1; }
+.gear-name { font-weight: 700; font-size: 0.9rem; }
+.gear-cat { color: var(--sub); font-size: 0.75rem; margin-top: 0.15rem; }
+.amazon-badge {
+  font-size: 0.72rem;
+  color: #ff9900;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  color: var(--sub);
+  font-size: 0.85rem;
+  border-top: 1px solid #1c2030;
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.6rem; }
+  .socials-grid { grid-template-columns: 1fr 1fr; }
+  .gear-grid { grid-template-columns: 1fr; }
+}
