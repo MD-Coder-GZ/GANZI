@@ -8,9 +8,10 @@
   <title>GANZISQUAD | Delta Force Streams</title>
   <meta name="description" content="GANZISQUAD — Delta Force streams, community, setup and gaming partners.">
 
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<base target="_blank">
 </head>
 
 <body>
@@ -18,7 +19,7 @@
   <div class="cursor-glow"></div>
 
   <nav class="topbar">
-    <a class="topbar-logo" href="#top">GANZI<span>SQUAD</span></a>
+    <a class="topbar-logo glitch-logo" data-text="GANZISQUAD" href="#top">GANZI<span>SQUAD</span></a>
 
     <div class="lang-switcher">
       <button onclick="setLang('en')" id="btn-en" class="active">EN</button>
@@ -30,6 +31,7 @@
   <header class="hero" id="top">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
+    <canvas id="heroParticles"></canvas>
 
     <div class="hero-content">
       <div class="status">
@@ -347,7 +349,7 @@
         </div>
       </div>
 
-      <a class="gearup-banner"
+      <a class="gearup-banner gradient-border"
         href="https://gearup.sjv.io/GANZI"
         target="_blank"
         rel="sponsored noopener">
@@ -452,35 +454,35 @@
       </p>
 
       <div class="gear-grid">
-        <a href="https://link.amazon/B0gexae8W" target="_blank" rel="sponsored noopener" class="gear-card">
+        <a href="https://link.amazon/B0gexae8W" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
           <span>🎮</span><div><strong>RTX 5080</strong><small>GPU</small></div><b>Amazon ↗</b>
         </a>
 
-        <a href="https://link.amazon/B009SceGY" target="_blank" rel="sponsored noopener" class="gear-card">
+        <a href="https://link.amazon/B009SceGY" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
           <span>⚡</span><div><strong>AMD Ryzen 7 9800X3D</strong><small>CPU</small></div><b>Amazon ↗</b>
         </a>
 
-        <a href="https://link.amazon/B0cMjxMGE" target="_blank" rel="sponsored noopener" class="gear-card">
+        <a href="https://link.amazon/B0cMjxMGE" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
           <span>🖥️</span><div><strong>MSI MAG 271QP QD-OLED</strong><small>Monitor</small></div><b>Amazon ↗</b>
         </a>
 
-        <a href="https://link.amazon/B059M44e3" target="_blank" rel="sponsored noopener" class="gear-card">
+        <a href="https://link.amazon/B059M44e3" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
           <span>🎙️</span><div><strong>Fifine AM8</strong><small>Microphone</small></div><b>Amazon ↗</b>
         </a>
 
-        <a href="https://link.amazon/B03Ky1cSb" target="_blank" rel="sponsored noopener" class="gear-card">
+        <a href="https://link.amazon/B03Ky1cSb" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
           <span>🖱️</span><div><strong>MCHOSE M7 Ultra</strong><small>Mouse</small></div><b>Amazon ↗</b>
         </a>
 
-        <a href="https://link.amazon/B038VnSL4" target="_blank" rel="sponsored noopener" class="gear-card">
+        <a href="https://link.amazon/B038VnSL4" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
           <span>💾</span><div><strong>Kingston FURY DDR5 32GB</strong><small>RAM</small></div><b>Amazon ↗</b>
         </a>
 
-        <a href="https://link.amazon/B0fbFJ1T8" target="_blank" rel="sponsored noopener" class="gear-card">
+        <a href="https://link.amazon/B0fbFJ1T8" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
           <span>⌨️</span><div><strong>AULA HERO 84U</strong><small>75% Magnetic</small></div><b>Amazon ↗</b>
         </a>
 
-        <div class="gear-card no-link">
+        <div class="gear-card no-link spotlight-card">
           <span>🪟</span><div><strong>Windows 11 Pro</strong><small>OS</small></div>
         </div>
       </div>
@@ -498,6 +500,6 @@
     </p>
   </footer>
 
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
