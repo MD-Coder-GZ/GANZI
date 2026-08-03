@@ -1,8 +1,7 @@
 # ganzisquad-site
 
 Personal streamer page for [ganzisquad](https://www.twitch.tv/ganzisquad).
-
-🌐 **Live site:** https://md-coder-gz.github.io/ganzisquad-site/
+/
 
 ## Features
 - EN / RU / DE language switcher
