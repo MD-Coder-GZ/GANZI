@@ -291,6 +291,29 @@ function acceptCookies(all) {
   localStorage.setItem("gz-cookie-consent", all ? "all" : "essential");
 }
 
+function setupActiveNav() {
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".topbar-nav a");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === `#${entry.target.id}`,
+            );
+          });
+        }
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   applyLang();
   setupRevealAnimation();
@@ -304,4 +327,5 @@ document.addEventListener("DOMContentLoaded", () => {
   setupTilt();
   setupHeroParticles();
   setupCookieBanner();
+  setupActiveNav();
 });
