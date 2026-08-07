@@ -114,7 +114,7 @@
           </p>
           <p
             data-en="Solo walkthroughs are not my thing. The main value is a live community and shared gaming emotions, not just views. The atmosphere is calm, funny, friendly and slightly expert."
-            data-ru="Соло-прохождения мне неинтересны. Главная ценность — живое комьюнити и совместные игровые эмоции, а не просто просмотры. На стриме спокойно, смешно, дружелюбно и немного экспертность."
+            data-ru="Соло-прохождения мне неинтересны. Главная ценность — живое комьюнити и совместные игровые эмоции, а не просто просмотры. Атмосфера спокойная, смешная, дружелюбная и немного экспертная."
             data-de="Solo-Durchspiele sind nicht mein Ding. Der Hauptwert ist eine lebendige Community und gemeinsame Gaming-Emotionen, nicht nur Views. Die Atmosphäre ist ruhig, lustig, freundlich und leicht expertenhaft.">
             Solo walkthroughs are not my thing.
           </p>
@@ -471,22 +471,23 @@
       </div>
       <div class="footer-col">
         <h4 data-en="LEGAL" data-ru="ПРАВОВАЯ ИНФОРМАЦИЯ" data-de="RECHTLICHES">LEGAL</h4>
-        <a href="#">Datenschutzerklärung</a>
-        <a href="#">Impressum</a>
-        <a href="#">AGB</a>
-        <a href="#" data-en="Cookie Settings" data-ru="Настройки Cookie" data-de="Cookie-Einstellungen">Cookie Settings</a>
+        <a href="#" onclick="openModal('modal-privacy');return false;">Datenschutzerklärung</a>
+        <a href="#" onclick="openModal('modal-impressum');return false;">Impressum</a>
+        <a href="#" onclick="openModal('modal-terms');return false;">AGB</a>
+        <a href="#" onclick="showCookieBanner();return false;" data-en="Cookie Settings" data-ru="Настройки Cookie" data-de="Cookie-Einstellungen">Cookie Settings</a>
       </div>
       <div class="footer-col">
         <h4 data-en="DONATE" data-ru="ДОНАТ" data-de="SPENDEN">DONATE</h4>
         <a href="https://paypal.me/ganzibank" target="_blank" rel="noopener">PayPal</a>
         <a href="https://www.revolut.me/ganzi/" target="_blank" rel="noopener">Revolut</a>
+        <a href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener">DonationAlerts</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 GANZISQUAD · Dresden, Germany</p>
+      <p>© 2026 GANZISQUAD · Thüringen, Germany</p>
       <div class="footer-legal">
-        <a href="#" data-en="Privacy Policy" data-ru="Политика конфиденциальности" data-de="Datenschutz">Privacy Policy</a>
-        <a href="#" data-en="Terms of Use" data-ru="Условия использования" data-de="Nutzungsbedingungen">Terms of Use</a>
+        <a href="#" onclick="openModal('modal-privacy');return false;" data-en="Privacy Policy" data-ru="Политика конфиденциальности" data-de="Datenschutz">Privacy Policy</a>
+        <a href="#" onclick="openModal('modal-terms');return false;" data-en="Terms of Use" data-ru="Условия использования" data-de="Nutzungsbedingungen">Terms of Use</a>
       </div>
     </div>
   </footer>
@@ -520,6 +521,139 @@
     <i class="fa-solid fa-arrow-up"></i>
     <span class="scroll-top-text" data-en="Back to top" data-ru="Вернуться в начало" data-de="Zurück nach oben">Back to top</span>
   </button>
+
+
+<!-- ===== MODALS ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeAllModals()"></div>
+
+<!-- Privacy Policy -->
+<dialog class="modal" id="modal-privacy" onclick="event.target===this&&closeAllModals()">
+  <button class="modal-close" onclick="closeAllModals()" aria-label="Close">×</button>
+  <h2 data-en="Privacy Policy" data-ru="Политика конфиденциальности" data-de="Datenschutzerklärung">Privacy Policy</h2>
+  <div class="modal-body">
+    <p data-en="Last updated: August 2026" data-ru="Последнее обновление: август 2026" data-de="Zuletzt aktualisiert: August 2026">Last updated: August 2026</p>
+    <h3 data-en="1. General Information" data-ru="1. Общие положения" data-de="1. Allgemeine Informationen">1. General Information</h3>
+    <p data-en="This website is operated by GANZISQUAD. We take the protection of your personal data very seriously and process it exclusively in accordance with the legal provisions (GDPR, TMG)."
+       data-ru="Этот сайт управляется GANZISQUAD. Мы серьёзно относимся к защите ваших персональных данных и обрабатываем их исключительно в соответствии с законодательством (GDPR, TMG)."
+       data-de="Diese Website wird von GANZISQUAD betrieben. Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst und verarbeiten sie ausschließlich nach den gesetzlichen Bestimmungen (DSGVO, TMG).">
+       This website is operated by GANZISQUAD. We take the protection of your personal data very seriously and process it exclusively in accordance with the legal provisions (GDPR, TMG).
+    </p>
+    <h3 data-en="2. Data Collection" data-ru="2. Сбор данных" data-de="2. Datenerfassung">2. Data Collection</h3>
+    <p data-en="We only collect personal data that you voluntarily provide (e.g., via Discord or donation links). When visiting the website, only technically necessary data such as IP address, browser type and access time are processed by our hosting provider."
+       data-ru="Мы собираем только те персональные данные, которые вы добровольно предоставляете (например, через Discord или ссылки для донатов). При посещении сайта наш хостинг-провайдер обрабатывает только технически необходимые данные, такие как IP-адрес, тип браузера и время доступа."
+       data-de="Wir erheben nur personenbezogene Daten, die Sie freiwillig angeben (z. B. über Discord oder Spendenlinks). Beim Besuch der Website werden nur technisch notwendige Daten wie IP-Adresse, Browsertyp und Zugriffszeit von unserem Hosting-Provider verarbeitet.">
+       We only collect personal data that you voluntarily provide (e.g., via Discord or donation links). When visiting the website, only technically necessary data such as IP address, browser type and access time are processed by our hosting provider.
+    </p>
+    <h3 data-en="3. Cookies" data-ru="3. Cookie" data-de="3. Cookies">3. Cookies</h3>
+    <p data-en="We use minimal cookies for language preference and cookie consent. Optional analytics cookies are disabled by default and only activated with your explicit consent."
+       data-ru="Мы используем минимальное количество cookie для сохранения языковых настроек и согласия на использование cookie. Опциональные аналитические cookie отключены по умолчанию и активируются только при вашем явном согласии."
+       data-de="Wir verwenden minimale Cookies für Spracheinstellungen und Cookie-Einwilligungen. Optionale Analyse-Cookies sind standardmäßig deaktiviert und werden nur bei Ihrer ausdrücklichen Zustimmung aktiviert.">
+       We use minimal cookies for language preference and cookie consent. Optional analytics cookies are disabled by default and only activated with your explicit consent.
+    </p>
+    <h3 data-en="4. Third-Party Services" data-ru="4. Сторонние сервисы" data-de="4. Drittanbieter-Dienste">4. Third-Party Services</h3>
+    <p data-en="This site contains links to external platforms (Twitch, YouTube, Discord, PayPal, Revolut, DonationAlerts, GearUP, Amazon). We have no influence on their data processing. Please refer to the respective privacy policies of these providers."
+       data-ru="На этом сайте есть ссылки на внешние платформы (Twitch, YouTube, Discord, PayPal, Revolut, DonationAlerts, GearUP, Amazon). Мы не влияем на их обработку данных. Пожалуйста, ознакомьтесь с политиками конфиденциальности этих провайдеров."
+       data-de="Diese Seite enthält Links zu externen Plattformen (Twitch, YouTube, Discord, PayPal, Revolut, DonationAlerts, GearUP, Amazon). Wir haben keinen Einfluss auf deren Datenverarbeitung. Bitte beachten Sie die jeweiligen Datenschutzrichtlinien dieser Anbieter.">
+       This site contains links to external platforms (Twitch, YouTube, Discord, PayPal, Revolut, DonationAlerts, GearUP, Amazon). We have no influence on their data processing. Please refer to the respective privacy policies of these providers.
+    </p>
+    <h3 data-en="5. Your Rights" data-ru="5. Ваши права" data-de="5. Ihre Rechte">5. Your Rights</h3>
+    <p data-en="You have the right to information, correction, deletion, restriction of processing, data portability and objection. To exercise these rights, please contact us via Discord or email."
+       data-ru="Вы имеете право на доступ, исправление, удаление, ограничение обработки, переносимость данных и возражение. Для осуществления этих прав свяжитесь с нами через Discord или email."
+       data-de="Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Um diese Rechte auszuüben, kontaktieren Sie uns bitte über Discord oder E-Mail.">
+       You have the right to information, correction, deletion, restriction of processing, data portability and objection. To exercise these rights, please contact us via Discord or email.
+    </p>
+    <h3 data-en="6. Contact" data-ru="6. Контакты" data-de="6. Kontakt">6. Contact</h3>
+    <p data-en="Operator: GANZISQUAD · Location: Thüringen, Germany · Contact: discord.gg/FrJbZvfPfm"
+       data-ru="Оператор: GANZISQUAD · Местоположение: Тюри́нгия , Германия · Контакт: discord.gg/FrJbZvfPfm"
+       data-de="Betreiber: GANZISQUAD · Standort: Thüringen, Deutschland · Kontakt: discord.gg/FrJbZvfPfm">
+       Operator: GANZISQUAD · Location: Dresden, Germany · Contact: discord.gg/FrJbZvfPfm
+    </p>
+  </div>
+</dialog>
+
+<!-- Impressum -->
+<dialog class="modal" id="modal-impressum" onclick="event.target===this&&closeAllModals()">
+  <button class="modal-close" onclick="closeAllModals()" aria-label="Close">×</button>
+  <h2 data-en="Legal Notice" data-ru="Правовая информация (Impressum)" data-de="Impressum">Legal Notice</h2>
+  <div class="modal-body">
+    <p data-en="Information in accordance with § 5 TMG (German Telemedia Act):"
+       data-ru="Информация в соответствии с § 5 TMG (Немецкий закон о телемедиа):"
+       data-de="Angaben gemäß § 5 TMG:">
+       Information in accordance with § 5 TMG (German Telemedia Act):
+    </p>
+    <div class="impressum-block">
+      <strong>GANZISQUAD</strong><br>
+      <span data-en="Represented by:" data-ru="Представитель:" data-de="Vertreten durch:">Represented by:</span> GANZI<br>
+      Obermarkt 21<br>
+      99998 Thüringen<br>
+      Germany<br><br>
+      <span data-en="Contact:" data-ru="Контакт:" data-de="Kontakt:">Contact:</span><br>
+      E-Mail: GanziDESpam@outlook.com<br>
+      Discord: discord.gg/FrJbZvfPfm
+    </div>
+    <p data-en="Responsible for content according to § 55 Abs. 2 RStV: GANZI (address as above)."
+       data-ru="Ответственный за контент согласно § 55 Abs. 2 RStV: GANZI (адрес указан выше)."
+       data-de="Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV: GANZI (Anschrift wie oben).">
+       Responsible for content according to § 55 Abs. 2 RStV: GANZI (address as above).
+    </p>
+    <h3 data-en="Disclaimer" data-ru="Отказ от ответственности" data-de="Haftungsausschluss">Disclaimer</h3>
+    <p data-en="Despite careful content control, we assume no liability for the content of external links. The operators of the linked pages are solely responsible for their content."
+       data-ru="Несмотря на тщательную проверку содержания, мы не несём ответственности за содержание внешних ссылок. За содержание связанных страниц ответственны исключительно их операторы."
+       data-de="Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.">
+       Despite careful content control, we assume no liability for the content of external links. The operators of the linked pages are solely responsible for their content.
+    </p>
+    <p data-en="All brand names, trademarks and logos mentioned on this site are the property of their respective owners."
+       data-ru="Все упомянутые на этом сайте торговые марки, бренды и логотипы являются собственностью их соответствующих владельцев."
+       data-de="Alle auf dieser Seite genannten Markennamen, Warenzeichen und Logos sind Eigentum ihrer jeweiligen Inhaber.">
+       All brand names, trademarks and logos mentioned on this site are the property of their respective owners.
+    </p>
+  </div>
+</dialog>
+
+<!-- Terms of Use / AGB -->
+<dialog class="modal" id="modal-terms" onclick="event.target===this&&closeAllModals()">
+  <button class="modal-close" onclick="closeAllModals()" aria-label="Close">×</button>
+  <h2 data-en="Terms of Use" data-ru="Условия использования" data-de="Allgemeine Geschäftsbedingungen (AGB)">Terms of Use</h2>
+  <div class="modal-body">
+    <p data-en="Last updated: August 2026" data-ru="Последнее обновление: август 2026" data-de="Zuletzt aktualisiert: August 2026">Last updated: August 2026</p>
+    <h3 data-en="1. Scope" data-ru="1. Область применения" data-de="1. Geltungsbereich">1. Scope</h3>
+    <p data-en="These terms of use apply to all visitors and users of the GANZISQUAD website. By using the website, you agree to these terms."
+       data-ru="Эти условия использования применяются ко всем посетителям и пользователям сайта GANZISQUAD. Используя сайт, вы соглашаетесь с этими условиями."
+       data-de="Diese Nutzungsbedingungen gelten für alle Besucher und Nutzer der GANZISQUAD-Website. Mit der Nutzung der Website stimmen Sie diesen Bedingungen zu.">
+       These terms of use apply to all visitors and users of the GANZISQUAD website. By using the website, you agree to these terms.
+    </p>
+    <h3 data-en="2. Content and Services" data-ru="2. Контент и услуги" data-de="2. Inhalte und Dienste">2. Content and Services</h3>
+    <p data-en="The website provides information about streaming activities, gaming content, community platforms and partner offers. All information is provided without guarantee."
+       data-ru="Сайт предоставляет информацию о стриминговой деятельности, игровом контенте, платформах сообщества и партнёрских предложениях. Вся информация предоставляется без гарантий."
+       data-de="Die Website bietet Informationen zu Streaming-Aktivitäten, Gaming-Content, Community-Plattformen und Partnerangeboten. Alle Informationen werden ohne Gewähr bereitgestellt.">
+       The website provides information about streaming activities, gaming content, community platforms and partner offers. All information is provided without guarantee.
+    </p>
+    <h3 data-en="3. Affiliate Links" data-ru="3. Партнёрские ссылки" data-de="3. Affiliate-Links">3. Affiliate Links</h3>
+    <p data-ru="Некоторые ссылки на этом сайте являются партнёрскими. При покупке через эти ссылки мы можем получить небольшую комиссию без дополнительных затрат для вас."
+       data-en="Some links on this site are affiliate links. When you purchase through these links, we may receive a small commission at no extra cost to you."
+       data-de="Einige Links auf dieser Seite sind Affiliate-Links. Bei einem Kauf über diese Links erhalten wir möglicherweise eine kleine Provision ohne zusätzliche Kosten für Sie.">
+       Some links on this site are affiliate links. When you purchase through these links, we may receive a small commission at no extra cost to you.
+    </p>
+    <h3 data-en="4. User Conduct" data-ru="4. Поведение пользователей" data-de="4. Nutzerverhalten">4. User Conduct</h3>
+    <p data-en="When using our Discord servers and community features, respectful and lawful behaviour is expected. Hate speech, harassment and illegal activities are prohibited and will result in immediate exclusion."
+       data-ru="При использовании наших Discord-серверов и функций сообщества ожидается уважительное и законное поведение. Речь ненависти, домогательства и незаконная деятельность запрещены и приведут к немедленному исключению."
+       data-de="Bei der Nutzung unserer Discord-Server und Community-Funktionen wird respektvolles und rechtmäßiges Verhalten erwartet. Hassrede, Belästigung und illegale Aktivitäten sind verboten und führen zum sofortigen Ausschluss.">
+       When using our Discord servers and community features, respectful and lawful behaviour is expected. Hate speech, harassment and illegal activities are prohibited and will result in immediate exclusion.
+    </p>
+    <h3 data-en="5. Changes to Terms" data-ru="5. Изменения условий" data-de="5. Änderungen der Bedingungen">5. Changes to Terms</h3>
+    <p data-en="We reserve the right to change these terms at any time. Continued use of the website after changes constitutes acceptance of the new terms."
+       data-ru="Мы оставляем за собой право изменять эти условия в любое время. Продолжение использования сайта после изменений означает принятие новых условий."
+       data-de="Wir behalten uns das Recht vor, diese Bedingungen jederzeit zu ändern. Die fortgesetzte Nutzung der Website nach Änderungen stellt die Annahme der neuen Bedingungen dar.">
+       We reserve the right to change these terms at any time. Continued use of the website after changes constitutes acceptance of the new terms.
+    </p>
+    <h3 data-en="6. Governing Law" data-ru="6. Применимое право" data-de="6. Anwendbares Recht">6. Governing Law</h3>
+    <p data-en="These terms are governed by the laws of the Federal Republic of Germany. Place of jurisdiction is Thüringen."
+       data-ru="Эти условия регулируются законодательством Федеративной Республики Германия. Местом юрисдикции является Тюри́нгия ."
+       data-de="Diese Bedingungen unterliegen dem Recht der Bundesrepublik Deutschland. Gerichtsstand ist Thüringen.">
+       These terms are governed by the laws of the Federal Republic of Germany. Place of jurisdiction is Thüringen.
+    </p>
+  </div>
+</dialog>
 
 </body>
 </html>
