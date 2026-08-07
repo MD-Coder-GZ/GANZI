@@ -1,109 +1,46 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#090b12" />
-  <meta name="description" content="GANZISQUAD — игры, стримы и игровое комьюнити Delta Force." />
-  <title>GANZISQUAD — Gaming • Streams • Community</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080a0f">
+  <meta name="description" content="GANZISQUAD — Delta Force, стримы и игровое комьюнити.">
+  <title>GANZISQUAD — Delta Force · Streams · Community</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
-
-  <header class="shell nav">
-    <a class="brand" href="#top" aria-label="GANZISQUAD — главная">GANZI<b>SQUAD</b></a>
-    <button class="menu" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
-    <nav class="nav-links" aria-label="Основная навигация">
-      <a href="#links">Ссылки</a>
-      <a href="#community">Комьюнити</a>
-      <a class="support-mini" href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener noreferrer">Поддержать ↗</a>
-    </nav>
+  <div class="noise"></div><div class="cursor-glow"></div>
+  <header class="topbar">
+    <a class="topbar-logo" href="#top">GANZI<span>SQUAD</span></a>
+    <div class="lang-switcher" aria-label="Язык"><button id="btn-ru" class="active" onclick="setLang('ru')">RU</button><button id="btn-en" onclick="setLang('en')">EN</button><button id="btn-de" onclick="setLang('de')">DE</button></div>
   </header>
-
   <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="shell hero-content">
-        <p class="eyebrow"><span class="live" aria-hidden="true"></span> GAMING • STREAMS • COMMUNITY</p>
-        <h1 id="hero-title">Играем <em>вместе.</em><br />Растём вместе.</h1>
-        <p class="lead">GANZISQUAD — место для стримов, видео и игрового комьюнити. Заходи в отряд и следи за новостями Delta Force.</p>
-        <div class="actions">
-          <a class="button primary" href="https://www.youtube.com/@GANZISQUAD/featured" target="_blank" rel="noopener noreferrer">Смотреть YouTube <span>→</span></a>
-          <a class="button secondary" href="https://web.telegram.org/a/#-1004425662108" target="_blank" rel="noopener noreferrer">Войти в Telegram <span>↗</span></a>
-        </div>
-        <div class="hero-tags" aria-label="Темы канала">
-          <span class="tag">Delta Force</span>
-          <span class="tag">Стримы</span>
-          <span class="tag">Клипы и хайлайты</span>
-        </div>
+    <section class="hero">
+      <div class="hero-bg"></div><div class="hero-overlay"></div><canvas id="heroParticles"></canvas>
+      <div class="hero-content">
+        <div class="status"><span class="status-dot"></span><span data-ru="GAMING · STREAMS · COMMUNITY" data-en="GAMING · STREAMS · COMMUNITY" data-de="GAMING · STREAMS · COMMUNITY">GAMING · STREAMS · COMMUNITY</span></div>
+        <h1 class="glitch-logo" data-text="GANZISQUAD">GANZI<span>SQUAD</span></h1>
+        <p class="hero-text" data-ru="Стримы, видео и живое игровое комьюнити. Delta Force, кооперативные шутеры и MMO — вместе интереснее." data-en="Streams, videos and a live gaming community. Delta Force, co-op shooters and MMO — better together." data-de="Streams, Videos und eine lebendige Gaming-Community. Delta Force, Koop-Shooter und MMO — gemeinsam besser.">Стримы, видео и живое игровое комьюнити. Delta Force, кооперативные шутеры и MMO — вместе интереснее.</p>
+        <div class="hero-buttons"><a class="hero-btn primary" href="https://www.youtube.com/@GANZISQUAD/featured" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i>YouTube</a><a class="hero-btn secondary" href="https://web.telegram.org/a/#-1004425662108" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i>GN Squad</a></div>
+      </div>
+      <a class="scroll-down" href="#content">SCROLL <i class="fa-solid fa-chevron-down"></i></a>
+    </section>
+
+    <section class="section reveal" id="content"><div class="section-title"><span class="section-number">01</span><div><p>GANZI CONTENT</p><h2>Последний контент</h2></div></div><p class="section-intro">Свежие стримы и видео по Delta Force, кооперативным шутерам и MMO.</p>
+      <div class="visual-grid">
+        <a class="visual-card large-card" style="background-image:url('assets/deltaforcecis.jpg')" href="https://www.youtube.com/@GANZISQUAD/featured" target="_blank" rel="noopener"><span class="visual-overlay"></span><div class="visual-content"><span class="visual-tag">DELTA FORCE</span><h3>Стримы и лучшие моменты</h3><p>Заходи на канал за новыми видео, хайлайтами и совместной игрой.</p><span class="visual-link">Смотреть на YouTube →</span></div></a>
+        <a class="visual-card" style="background-image:url('assets/font.png')" href="https://www.youtube.com/@GANZISQUAD/featured" target="_blank" rel="noopener"><span class="visual-overlay"></span><div class="visual-content"><span class="visual-tag">HIGHLIGHTS</span><h3>Видео и клипы</h3><span class="visual-link">Открыть →</span></div></a>
+        <a class="visual-card" style="background-image:url('assets/my-pc.png')" href="https://web.telegram.org/a/#-1004425662108" target="_blank" rel="noopener"><span class="visual-overlay"></span><div class="visual-content"><span class="visual-tag">GN SQUAD</span><h3>Новости отряда</h3><span class="visual-link">В Telegram →</span></div></a>
       </div>
     </section>
 
-    <section id="links" class="shell section" aria-labelledby="links-title">
-      <p class="label">01 / ССЫЛКИ</p>
-      <h2 id="links-title" class="title">Оставайся на связи</h2>
-      <div class="grid">
-        <a class="card youtube" href="https://www.youtube.com/@GANZISQUAD/featured" target="_blank" rel="noopener noreferrer">
-          <span class="icon" aria-hidden="true">▶</span>
-          <h3>YouTube</h3>
-          <p>Видео, стримы и лучшие моменты</p>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="card telegram" href="https://web.telegram.org/a/#-1004425662108" target="_blank" rel="noopener noreferrer">
-          <span class="icon" aria-hidden="true">✈</span>
-          <h3>GN Squad</h3>
-          <p>Новости, общение и анонсы</p>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="card donate" href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener noreferrer">
-          <span class="icon" aria-hidden="true">♥</span>
-          <h3>Поддержать</h3>
-          <p>DonationAlerts — по желанию</p>
-          <span class="arrow" aria-hidden="true">↗</span>
-        </a>
-      </div>
-    </section>
+    <section class="section reveal" id="about"><div class="section-title"><span class="section-number">02</span><div><p>О ПРОЕКТЕ</p><h2>Один отряд. Одна атмосфера.</h2></div></div><div class="about-copy"><p>Я строю долгосрочный и устойчивый проект вокруг стриминга, комьюнити и игрового контента. Основной фокус — кооперативные шутеры, тактические игры и MMO, где важно живое взаимодействие между игроками.</p><p>Мне неинтересны соло-прохождения. Главная ценность канала — живое комьюнити и совместные игровые эмоции, а не просто просмотры. Атмосфера спокойная, смешная, дружелюбная и немного экспертная.</p></div></section>
 
-    <section id="community" class="community" aria-labelledby="community-title">
-      <div class="shell community-wrap">
-        <div class="community-text">
-          <p class="label">02 / КОМЬЮНИТИ</p>
-          <h2 id="community-title" class="title">Не просто зрители.<br />Один отряд.</h2>
-          <p>Присоединяйся к GN Squad в Telegram: обсуждаем игры, делимся моментами, узнаём о новых видео и стримах первыми.</p>
-          <div class="actions">
-            <a class="button primary" href="https://web.telegram.org/a/#-1004425662108" target="_blank" rel="noopener noreferrer">Открыть GN Squad →</a>
-          </div>
-        </div>
-        <article class="delta-card">
-          <small>DELTA FORCE • CIS</small>
-          <h3>Squad ready.</h3>
-          <a href="https://web.telegram.org/a/#-1004425662108" target="_blank" rel="noopener noreferrer">Вступить в комьюнити ↗</a>
-        </article>
-      </div>
-    </section>
+    <section class="section reveal" id="projects"><div class="section-title"><span class="section-number">03</span><div><p>В РАЗРАБОТКЕ</p><h2>Будущие проекты</h2></div></div><div class="socials-grid"><article class="social-card"><i class="fa-solid fa-scissors"></i><div><strong>Shorts и клипы</strong><small>Нарезка ключевых моментов стримов для YouTube Shorts и TikTok.</small></div></article><article class="social-card"><i class="fa-solid fa-crosshairs"></i><div><strong>Гайды Delta Force</strong><small>Структурированные материалы с регулярными обновлениями.</small></div></article><article class="social-card"><i class="fa-solid fa-closed-captioning"></i><div><strong>Субтитры</strong><small>Английский и немецкий для расширения аудитории.</small></div></article></div></section>
 
-    <section class="shell section section-support" aria-labelledby="support-title">
-      <div class="support">
-        <div>
-          <p class="label">03 / ПОДДЕРЖКА</p>
-          <h2 id="support-title">Помоги проекту расти</h2>
-          <p>Добровольная поддержка идёт на развитие контента и комьюнити.</p>
-        </div>
-        <a class="button support-button" href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener noreferrer">DonationAlerts ↗</a>
-      </div>
-    </section>
-  </main>
+    <section class="section reveal" id="community"><div class="section-title"><span class="section-number">04</span><div><p>LIVE COMMUNITY</p><h2>Следуй за отрядом</h2></div></div><div class="socials-grid"><a class="social-card youtube" href="https://www.youtube.com/@GANZISQUAD/featured" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i><div><strong>YouTube</strong><small>Видео, стримы и хайлайты</small></div><span class="card-arrow">↗</span></a><a class="social-card telegram" href="https://web.telegram.org/a/#-1004425662108" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i><div><strong>GN Squad</strong><small>Новости и общение в Telegram</small></div><span class="card-arrow">↗</span></a><a class="social-card" href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener"><i class="fa-solid fa-heart"></i><div><strong>Поддержать</strong><small>Добровольная поддержка проекта</small></div><span class="card-arrow">↗</span></a></div></section>
 
-  <footer class="footer">
-    <div class="shell footer-inner">
-      <span>© 2026 GANZISQUAD. Все ссылки ведут на официальные площадки проекта.</span>
-      <a href="#top">Наверх ↑</a>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    <section class="section reveal" id="support"><div class="support-card spotlight-card"><div><p>SUPPORT</p><h2>Помоги проекту расти</h2><span>Поддержка идёт на развитие контента, стримов и комьюнити.</span></div><a class="hero-btn primary" href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener">DonationAlerts <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></section>
+  </main><script src="script.js"></script>
+</body></html>
