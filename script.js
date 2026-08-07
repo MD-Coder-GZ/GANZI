@@ -376,6 +376,19 @@ document.addEventListener("DOMContentLoaded", () => {
   applyLang();
   setupRevealAnimation();
 
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+        });
+        history.pushState(null, null, this.getAttribute("href"));
+      }
+    });
+  });
+
   document
     .querySelectorAll(".discord-server-card[data-guild-id]")
     .forEach(loadDiscordWidget);
