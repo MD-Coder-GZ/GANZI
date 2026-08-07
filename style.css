@@ -118,6 +118,51 @@ a {
   box-shadow: 0 0 18px rgba(255, 157, 0, 0.45);
 }
 
+/* Topbar navigation */
+.topbar-nav {
+  display: flex;
+  gap: 0.1rem;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.topbar-nav a {
+  position: relative;
+  padding: 0.4rem 0.7rem;
+  color: var(--sub);
+  font: 700 0.78rem "Rajdhani", sans-serif;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: 7px;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.topbar-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--orange);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 157, 0, 0.5);
+}
+
+.topbar-nav a:hover,
+.topbar-nav a.active {
+  color: var(--orange-light);
+  background: rgba(255, 157, 0, 0.08);
+}
+
+.topbar-nav a:hover::after,
+.topbar-nav a.active::after {
+  width: 60%;
+}
+
 /* Logo glitch */
 .glitch-logo {
   position: relative;
@@ -1593,6 +1638,12 @@ footer {
 }
 
 /* Mobile */
+@media (max-width: 900px) {
+  .topbar-nav {
+    display: none;
+  }
+}
+
 @media (max-width: 680px) {
   .topbar {
     padding: 0.95rem 1rem;
