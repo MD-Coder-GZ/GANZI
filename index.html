@@ -18,17 +18,17 @@
   <div class="cursor-glow"></div>
 
   <nav class="topbar">
-    <a class="topbar-logo glitch-logo" href="#top" data-text="GANZISQUAD">
+    <a class="topbar-logo glitch-logo" href="#top" target="_self" data-text="GANZISQUAD">
       GANZI<span>SQUAD</span>
     </a>
 
     <div class="topbar-nav">
-      <a href="#about" data-en="About" data-ru="Обо мне" data-de="Über mich">About</a>
-      <a href="#socials" data-en="Socials" data-ru="Соцсети" data-de="Socials">Socials</a>
-      <a href="#discord" data-en="Discord" data-ru="Discord" data-de="Discord">Discord</a>
-      <a href="#content" data-en="Content" data-ru="Контент" data-de="Content">Content</a>
-      <a href="#support" data-en="Support" data-ru="Поддержка" data-de="Support">Support</a>
-      <a href="#setup" data-en="Setup" data-ru="Сетап" data-de="Setup">Setup</a>
+      <a href="#about" target="_self" data-en="About" data-ru="Обо мне" data-de="Über mich">About</a>
+      <a href="#socials" target="_self" data-en="Socials" data-ru="Соцсети" data-de="Socials">Socials</a>
+      <a href="#discord" target="_self" data-en="Discord" data-ru="Discord" data-de="Discord">Discord</a>
+      <a href="#content" target="_self" data-en="Content" data-ru="Контент" data-de="Content">Content</a>
+      <a href="#support" target="_self" data-en="Support" data-ru="Поддержка" data-de="Support">Support</a>
+      <a href="#setup" target="_self" data-en="Setup" data-ru="Сетап" data-de="Setup">Setup</a>
     </div>
 
     <div class="lang-switcher">
@@ -84,7 +84,7 @@
       </div>
     </div>
 
-    <a href="#about" class="scroll-down">
+    <a href="#about" target="_self" class="scroll-down">
       <span data-en="Explore" data-ru="Смотреть" data-de="Entdecken">Explore</span>
       <i class="fa-solid fa-chevron-down"></i>
     </a>
@@ -114,7 +114,7 @@
           </p>
           <p
             data-en="Solo walkthroughs are not my thing. The main value is a live community and shared gaming emotions, not just views. The atmosphere is calm, funny, friendly and slightly expert."
-            data-ru="Соло-прохождения мне неинтересны. Главная ценность — живое комьюнити и совместные игровые эмоции, а не просто просмотры. Атмосфера спокойная, смешная, дружелюбная и немного экспертная."
+            data-ru="Соло-прохождения мне неинтересны. Главная ценность — живое комьюнити и совместные игровые эмоции, а не просто просмотры. На стриме спокойно, смешно, дружелюбно и немного экспертность."
             data-de="Solo-Durchspiele sind nicht mein Ding. Der Hauptwert ist eine lebendige Community und gemeinsame Gaming-Emotionen, nicht nur Views. Die Atmosphäre ist ruhig, lustig, freundlich und leicht expertenhaft.">
             Solo walkthroughs are not my thing.
           </p>
@@ -278,7 +278,7 @@
           </div>
         </a>
 
-        <a class="visual-card" href="#setup" style="background-image: url('assets/my-pc.png?v=1');">
+        <a class="visual-card" href="#setup" target="_self" style="background-image: url('assets/my-pc.png?v=1');">
           <div class="visual-overlay"></div>
           <div class="visual-content">
             <span class="visual-tag">LOADOUT</span>
@@ -461,13 +461,13 @@
       </div>
       <div class="footer-col">
         <h4 data-en="NAVIGATION" data-ru="НАВИГАЦИЯ" data-de="NAVIGATION">NAVIGATION</h4>
-        <a href="#about" data-en="About" data-ru="Обо мне" data-de="Über mich">About</a>
-        <a href="#socials" data-en="Socials" data-ru="Соцсети" data-de="Socials">Socials</a>
-        <a href="#discord" data-en="Discord" data-ru="Discord" data-de="Discord">Discord</a>
-        <a href="#content" data-en="Content" data-ru="Контент" data-de="Content">Content</a>
-        <a href="#projects" data-en="Projects" data-ru="Проекты" data-de="Projekte">Projects</a>
-        <a href="#support" data-en="Support" data-ru="Поддержка" data-de="Support">Support</a>
-        <a href="#setup" data-en="Setup" data-ru="Сетап" data-de="Setup">Setup</a>
+        <a href="#about" target="_self" data-en="About" data-ru="Обо мне" data-de="Über mich">About</a>
+        <a href="#socials" target="_self" data-en="Socials" data-ru="Соцсети" data-de="Socials">Socials</a>
+        <a href="#discord" target="_self" data-en="Discord" data-ru="Discord" data-de="Discord">Discord</a>
+        <a href="#content" target="_self" data-en="Content" data-ru="Контент" data-de="Content">Content</a>
+        <a href="#projects" target="_self" data-en="Projects" data-ru="Проекты" data-de="Projekte">Projects</a>
+        <a href="#support" target="_self" data-en="Support" data-ru="Поддержка" data-de="Support">Support</a>
+        <a href="#setup" target="_self" data-en="Setup" data-ru="Сетап" data-de="Setup">Setup</a>
       </div>
       <div class="footer-col">
         <h4 data-en="LEGAL" data-ru="ПРАВОВАЯ ИНФОРМАЦИЯ" data-de="RECHTLICHES">LEGAL</h4>
@@ -516,5 +516,10 @@
   </div>
 
   <script src="script.js?v=9"></script>
+  <button class="scroll-top" id="scrollTop" aria-label="Вернуться в начало">
+    <i class="fa-solid fa-arrow-up"></i>
+    <span class="scroll-top-text" data-en="Back to top" data-ru="Вернуться в начало" data-de="Zurück nach oben">Back to top</span>
+  </button>
+
 </body>
 </html>
