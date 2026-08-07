@@ -1,442 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080a0f">
-
-  <title>GANZISQUAD | Delta Force Streams</title>
-  <meta name="description" content="GANZISQUAD — Delta Force streams, community, setup and gaming partners.">
-
-  <link rel="stylesheet" href="style.css?v=8">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090b12" />
+  <meta name="description" content="GANZISQUAD — игры, стримы и игровое комьюнити Delta Force." />
+  <title>GANZISQUAD — Gaming • Streams • Community</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <div class="noise"></div>
-  <div class="cursor-glow"></div>
+  <div class="noise" aria-hidden="true"></div>
 
-  <nav class="topbar">
-    <a class="topbar-logo glitch-logo" href="#top" data-text="GANZISQUAD">
-      GANZI<span>SQUAD</span>
-    </a>
-
-    <div class="lang-switcher">
-      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-      <button id="btn-ru" onclick="setLang('ru')">RU</button>
-      <button id="btn-de" onclick="setLang('de')">DE</button>
-    </div>
-  </nav>
-
-  <header class="hero" id="top">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <canvas id="heroParticles" aria-hidden="true"></canvas>
-
-    <div class="hero-content">
-      <div class="status">
-        <span class="status-dot"></span>
-        <span
-          data-en="DELTA FORCE · FPS STREAMER"
-          data-ru="DELTA FORCE · FPS СТРИМЕР"
-          data-de="DELTA FORCE · FPS-STREAMER">
-          DELTA FORCE · FPS STREAMER
-        </span>
-      </div>
-
-      <p
-        class="hero-text"
-        data-en="Streams, highlights and a community for tactical FPS players."
-        data-ru="Стримы, хайлайты и сообщество для любителей тактических FPS."
-        data-de="Streams, Highlights und eine Community für taktische FPS-Spieler.">
-        Streams, highlights and a community for tactical FPS players.
-      </p>
-
-      <div class="hero-buttons">
-        <a class="hero-btn primary" href="https://www.twitch.tv/ganzisquad" target="_blank" rel="noopener">
-          <i class="fab fa-twitch"></i>
-          <span
-            data-en="Watch on Twitch"
-            data-ru="Смотреть Twitch"
-            data-de="Auf Twitch ansehen">
-            Watch on Twitch
-          </span>
-        </a>
-
-        <a class="hero-btn secondary" href="https://discord.com/invite/FrJbZvfPfm" target="_blank" rel="noopener">
-          <i class="fab fa-discord"></i>
-          Discord
-        </a>
-      </div>
-    </div>
-
-    <a href="#socials" class="scroll-down">
-      <span data-en="Explore" data-ru="Смотреть" data-de="Entdecken">Explore</span>
-      <i class="fa-solid fa-chevron-down"></i>
-    </a>
+  <header class="shell nav">
+    <a class="brand" href="#top" aria-label="GANZISQUAD — главная">GANZI<b>SQUAD</b></a>
+    <button class="menu" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
+    <nav class="nav-links" aria-label="Основная навигация">
+      <a href="#links">Ссылки</a>
+      <a href="#community">Комьюнити</a>
+      <a class="support-mini" href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener noreferrer">Поддержать ↗</a>
+    </nav>
   </header>
 
-  <main>
-    <section class="section reveal" id="socials">
-      <div class="section-title">
-        <span class="section-number">01</span>
-
-        <div>
-          <p data-en="FOLLOW GANZI" data-ru="ПОДПИШИСЬ НА GANZI" data-de="FOLGE GANZI">
-            FOLLOW GANZI
-          </p>
-
-          <h2 data-en="Follow the squad" data-ru="Присоединяйся к squad" data-de="Folge dem Squad">
-            Follow the squad
-          </h2>
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="shell hero-content">
+        <p class="eyebrow"><span class="live" aria-hidden="true"></span> GAMING • STREAMS • COMMUNITY</p>
+        <h1 id="hero-title">Играем <em>вместе.</em><br />Растём вместе.</h1>
+        <p class="lead">GANZISQUAD — место для стримов, видео и игрового комьюнити. Заходи в отряд и следи за новостями Delta Force.</p>
+        <div class="actions">
+          <a class="button primary" href="https://www.youtube.com/@GANZISQUAD/featured" target="_blank" rel="noopener noreferrer">Смотреть YouTube <span>→</span></a>
+          <a class="button secondary" href="https://web.telegram.org/a/#-1004425662108" target="_blank" rel="noopener noreferrer">Войти в Telegram <span>↗</span></a>
+        </div>
+        <div class="hero-tags" aria-label="Темы канала">
+          <span class="tag">Delta Force</span>
+          <span class="tag">Стримы</span>
+          <span class="tag">Клипы и хайлайты</span>
         </div>
       </div>
+    </section>
 
-      <div class="socials-grid">
-        <a href="https://www.twitch.tv/ganzisquad" target="_blank" rel="noopener" class="social-card twitch spotlight-card">
-          <i class="fab fa-twitch"></i>
-          <div>
-            <strong>Twitch</strong>
-            <small data-en="Live streams" data-ru="Прямые эфиры" data-de="Live-Streams">Live streams</small>
-          </div>
-          <span class="card-arrow">↗</span>
+    <section id="links" class="shell section" aria-labelledby="links-title">
+      <p class="label">01 / ССЫЛКИ</p>
+      <h2 id="links-title" class="title">Оставайся на связи</h2>
+      <div class="grid">
+        <a class="card youtube" href="https://www.youtube.com/@GANZISQUAD/featured" target="_blank" rel="noopener noreferrer">
+          <span class="icon" aria-hidden="true">▶</span>
+          <h3>YouTube</h3>
+          <p>Видео, стримы и лучшие моменты</p>
+          <span class="arrow" aria-hidden="true">↗</span>
         </a>
-
-        <a href="https://www.youtube.com/@Ganzisquad" target="_blank" rel="noopener" class="social-card youtube spotlight-card">
-          <i class="fab fa-youtube"></i>
-          <div>
-            <strong>YouTube</strong>
-            <small data-en="Videos & highlights" data-ru="Видео и хайлайты" data-de="Videos & Highlights">
-              Videos & highlights
-            </small>
-          </div>
-          <span class="card-arrow">↗</span>
+        <a class="card telegram" href="https://web.telegram.org/a/#-1004425662108" target="_blank" rel="noopener noreferrer">
+          <span class="icon" aria-hidden="true">✈</span>
+          <h3>GN Squad</h3>
+          <p>Новости, общение и анонсы</p>
+          <span class="arrow" aria-hidden="true">↗</span>
         </a>
-
-        <a href="https://t.me/boost/ganzisquad" target="_blank" rel="noopener" class="social-card telegram spotlight-card">
-          <i class="fab fa-telegram"></i>
-          <div>
-            <strong>Telegram</strong>
-            <small data-en="Updates & news" data-ru="Новости и обновления" data-de="News & Updates">
-              Updates & news
-            </small>
-          </div>
-          <span class="card-arrow">↗</span>
+        <a class="card donate" href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener noreferrer">
+          <span class="icon" aria-hidden="true">♥</span>
+          <h3>Поддержать</h3>
+          <p>DonationAlerts — по желанию</p>
+          <span class="arrow" aria-hidden="true">↗</span>
         </a>
       </div>
     </section>
 
-    <section class="section reveal" id="discord">
-      <div class="section-title">
-        <span class="section-number">02</span>
-
-        <div>
-          <p data-en="LIVE COMMUNITY" data-ru="ЖИВОЕ СООБЩЕСТВО" data-de="LIVE-COMMUNITY">
-            LIVE COMMUNITY
-          </p>
-
-          <h2 data-en="Choose your Discord" data-ru="Выбери свой Discord" data-de="Wähle deinen Discord">
-            Choose your Discord
-          </h2>
+    <section id="community" class="community" aria-labelledby="community-title">
+      <div class="shell community-wrap">
+        <div class="community-text">
+          <p class="label">02 / КОМЬЮНИТИ</p>
+          <h2 id="community-title" class="title">Не просто зрители.<br />Один отряд.</h2>
+          <p>Присоединяйся к GN Squad в Telegram: обсуждаем игры, делимся моментами, узнаём о новых видео и стримах первыми.</p>
+          <div class="actions">
+            <a class="button primary" href="https://web.telegram.org/a/#-1004425662108" target="_blank" rel="noopener noreferrer">Открыть GN Squad →</a>
+          </div>
         </div>
-      </div>
-
-      <div class="discord-servers-grid">
-        <article class="discord-server-card" data-guild-id="820446262972907541">
-          <div class="discord-card-glow"></div>
-
-          <div class="discord-card-top">
-            <div class="discord-server-icon">
-              <i class="fab fa-discord"></i>
-            </div>
-
-            <div>
-              <span class="discord-server-type" data-en="MAIN COMMUNITY" data-ru="ОСНОВНОЕ СООБЩЕСТВО" data-de="HAUPT-COMMUNITY">
-                MAIN COMMUNITY
-              </span>
-              <h3 class="server-name">GANZISQUAD</h3>
-            </div>
-
-            <span class="discord-live-pill">
-              <span></span>
-              <b data-en="LIVE" data-ru="ОНЛАЙН" data-de="LIVE">LIVE</b>
-            </span>
-          </div>
-
-          <div class="discord-server-stats">
-            <div>
-              <span class="stat-online-dot"></span>
-              <strong class="server-online">...</strong>
-              <small data-en="online now" data-ru="онлайн сейчас" data-de="jetzt online">online now</small>
-            </div>
-
-            <div>
-              <i class="fa-solid fa-circle-info"></i>
-              <strong class="server-status" data-en="Open" data-ru="Открыт" data-de="Offen">Open</strong>
-              <small data-en="community" data-ru="сообщество" data-de="Community">community</small>
-            </div>
-          </div>
-
-          <a href="https://discord.com/invite/FrJbZvfPfm" target="_blank" rel="noopener" class="discord-server-join">
-            <i class="fab fa-discord"></i>
-            <span data-en="Join community" data-ru="Вступить в сообщество" data-de="Community beitreten">
-              Join community
-            </span>
-            <b>↗</b>
-          </a>
-        </article>
-
-        <article class="discord-server-card delta-server" data-guild-id="1490463085029228614">
-          <div class="discord-card-glow"></div>
-
-          <div class="discord-card-top">
-            <div class="discord-server-icon">
-              <i class="fa-solid fa-crosshairs"></i>
-            </div>
-
-            <div>
-              <span class="discord-server-type">DELTA FORCE CIS</span>
-              <h3 class="server-name">DELTA FORCE</h3>
-            </div>
-
-            <span class="discord-live-pill">
-              <span></span>
-              <b data-en="LIVE" data-ru="ОНЛАЙН" data-de="LIVE">LIVE</b>
-            </span>
-          </div>
-
-          <div class="discord-server-stats">
-            <div>
-              <span class="stat-online-dot"></span>
-              <strong class="server-online">...</strong>
-              <small data-en="online now" data-ru="онлайн сейчас" data-de="jetzt online">online now</small>
-            </div>
-
-            <div>
-              <i class="fa-solid fa-circle-info"></i>
-              <strong class="server-status" data-en="Open" data-ru="Открыт" data-de="Offen">Open</strong>
-              <small data-en="CIS server" data-ru="CIS сервер" data-de="CIS-Server">CIS server</small>
-            </div>
-          </div>
-
-          <a href="https://discord.gg/U347WWhjUj" target="_blank" rel="noopener" class="discord-server-join">
-            <i class="fab fa-discord"></i>
-            <span data-en="Join Delta Force" data-ru="Вступить в Delta Force" data-de="Delta Force beitreten">
-              Join Delta Force
-            </span>
-            <b>↗</b>
-          </a>
+        <article class="delta-card">
+          <small>DELTA FORCE • CIS</small>
+          <h3>Squad ready.</h3>
+          <a href="https://web.telegram.org/a/#-1004425662108" target="_blank" rel="noopener noreferrer">Вступить в комьюнити ↗</a>
         </article>
       </div>
     </section>
 
-    <section class="section reveal" id="content">
-      <div class="section-title">
-        <span class="section-number">03</span>
-
+    <section class="shell section section-support" aria-labelledby="support-title">
+      <div class="support">
         <div>
-          <p data-en="GANZI CONTENT" data-ru="КОНТЕНТ GANZI" data-de="GANZI CONTENT">GANZI CONTENT</p>
-
-          <h2 data-en="Enter the squad" data-ru="Войди в squad" data-de="Tritt dem Squad bei">
-            Enter the squad
-          </h2>
+          <p class="label">03 / ПОДДЕРЖКА</p>
+          <h2 id="support-title">Помоги проекту расти</h2>
+          <p>Добровольная поддержка идёт на развитие контента и комьюнити.</p>
         </div>
-      </div>
-
-      <div class="visual-grid">
-        <a class="visual-card large-card" href="https://discord.gg/U347WWhjUj" target="_blank" rel="noopener" style="background-image: url('assets/deltaforcecis.jpg?v=1');">
-          <div class="visual-overlay"></div>
-
-          <div class="visual-content">
-            <span class="visual-tag">DELTA FORCE CIS</span>
-
-            <h3 data-en="Find your squad" data-ru="Найди свой squad" data-de="Finde dein Squad">
-              Find your squad
-            </h3>
-
-            <p data-en="Join the Delta Force CIS Discord server." data-ru="Вступай в Discord-сервер Delta Force CIS." data-de="Tritt dem Delta Force CIS Discord-Server bei.">
-              Join the Delta Force CIS Discord server.
-            </p>
-
-            <span class="visual-link" data-en="Join Discord ↗" data-ru="Войти в Discord ↗" data-de="Discord beitreten ↗">
-              Join Discord ↗
-            </span>
-          </div>
-        </a>
-
-        <a class="visual-card" href="https://www.twitch.tv/ganzisquad" target="_blank" rel="noopener" style="background-image: url('assets/font.png?v=1');">
-          <div class="visual-overlay"></div>
-
-          <div class="visual-content">
-            <span class="visual-tag">LIVE</span>
-
-            <h3 data-en="Watch streams" data-ru="Смотри стримы" data-de="Streams ansehen">
-              Watch streams
-            </h3>
-
-            <span class="visual-link">Twitch ↗</span>
-          </div>
-        </a>
-
-        <a class="visual-card" href="#setup" style="background-image: url('assets/my-pc.png?v=1');">
-          <div class="visual-overlay"></div>
-
-          <div class="visual-content">
-            <span class="visual-tag">LOADOUT</span>
-
-            <h3 data-en="My PC setup" data-ru="Мой ПК" data-de="Mein PC-Setup">
-              My PC setup
-            </h3>
-
-            <span class="visual-link" data-en="Explore ↗" data-ru="Смотреть ↗" data-de="Entdecken ↗">
-              Explore ↗
-            </span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section reveal" id="partners">
-      <div class="section-title">
-        <span class="section-number">04</span>
-
-        <div>
-          <p data-en="PARTNERS" data-ru="ПАРТНЁРЫ" data-de="PARTNER">PARTNERS</p>
-
-          <h2 data-en="Boost your connection" data-ru="Улучши соединение" data-de="Verbessere deine Verbindung">
-            Boost your connection
-          </h2>
-        </div>
-      </div>
-
-      <div class="gearup-layout">
-        <a class="gearup-banner gradient-border" href="https://gearup.sjv.io/GANZI" target="_blank" rel="sponsored noopener">
-          <img src="assets/gearup.png?v=1" alt="GearUP Booster — GANZI partner offer">
-
-          <span class="gearup-banner-cta" data-en="Get GearUP for PC ↗" data-ru="Получить GearUP для ПК ↗" data-de="GearUP für PC holen ↗">
-            Получить GearUP для ПК ↗
-          </span>
-        </a>
-
-        <div class="partners-grid">
-          <a href="https://gearupapp.pxf.io/GANZI" target="_blank" rel="sponsored noopener" class="partner-card spotlight-card">
-            <div class="partner-icon">⚡</div>
-
-            <div>
-              <strong>GearUP Mobile</strong>
-              <p data-en="Game booster for mobile games" data-ru="Бустер для мобильных игр" data-de="Game-Booster für mobile Spiele">
-                Бустер для мобильных игр
-              </p>
-            </div>
-
-            <span>↗</span>
-          </a>
-
-          <a href="https://gearup.sjv.io/GANZI" target="_blank" rel="sponsored noopener" class="partner-card spotlight-card">
-            <div class="partner-icon">🖥️</div>
-
-            <div>
-              <strong>GearUP PC</strong>
-              <p data-en="Lower ping and stable connection for PC games" data-ru="Низкий пинг и стабильное соединение для ПК" data-de="Niedriger Ping und stabile Verbindung für PC-Spiele">
-                Низкий пинг и стабильное соединение для ПК
-              </p>
-            </div>
-
-            <span>↗</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section reveal" id="support">
-      <div class="section-title">
-        <span class="section-number">05</span>
-
-        <div>
-          <p data-en="SUPPORT" data-ru="ПОДДЕРЖКА" data-de="SUPPORT">SUPPORT</p>
-
-          <h2 data-en="Support the stream" data-ru="Поддержать стрим" data-de="Stream unterstützen">
-            Support the stream
-          </h2>
-        </div>
-      </div>
-
-      <div class="donate-grid">
-        <a href="https://paypal.me/ganzibank" target="_blank" rel="noopener" class="donate-card paypal">
-          <i class="fab fa-paypal"></i>
-          <span>PayPal</span>
-          <small data-en="Donate" data-ru="Донат" data-de="Spenden">Donate</small>
-        </a>
-
-        <a href="https://www.revolut.me/ganzi/" target="_blank" rel="noopener" class="donate-card revolut">
-          <i class="fa-solid fa-heart"></i>
-          <span>Revolut</span>
-          <small data-en="Donate" data-ru="Донат" data-de="Spenden">Donate</small>
-        </a>
-      </div>
-    </section>
-
-    <section class="section reveal" id="setup">
-      <div class="section-title">
-        <span class="section-number">06</span>
-
-        <div>
-          <p data-en="LOADOUT" data-ru="СЕТАП" data-de="SETUP">LOADOUT</p>
-
-          <h2 data-en="My PC setup" data-ru="Мой ПК" data-de="Mein PC-Setup">
-            My PC setup
-          </h2>
-        </div>
-      </div>
-
-      <p class="affiliate-note" data-en="Affiliate links: I may receive a small commission at no extra cost to you." data-ru="Партнёрские ссылки: я могу получить небольшую комиссию без доплаты для тебя." data-de="Affiliate-Links: Ich kann eine kleine Provision erhalten, ohne Mehrkosten für dich.">
-        Affiliate links: I may receive a small commission at no extra cost to you.
-      </p>
-
-      <div class="gear-grid">
-        <a href="https://link.amazon/B0gexae8W" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>🎮</span><div><strong>RTX 5080</strong><small>GPU</small></div><b>Amazon ↗</b>
-        </a>
-
-        <a href="https://link.amazon/B009SceGY" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>⚡</span><div><strong>AMD Ryzen 7 9800X3D</strong><small>CPU</small></div><b>Amazon ↗</b>
-        </a>
-
-        <a href="https://link.amazon/B0cMjxMGE" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>🖥️</span><div><strong>MSI MAG 271QP QD-OLED</strong><small>Monitor</small></div><b>Amazon ↗</b>
-        </a>
-
-        <a href="https://link.amazon/B059M44e3" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>🎙️</span><div><strong>Fifine AM8</strong><small>Microphone</small></div><b>Amazon ↗</b>
-        </a>
-
-        <a href="https://link.amazon/B03Ky1cSb" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>🖱️</span><div><strong>MCHOSE M7 Ultra</strong><small>Mouse</small></div><b>Amazon ↗</b>
-        </a>
-
-        <a href="https://link.amazon/B038VnSL4" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>💾</span><div><strong>Kingston FURY DDR5 32GB</strong><small>RAM</small></div><b>Amazon ↗</b>
-        </a>
-
-        <a href="https://link.amazon/B0fbFJ1T8" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>⌨️</span><div><strong>AULA HERO 84U</strong><small>75% Magnetic</small></div><b>Amazon ↗</b>
-        </a>
-
-        <div class="gear-card no-link">
-          <span>🪟</span><div><strong>Windows 11 Pro</strong><small>OS</small></div>
-        </div>
+        <a class="button support-button" href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener noreferrer">DonationAlerts ↗</a>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-logo">GANZI<span>SQUAD</span></div>
-    <p>© 2026 GANZISQUAD · Dresden, Germany</p>
-    <p data-en="Affiliate links may generate commission." data-ru="Партнёрские ссылки могут приносить комиссию." data-de="Affiliate-Links können Provision generieren.">
-      Affiliate links may generate commission.
-    </p>
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <span>© 2026 GANZISQUAD. Все ссылки ведут на официальные площадки проекта.</span>
+      <a href="#top">Наверх ↑</a>
+    </div>
   </footer>
 
-  <script src="script.js?v=8"></script>
+  <script src="script.js"></script>
 </body>
 </html>
