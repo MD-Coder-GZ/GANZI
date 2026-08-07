@@ -338,6 +338,40 @@ function setupScrollTop() {
   });
 }
 
+/* ===== MODALS ===== */
+function openModal(id) {
+  const modal = document.getElementById(id);
+  const overlay = document.getElementById("modalOverlay");
+  if (!modal) return;
+  if (overlay) overlay.classList.add("active");
+  modal.classList.add("active");
+  if (typeof modal.showModal === "function") modal.showModal();
+  document.body.style.overflow = "hidden";
+  applyLang();
+}
+
+function closeAllModals() {
+  document.querySelectorAll(".modal").forEach((m) => {
+    m.classList.remove("active");
+    if (typeof m.close === "function") m.close();
+  });
+  const overlay = document.getElementById("modalOverlay");
+  if (overlay) overlay.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+function showCookieBanner() {
+  const banner = document.getElementById("cookieBanner");
+  if (banner) {
+    banner.classList.add("show");
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  }
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeAllModals();
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   applyLang();
   setupRevealAnimation();
