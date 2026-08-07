@@ -1,131 +1,307 @@
-const LANGS = ["ru", "en", "de"];
-let currentLang = localStorage.getItem("gz-lang") || "ru";
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const finePointer = window.matchMedia("(pointer: fine)").matches;
+const LANGS = ["en", "ru", "de"];
+let currentLang = localStorage.getItem("gz-lang") || "en";
+
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
+
+const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
 
 function setLang(lang) {
-  if (!LANGS.includes(lang)) return;
   currentLang = lang;
   localStorage.setItem("gz-lang", lang);
-  document.querySelectorAll("[data-ru]").forEach((el) => {
-    el.textContent = el.getAttribute(`data-${lang}`) || el.getAttribute("data-ru");
+  applyLang();
+}
+
+function applyLang() {
+  document.querySelectorAll("[data-en]").forEach((element) => {
+    const translation =
+      element.getAttribute(`data-${currentLang}`) ||
+      element.getAttribute("data-en");
+
+    element.textContent = translation;
   });
-  LANGS.forEach((item) => {
-    document.getElementById(`btn-${item}`)?.classList.toggle("active", item === lang);
+
+  LANGS.forEach((lang) => {
+    document
+      .getElementById(`btn-${lang}`)
+      ?.classList.toggle("active", lang === currentLang);
   });
-  document.documentElement.lang = lang;
-}
 
-function setupMenuToggle() {
-  const toggle = document.querySelector(".menu-toggle");
-  const nav = document.querySelector(".nav-links");
-  if (!toggle || !nav) return;
-  toggle.addEventListener("click", () => nav.classList.toggle("open"));
-}
-
-function setupReveal() {
-  const blocks = document.querySelectorAll(".reveal");
-  if (reducedMotion || !("IntersectionObserver" in window)) {
-    blocks.forEach((b) => b.classList.add("visible"));
-    return;
-  }
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.12 });
-  blocks.forEach((b) => observer.observe(b));
-}
-
-function setupCursorGlow() {
-  const glow = document.querySelector(".cursor-glow");
-  if (!glow || !finePointer || reducedMotion) return;
-  window.addEventListener("pointermove", (e) => {
-    glow.style.left = `${e.clientX}px`;
-    glow.style.top = `${e.clientY}px`;
-  }, { passive: true });
-}
-
-function setupSpotlights() {
-  if (!finePointer || reducedMotion) return;
-  document.querySelectorAll(".spotlight-card").forEach((card) => {
-    card.addEventListener("pointermove", (e) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty("--spotlight-x", `${e.clientX - rect.left}px`);
-      card.style.setProperty("--spotlight-y", `${e.clientY - rect.top}px`);
-    }, { passive: true });
-  });
+  document.documentElement.lang = currentLang;
 }
 
 async function loadDiscordWidget(card) {
   const guildId = card.dataset.guildId;
-  if (!guildId) return;
+  const url = `https://discord.com/api/guilds/${guildId}/widget.json`;
+
   try {
-    const res = await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`, { cache: "no-store" });
-    if (!res.ok) throw new Error("unavailable");
-    const data = await res.json();
-    const online = card.querySelector(".server-online");
-    const name = card.querySelector(".server-name");
-    if (online) online.textContent = data.presence_count ?? "—";
-    if (name && data.name) name.textContent = data.name;
+    const response = await fetch(url, { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error("Discord widget unavailable");
+    }
+
+    const data = await response.json();
+
+    const onlineElement = card.querySelector(".server-online");
+    const nameElement = card.querySelector(".server-name");
+
+    if (onlineElement) {
+      onlineElement.textContent = data.presence_count ?? "—";
+    }
+
+    if (nameElement && data.name) {
+      nameElement.textContent = data.name;
+    }
   } catch {
-    const online = card.querySelector(".server-online");
-    if (online) online.textContent = "—";
+    const onlineElement = card.querySelector(".server-online");
+
+    if (onlineElement) {
+      onlineElement.textContent = "—";
+    }
   }
 }
 
-function setupParticles() {
-  const canvas = document.getElementById("bgParticles");
-  if (!canvas || reducedMotion) return;
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
-  let w, h, particles, frame;
+function setupRevealAnimation() {
+  const blocks = document.querySelectorAll(".reveal");
 
-  function resize() {
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
-    w = window.innerWidth;
-    h = window.innerHeight;
-    canvas.width = w * ratio;
-    canvas.height = h * ratio;
-    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-    particles = Array.from({ length: w < 700 ? 22 : 46 }, () => ({
-      x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18,
-      r: Math.random() * 1.3 + 0.4, a: Math.random() * 0.35 + 0.08,
-      gold: Math.random() > 0.5
-    }));
+  if (prefersReducedMotion) {
+    blocks.forEach((block) => block.classList.add("visible"));
+    return;
   }
 
-  function draw() {
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach((p) => {
-      p.x = (p.x + p.vx + w) % w;
-      p.y = (p.y + p.vy + h) % h;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.gold ? `rgba(255,207,107,${p.a})` : `rgba(168,107,255,${p.a})`;
-      ctx.fill();
-    });
-    frame = requestAnimationFrame(draw);
-  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
 
-  resize();
-  draw();
-  window.addEventListener("resize", resize, { passive: true });
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) cancelAnimationFrame(frame);
-    else draw();
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.1 },
+  );
+
+  blocks.forEach((block) => observer.observe(block));
+}
+
+function setupCursorGlow() {
+  const glow = document.querySelector(".cursor-glow");
+
+  if (!glow || !hasFinePointer || prefersReducedMotion) return;
+
+  window.addEventListener(
+    "pointermove",
+    (event) => {
+      glow.style.left = `${event.clientX}px`;
+      glow.style.top = `${event.clientY}px`;
+    },
+    { passive: true },
+  );
+}
+
+function setupSpotlights() {
+  if (!hasFinePointer || prefersReducedMotion) return;
+
+  document.querySelectorAll(".spotlight-card").forEach((card) => {
+    card.addEventListener(
+      "pointermove",
+      (event) => {
+        const rect = card.getBoundingClientRect();
+
+        card.style.setProperty(
+          "--spotlight-x",
+          `${event.clientX - rect.left}px`,
+        );
+
+        card.style.setProperty(
+          "--spotlight-y",
+          `${event.clientY - rect.top}px`,
+        );
+      },
+      { passive: true },
+    );
   });
 }
 
+function setupTilt() {
+  if (!hasFinePointer || prefersReducedMotion) return;
+
+  const cards = document.querySelectorAll(
+    ".social-card, .partner-card, .gear-card",
+  );
+
+  cards.forEach((card) => {
+    card.addEventListener(
+      "pointermove",
+      (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const rotateX = ((y - rect.height / 2) / rect.height) * -7;
+        const rotateY = ((x - rect.width / 2) / rect.width) * 7;
+
+        card.style.transform =
+          `perspective(750px) rotateX(${rotateX}deg) ` +
+          `rotateY(${rotateY}deg) translateY(-4px)`;
+      },
+      { passive: true },
+    );
+
+    card.addEventListener("pointerleave", () => {
+      card.style.transform = "";
+    });
+  });
+}
+
+function setupHeroParticles() {
+  const canvas = document.getElementById("heroParticles");
+  const hero = document.querySelector(".hero");
+
+  if (!canvas || !hero || prefersReducedMotion) return;
+
+  const context = canvas.getContext("2d");
+
+  if (!context) return;
+
+  let width = 0;
+  let height = 0;
+  let particles = [];
+  let animationFrame = null;
+  let isDrawing = false;
+
+  const particleCount = window.innerWidth < 700 ? 16 : 34;
+
+  function resizeCanvas() {
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = hero.clientWidth;
+    height = hero.clientHeight;
+
+    canvas.width = width * pixelRatio;
+    canvas.height = height * pixelRatio;
+
+    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+  }
+
+  function createParticles() {
+    particles = Array.from({ length: particleCount }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.22,
+      vy: (Math.random() - 0.5) * 0.22,
+      radius: Math.random() * 1.1 + 0.35,
+      alpha: Math.random() * 0.26 + 0.08,
+    }));
+  }
+
+  function drawParticles() {
+    if (!isDrawing) return;
+
+    context.clearRect(0, 0, width, height);
+
+    particles.forEach((particle) => {
+      particle.x += particle.vx;
+      particle.y += particle.vy;
+
+      if (particle.x < -5) particle.x = width + 5;
+      if (particle.x > width + 5) particle.x = -5;
+      if (particle.y < -5) particle.y = height + 5;
+      if (particle.y > height + 5) particle.y = -5;
+
+      context.beginPath();
+      context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+
+      context.fillStyle = `rgba(255, 170, 50, ${particle.alpha})`;
+      context.fill();
+    });
+
+    for (let i = 0; i < particles.length; i += 1) {
+      for (let j = i + 1; j < particles.length; j += 1) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance >= 92) continue;
+
+        context.beginPath();
+        context.moveTo(particles[i].x, particles[i].y);
+        context.lineTo(particles[j].x, particles[j].y);
+        context.strokeStyle = `rgba(146, 92, 255, ${0.06 * (1 - distance / 92)})`;
+        context.lineWidth = 0.45;
+        context.stroke();
+      }
+    }
+
+    animationFrame = requestAnimationFrame(drawParticles);
+  }
+
+  function restartParticles() {
+    resizeCanvas();
+    createParticles();
+  }
+
+  function startParticles() {
+    if (isDrawing) return;
+
+    isDrawing = true;
+    drawParticles();
+  }
+
+  function stopParticles() {
+    isDrawing = false;
+
+    if (animationFrame) {
+      cancelAnimationFrame(animationFrame);
+    }
+  }
+
+  restartParticles();
+  startParticles();
+
+  window.addEventListener("resize", restartParticles, { passive: true });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopParticles();
+    } else {
+      startParticles();
+    }
+  });
+}
+
+/* ===== NEW: COOKIE BANNER ===== */
+function setupCookieBanner() {
+  const banner = document.getElementById("cookieBanner");
+  if (!banner) return;
+
+  const consent = localStorage.getItem("gz-cookie-consent");
+  if (consent) return;
+
+  setTimeout(() => {
+    banner.classList.add("show");
+  }, 1200);
+}
+
+function acceptCookies(all) {
+  const banner = document.getElementById("cookieBanner");
+  if (banner) banner.classList.remove("show");
+  localStorage.setItem("gz-cookie-consent", all ? "all" : "essential");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  setLang(currentLang);
-  setupMenuToggle();
-  setupReveal();
+  applyLang();
+  setupRevealAnimation();
+
+  document
+    .querySelectorAll(".discord-server-card[data-guild-id]")
+    .forEach(loadDiscordWidget);
+
   setupCursorGlow();
   setupSpotlights();
-  setupParticles();
-  document.querySelectorAll(".discord-server-card[data-guild-id]").forEach(loadDiscordWidget);
+  setupTilt();
+  setupHeroParticles();
+  setupCookieBanner();
 });
