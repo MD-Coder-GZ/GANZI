@@ -1965,6 +1965,20 @@ footer {
   }
 }
 
+.hero-btn.telegram {
+  color: #3bb9ff;
+  background: rgba(11, 14, 23, 0.86);
+  border: 1px solid rgba(59, 185, 255, 0.45);
+  box-shadow: 0 0 18px rgba(59, 185, 255, 0.15);
+}
+
+.hero-btn.telegram:hover {
+  color: #fff;
+  background: linear-gradient(135deg, #3bb9ff, #0088cc);
+  border-color: transparent;
+  box-shadow: 0 0 28px rgba(59, 185, 255, 0.45);
+}
+
 @media (hover: none), (pointer: coarse) {
   .glitch-logo::before,
   .glitch-logo::after,
