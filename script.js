@@ -314,6 +314,30 @@ function setupActiveNav() {
   sections.forEach((section) => observer.observe(section));
 }
 
+/* ===== Scroll to top ===== */
+function setupScrollTop() {
+  const btn = document.getElementById("scrollTop");
+  if (!btn) return;
+
+  const toggle = () => {
+    if (window.scrollY > 500) {
+      btn.classList.add("visible");
+    } else {
+      btn.classList.remove("visible");
+    }
+  };
+
+  window.addEventListener("scroll", toggle, { passive: true });
+  toggle();
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   applyLang();
   setupRevealAnimation();
@@ -328,4 +352,5 @@ document.addEventListener("DOMContentLoaded", () => {
   setupHeroParticles();
   setupCookieBanner();
   setupActiveNav();
+  setupScrollTop();
 });
