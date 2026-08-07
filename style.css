@@ -1588,6 +1588,74 @@ footer {
   50% { opacity: 0.35; transform: scaleX(0.65); }
 }
 
+
+/* ===== Scroll to top ===== */
+.scroll-top {
+  position: fixed;
+  z-index: 150;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.7rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(10, 13, 20, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease, background 0.25s ease, color 0.25s ease;
+  font-family: "Orbitron", sans-serif;
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-top i {
+  font-size: 1.1rem;
+  transition: transform 0.25s ease;
+}
+
+.scroll-top:hover {
+  background: rgba(255, 157, 0, 0.12);
+  border-color: rgba(255, 157, 0, 0.45);
+  color: var(--orange-light);
+}
+
+.scroll-top:hover i {
+  transform: translateY(-3px);
+}
+
+.scroll-top-text {
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+@media (max-width: 680px) {
+  .scroll-top {
+    right: 1rem;
+    bottom: 1rem;
+    padding: 0.55rem 0.5rem;
+  }
+  .scroll-top-text {
+    font-size: 0.5rem;
+  }
+}
+
 /* Tablet */
 @media (max-width: 900px) {
   .socials-grid {
