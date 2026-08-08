@@ -8,13 +8,9 @@
 
 🚀 Что вы найдёте здесь
 Прямые трансляции в высоком качестве
-
 Автоматизированные Shorts: гайды, новости, AI‑контент
-
 Командную игру и живое общение
-
-Discord‑сервер WARDOGS CIS
-
+Discord‑сервера
 Полный список ссылок и информации обо мне
 
 🌐 Зачем этот сайт
@@ -23,16 +19,12 @@ Discord‑сервер WARDOGS CIS
 
 🧩 Техническая часть (для GitHub)
 Лёгкая структура: index.html + assets
-
 Мультиязычность через data-en, data-ru, data-de
-
 Быстрое редактирование прямо через GitHub
 
-🔥 Контакты и ссылки
+🔥 Контакты и ссылки: 
+
 [Twitch](https://twitch.tv/ganzisquad)
-
 [Донаты](https://www.donationalerts.com/r/ganzisquad)
-
 [Telegram](https://t.me/ganzisquad)
-
 [Главный сайт](https://md-coder-gz.github.io/GANZI/)
