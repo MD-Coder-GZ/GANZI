@@ -1,15 +1,38 @@
-# ganzisquad-site
+🛡️ GANZISQUAD — Stream. Squad. Impact.
+Добро пожаловать в центральный хаб стримера GANZISQUAD.
+Здесь собрана вся ключевая информация: стримы, соцсети, донаты, проекты, сетап и ссылки на сообщество.
 
-Personal streamer page for [ganzisquad](https://www.twitch.tv/ganzisquad).
-/
+🎮 О канале
+Я создаю атмосферу тактического кооператива: спокойный юмор, дружелюбие, экспертность и командная игра.
+Основной контент — Delta Force, шутеры, тактика, MMO и живые стримы с активным взаимодействием.
 
-## Features
-- EN / RU / DE language switcher
-- Social links: Twitch, YouTube, Discord, Telegram
-- Donate: PayPal, Revolut
-- PC Setup with Amazon affiliate links
-- Delta Force Discord server
+🚀 Что вы найдёте здесь
+Прямые трансляции в высоком качестве
 
-## How to edit
-Edit `index.html` directly on GitHub to update links and text.
-All language strings use `data-en`, `data-ru`, `data-de` attributes.
+Автоматизированные Shorts: гайды, новости, AI‑контент
+
+Командную игру и живое общение
+
+Discord‑сервер WARDOGS CIS
+
+Полный список ссылок и информации обо мне
+
+🌐 Зачем этот сайт
+Это единая точка входа в мой контент:
+все соцсети, донаты, проекты и полезные материалы — в одном месте.
+
+🧩 Техническая часть (для GitHub)
+Лёгкая структура: index.html + assets
+
+Мультиязычность через data-en, data-ru, data-de
+
+Быстрое редактирование прямо через GitHub
+
+🔥 Контакты и ссылки
+[Twitch](https://twitch.tv/ganzisquad)
+
+[Донаты](https://www.donationalerts.com/r/ganzisquad)
+
+[Telegram](https://t.me/ganzisquad)
+
+[Главный сайт](https://md-coder-gz.github.io/GANZI/)
