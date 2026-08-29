@@ -18,6 +18,18 @@ img,svg{display:block;max-width:100%}a{color:inherit;text-decoration:none}button
 @keyframes bf2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-45px,35px) scale(1.08)}66%{transform:translate(35px,-25px) scale(.95)}}
 @keyframes bf3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(55px,-35px) scale(1.12)}}
 
+
+.mobile-menu.open{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(7,7,10,.96);
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
 /* LOGO — свободно стоит */
 .brand-float{position:fixed;top:22px;left:var(--sp-5);z-index:101;font-weight:650;font-size:15px;letter-spacing:.14em;text-shadow:0 2px 12px rgba(0,0,0,.6)}
 .brand-float span{color:var(--accent);font-weight:400;text-shadow:0 0 18px var(--glow)}
