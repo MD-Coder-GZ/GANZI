@@ -40,7 +40,15 @@
   </div>
 
   <aside id="mobileMenu" class="mobile-menu">
+    <button id="closeMobileMenu" class="mobile-menu-close" aria-label="Закрыть меню">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
     <a href="#about" data-i18n="nav.about">О нас</a><a href="#schedule" data-i18n="nav.schedule">Расписание</a><a href="#services" data-i18n="nav.services">Услуги</a><a href="#setup" data-i18n="nav.setup">ПК</a><a href="#social" data-i18n="nav.social">Соцсети</a><a href="#support" data-i18n="nav.support">Поддержка</a><a href="#contact" data-i18n="nav.contact">Контакты</a>
+  <div class="mobile-menu-langs" aria-label="Language">
+    <button data-lang="ru" class="is-active">RU</button>
+    <button data-lang="en">EN</button>
+    <button data-lang="de">DE</button>
+  </div>
   </aside>
 
   <main>
@@ -99,10 +107,10 @@
     <section id="schedule" class="section reveal"><div class="section-heading"><span>Twitch</span><h2 data-i18n="schedule.title">Расписание стримов</h2><p id="twitchState" data-i18n="schedule.fallback">Статус Twitch появится после подключения API.</p></div><div id="scheduleGrid" class="schedule"></div></section>
 
     <section id="services" class="section reveal"><div class="section-heading"><span data-i18n="services.tag">Услуги</span><h2 data-i18n="services.title">Помощь проектам</h2></div><div class="services">
-      <article><h3>Streaming Setup</h3><p data-i18n="services.obs">OBS, звук, камеры, алерты, overlay и настройка трансляции.</p><b>от 50€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
+      <article><h3>Streaming Setup</h3><p data-i18n="services.obs">OBS, звук, камеры, алерты, overlay и настройка трансляции.</p><b>50€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
       <article><h3>PC Optimization</h3><p data-i18n="services.pc">FPS, задержки, Windows, драйверы и игровые настройки.</p><b>80€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
-      <article><h3 data-i18n="services.chat.title">Оформление чата</h3><p data-i18n="services.chat">Twitch chat, overlay, алерты, авто-сообщения и команды ботов.</p><b>от 30€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
-      <article><h3 data-i18n="services.audit.title">Аудит канала</h3><p data-i18n="services.audit">Разбор оформления и контента с понятным планом улучшений.</p><b>20€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
+      <article><h3 data-i18n="services.chat.title">Оформление чата</h3><p data-i18n="services.chat">Twitch chat, overlay, алерты, авто-сообщения и команды ботов.</p><b>от 60€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
+      <article><h3 data-i18n="services.audit.title">Аудит канала</h3><p data-i18n="services.audit">Разбор оформления и контента с понятным планом улучшений.</p><b>40€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
       <article><h3>Web Development</h3><p data-i18n="services.web">Сайты, лендинги и веб-приложения с адаптивным дизайном.</p><b>от 150€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
       <article><h3>Brand Design</h3><p data-i18n="services.brand">Логотип, айдентика, overlay-пакет и стиль канала.</p><b>от 100€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
     </div></section>
