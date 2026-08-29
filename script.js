@@ -531,6 +531,9 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
   const menu = document.getElementById("mobileMenu");
+  const closeBtn = document.getElementById("closeMobileMenu");
+  if (closeBtn)
+    closeBtn.addEventListener("click", () => menu.classList.remove("open"));
   document
     .getElementById("menuBtn")
     .addEventListener("click", () => menu.classList.toggle("open"));
