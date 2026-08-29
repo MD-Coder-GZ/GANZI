@@ -1,662 +1,196 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080a0f">
-
-  <title>GANZISQUAD | Delta Force Streams</title>
-  <meta name="description" content="GANZISQUAD — Delta Force streams, community, setup and gaming partners.">
-
-  <link rel="stylesheet" href="style.css?v=9">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07070a">
+  <meta name="description" content="GANZI SQUAD — гейминг, стриминг, технологии и AI-автоматизация.">
+  <title>GANZI SQUAD</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./script.js" defer></script>
 </head>
-
 <body>
-  <div class="noise"></div>
-  <div class="cursor-glow"></div>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cg" aria-hidden="true"></div>
 
-  <nav class="topbar">
-    <a class="topbar-logo glitch-logo" href="#top" target="_self" data-text="GANZISQUAD">
-      GANZI<span>SQUAD</span>
-    </a>
+  <a class="brand-float" href="#hero">GANZI <span>SQUAD</span></a>
 
-    <div class="topbar-nav">
-      <a href="#about" target="_self" data-en="About" data-ru="Обо мне" data-de="Über mich">About</a>
-      <a href="#socials" target="_self" data-en="Socials" data-ru="Соцсети" data-de="Socials">Socials</a>
-      <a href="#discord" target="_self" data-en="Discord" data-ru="Discord" data-de="Discord">Discord</a>
-      <a href="#content" target="_self" data-en="Content" data-ru="Контент" data-de="Content">Content</a>
-      <a href="#support" target="_self" data-en="Support" data-ru="Поддержка" data-de="Support">Support</a>
-      <a href="#setup" target="_self" data-en="Setup" data-ru="Сетап" data-de="Setup">Setup</a>
-    </div>
-
-    <div class="lang-switcher">
-      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-      <button id="btn-ru" onclick="setLang('ru')">RU</button>
-      <button id="btn-de" onclick="setLang('de')">DE</button>
-    </div>
+  <nav class="pill-nav">
+    <a href="#about" data-i18n="nav.about">О нас</a>
+    <a href="#schedule" data-i18n="nav.schedule">Расписание</a>
+    <a href="#services" data-i18n="nav.services">Услуги</a>
+    <a href="#setup" data-i18n="nav.setup">ПК</a>
+    <a href="#social" data-i18n="nav.social">Соцсети</a>
+    <a href="#support" data-i18n="nav.support">Поддержка</a>
+    <a href="#contact" data-i18n="nav.contact">Контакты</a>
   </nav>
 
-  <header class="hero" id="top">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <canvas id="heroParticles" aria-hidden="true"></canvas>
+  <div class="nav-tools-float">
+    <div class="languages" aria-label="Language"><button data-lang="ru" class="is-active">RU</button><button data-lang="en">EN</button><button data-lang="de">DE</button></div>
+    <button id="menuBtn" class="menu-btn" aria-label="Открыть меню"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
 
-    <div class="hero-content">
-      <div class="status">
-        <span class="status-dot"></span>
-        <span
-          data-en="DELTA FORCE · FPS STREAMER"
-          data-ru="DELTA FORCE · FPS СТРИМЕР"
-          data-de="DELTA FORCE · FPS-STREAMER">
-          DELTA FORCE · FPS STREAMER
-        </span>
-      </div>
-
-      <p
-        class="hero-text"
-        data-en="Streams, highlights and a community for tactical FPS players."
-        data-ru="Стримы, хайлайты и сообщество для любителей тактических FPS."
-        data-de="Streams, Highlights und eine Community für taktische FPS-Spieler.">
-        Streams, highlights and a community for tactical FPS players.
-      </p>
-
-      <div class="hero-buttons">
-        <a class="hero-btn primary" href="https://www.twitch.tv/ganzisquad" target="_blank" rel="noopener">
-          <i class="fab fa-twitch"></i>
-          <span
-            data-en="Watch on Twitch"
-            data-ru="Смотреть Twitch"
-            data-de="Auf Twitch ansehen">
-            Watch on Twitch
-          </span>
-        </a>
-
-        <a class="hero-btn youtube" href="https://www.youtube.com/@Ganzisquad" target="_blank" rel="noopener">
-          <i class="fab fa-youtube"></i>
-          <span data-en="YouTube" data-ru="YouTube" data-de="YouTube">YouTube</span>
-        </a>
-        <a class="hero-btn secondary" href="https://discord.com/invite/FrJbZvfPfm" target="_blank" rel="noopener">
-          <i class="fab fa-discord"></i>
-          Discord
-        </a>
-      </div>
-    </div>
-    
-        <a class="hero-btn telegram" href="https://t.me/ganzisquad" target="_blank" rel="noopener">
-      <i class="fab fa-telegram"></i>
-      <span>Telegram</span>
-    </a>
-
-    <a href="#about" target="_self" class="scroll-down">
-      <span data-en="Explore" data-ru="Смотреть" data-de="Entdecken">Explore</span>
-      <i class="fa-solid fa-chevron-down"></i>
-    </a>
-  </header>
+  <aside id="mobileMenu" class="mobile-menu">
+    <a href="#about" data-i18n="nav.about">О нас</a><a href="#schedule" data-i18n="nav.schedule">Расписание</a><a href="#services" data-i18n="nav.services">Услуги</a><a href="#setup" data-i18n="nav.setup">ПК</a><a href="#social" data-i18n="nav.social">Соцсети</a><a href="#support" data-i18n="nav.support">Поддержка</a><a href="#contact" data-i18n="nav.contact">Контакты</a>
+  </aside>
 
   <main>
-    <!-- ABOUT -->
-    <section class="section reveal" id="about">
-      <div class="section-title">
-        <span class="section-number">01</span>
-        <div>
-          <p data-en="ABOUT" data-ru="ОБО МНЕ" data-de="ÜBER MICH">ABOUT</p>
-          <h2 data-en="Who is GANZI" data-ru="Кто такой GANZI" data-de="Wer ist GANZI">Who is GANZI</h2>
+    <section id="hero" class="hero">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><b></b><span data-i18n="hero.badge">Личный бренд</span></div>
+        <h1><strong>GANZI</strong><em>SQUAD</em></h1>
+        <p data-i18n="hero.text">Креативное пространство для тех, кто создаёт будущее. Гейминг, стриминг, технологии и AI — на одном дыхании.</p>
+        <div class="cta">
+          <a class="button primary" href="https://www.twitch.tv/ganzisquad" target="_blank" rel="noopener" data-i18n="hero.twitch">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.3 2 3 5.7v14.6h5v2.7h2.9L13.6 20h4.4L23 15V2H4.3zm16.6 12-3 3h-4.6L11 19.4V17H6.7V4.3h14.2v9.7z"/><path d="M17.3 7.4h2v5h-2zm-5.4 0h2v5h-2z"/></svg>
+            Смотреть Twitch
+          </a>
+          <a class="button ghost" href="#support" data-i18n="hero.support">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.6Z"/></svg>
+            Поддержать
+          </a>
+          <button class="bell-btn" id="telegramBell" aria-label="Написать в Telegram" data-i18n-title="hero.bell">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          </button>
+        </div>
+      </div>
+      <figure class="hero-photo reveal"><img src="image.jpg" alt="GANZI" onerror="this.style.display='none';this.nextElementSibling.hidden=false"><span hidden>G</span></figure>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>GANZI SQUAD</span><span>•</span><span>СТРИМИНГ</span><span>•</span><span>ГЕЙМИНГ</span><span>•</span><span>AI АВТОМАТИЗАЦИЯ</span><span>•</span><span>БРЕНД</span><span>•</span><span>GANZI SQUAD</span><span>•</span><span>СТРИМИНГ</span><span>•</span><span>ГЕЙМИНГ</span><span>•</span><span>AI АВТОМАТИЗАЦИЯ</span><span>•</span><span>БРЕНД</span><span>•</span></div></div>
+
+    <section id="about" class="section about reveal">
+      <div class="section-heading"><span data-i18n="about.tag">О проекте</span><h2 data-i18n="about.title">GANZI SQUAD</h2></div>
+      <p data-i18n="about.text">GANZI (Andrei Garbuz) — стример и разработчик из Лейпцига. Строю долгосрочный проект вокруг стриминга, живого комьюнити и игрового контента: с 2022 года совмещаю гейминг с технологиями и AI-автоматизацией.</p>
+      <p data-i18n="about.text2" style="margin-top:16px">Основной формат — кооперативные стримы: тактические шутеры, MMO и игры с активным взаимодействием, а не соло-прохождения. Атмосфера канала — спокойная, дружелюбная и немного экспертная. Дополнительно — Shorts с автоматизацией, гайды и новости.</p>
+
+      <div class="timeline-wrap">
+        <div class="timeline-label" data-i18n="timeline.pastLabel">Пройденный путь</div>
+        <div class="timeline">
+          <div><b>2022</b><span data-i18n="timeline.one">Первый стрим</span></div>
+          <div><b>2023</b><span data-i18n="timeline.two">GearUP партнёрство</span></div>
+          <div><b>2024</b><span data-i18n="timeline.three">50K подписчиков</span></div>
+          <div><b>2025</b><span data-i18n="timeline.four">Запуск сайта</span></div>
         </div>
       </div>
 
-      <div class="about-layout">
-        <div class="about-visual">
-          <div class="about-avatar"><img src="assets/ganziface.png" alt="GANZI"></div>
-        </div>
-        <div class="about-text">
-          <p
-            data-en="I am building a long-term, sustainable project around streaming, community and gaming content. Main focus — cooperative shooters, tactical games and MMO with live player interaction."
-            data-ru="Я строю долгосрочный и устойчивый проект вокруг стриминга, комьюнити и игрового контента. Основной фокус — кооперативные шутеры, тактические игры и MMO с живым взаимодействием игроков."
-            data-de="Ich baue ein langfristiges, nachhaltiges Projekt rund um Streaming, Community und Gaming-Content auf. Fokus — kooperative Shooter, taktische Spiele und MMO mit live Spielerinteraktion.">
-            I am building a long-term, sustainable project around streaming, community and gaming content.
-          </p>
-          <p
-            data-en="Solo walkthroughs are not my thing. The main value is a live community and shared gaming emotions, not just views. The atmosphere is calm, funny, friendly and slightly expert."
-            data-ru="Соло-прохождения мне неинтересны. Главная ценность — живое комьюнити и совместные игровые эмоции, а не просто просмотры. Атмосфера спокойная, смешная, дружелюбная и немного экспертная."
-            data-de="Solo-Durchspiele sind nicht mein Ding. Der Hauptwert ist eine lebendige Community und gemeinsame Gaming-Emotionen, nicht nur Views. Die Atmosphäre ist ruhig, lustig, freundlich und leicht expertenhaft.">
-            Solo walkthroughs are not my thing.
-          </p>
-          <div class="about-stats">
-            <div>
-              <h4>16+</h4>
-              <small data-en="Target audience" data-ru="Целевая аудитория" data-de="Zielgruppe">Target audience</small>
-            </div>
-            <div>
-              <h4>RU</h4>
-              <small data-en="Main language" data-ru="Основной язык" data-de="Hauptsprache">Main language</small>
-            </div>
-            <div>
-              <h4>∞</h4>
-              <small data-en="Ambitions" data-ru="Амбиции" data-de="Ambitionen">Ambitions</small>
-            </div>
-          </div>
+      <div class="timeline-wrap future">
+        <div class="timeline-label" data-i18n="timeline.futureLabel">Планы и амбиции</div>
+        <div class="timeline timeline-future">
+          <div><b>🎯</b><span data-i18n="timeline.f1">100K подписчиков</span></div>
+          <div><b>🎮</b><span data-i18n="timeline.f2">Стрим GTA VI в день выхода</span></div>
+          <div><b>🤖</b><span data-i18n="timeline.f3">Полная автоматизация Shorts</span></div>
+          <div><b>🌍</b><span data-i18n="timeline.f4">Субтитры на EN/DE</span></div>
         </div>
       </div>
     </section>
 
-    <section class="section reveal" id="socials">
-      <div class="section-title">
-        <span class="section-number">02</span>
-        <div>
-          <p data-en="FOLLOW GANZI" data-ru="ПОДПИШИСЬ НА GANZI" data-de="FOLGE GANZI">FOLLOW GANZI</p>
-          <h2 data-en="Follow the squad" data-ru="Присоединяйся к squad" data-de="Folge dem Squad">Follow the squad</h2>
-        </div>
-      </div>
+    <section class="stats reveal"><article><b class="counter" data-target="50" data-suffix="K+">0</b><span data-i18n="stats.followers">Подписчиков</span></article><article><b class="counter" data-target="1.2" data-suffix="M" data-decimals="1">0</b><span data-i18n="stats.views">Просмотров</span></article><article><b class="counter" data-target="320" data-suffix="+">0</b><span data-i18n="stats.streams">Стримов</span></article><article><b class="counter" data-target="24" data-suffix="/7">0</b><span data-i18n="stats.active">В движении</span></article></section>
 
-      <div class="socials-grid">
-        <a href="https://www.twitch.tv/ganzisquad" target="_blank" rel="noopener" class="social-card twitch spotlight-card">
-          <i class="fab fa-twitch"></i>
-          <div>
-            <strong>Twitch</strong>
-            <small data-en="Live streams" data-ru="Прямые эфиры" data-de="Live-Streams">Live streams</small>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+    <section id="schedule" class="section reveal"><div class="section-heading"><span>Twitch</span><h2 data-i18n="schedule.title">Расписание стримов</h2><p id="twitchState" data-i18n="schedule.fallback">Статус Twitch появится после подключения API.</p></div><div id="scheduleGrid" class="schedule"></div><p class="api-note">Twitch API: укажи Client ID и токен в <code>script.js</code>, чтобы включить live-статус и зрителей.</p></section>
 
-        <a href="https://www.youtube.com/@Ganzisquad" target="_blank" rel="noopener" class="social-card youtube spotlight-card">
-          <i class="fab fa-youtube"></i>
-          <div>
-            <strong>YouTube</strong>
-            <small data-en="Videos & highlights" data-ru="Видео и хайлайты" data-de="Videos & Highlights">Videos & highlights</small>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
+    <section id="services" class="section reveal"><div class="section-heading"><span data-i18n="services.tag">Услуги</span><h2 data-i18n="services.title">Помощь проектам</h2></div><div class="services">
+      <article><h3>Streaming Setup</h3><p data-i18n="services.obs">OBS, звук, камеры, алерты, overlay и настройка трансляции.</p><b>50€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
+      <article><h3>PC Optimization</h3><p data-i18n="services.pc">FPS, задержки, Windows, драйверы и игровые настройки.</p><b>80€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
+      <article><h3 data-i18n="services.chat.title">Оформление чата</h3><p data-i18n="services.chat">Twitch chat, overlay, алерты, авто-сообщения и команды ботов.</p><b>от 60€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
+      <article><h3 data-i18n="services.audit.title">Аудит канала</h3><p data-i18n="services.audit">Разбор оформления и контента с понятным планом улучшений.</p><b>40€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
+      <article><h3>Web Development</h3><p data-i18n="services.web">Сайты, лендинги и веб-приложения с адаптивным дизайном.</p><b>от 150€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
+      <article><h3>Brand Design</h3><p data-i18n="services.brand">Логотип, айдентика, overlay-пакет и стиль канала.</p><b>от 100€</b><a href="#contact" class="button small" data-i18n="services.order">Заказать</a></article>
+    </div></section>
 
-        <a href="https://t.me/ganzisquad" target="_blank" rel="noopener" class="social-card telegram spotlight-card">
-          <i class="fab fa-telegram"></i>
-          <div>
-            <strong>Telegram</strong>
-            <small data-en="Updates & news" data-ru="Новости и обновления" data-de="News & Updates">Updates & news</small>
-          </div>
-          <span class="card-arrow">↗</span>
-        </a>
-      </div>
-    </section>
+    <section id="setup" class="section reveal"><div class="section-heading"><span data-i18n="setup.tag">Мой ПК</span><h2 data-i18n="setup.title">Комплектующие</h2><p data-i18n="setup.text">Клик по компоненту ведёт на Amazon через партнёрскую ссылку.</p></div><div class="setup">
+      <a data-amazon="gpu" href="https://link.amazon/B0gexae8W" target="_blank" rel="noopener sponsored"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><path d="M17 10v4M19.5 10v4"/></svg></i><b>RTX 5080</b><small>GPU · Amazon</small></a>
+      <a data-amazon="cpu" href="https://link.amazon/B009SceGY" target="_blank" rel="noopener sponsored"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="1"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></i><b>AMD Ryzen 7 9800X3D</b><small>CPU · Amazon</small></a>
+      <a data-amazon="monitor" href="https://link.amazon/B0cMjxMGE" target="_blank" rel="noopener sponsored"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></i><b>MSI MAG 271QP QD-OLED</b><small>Monitor · Amazon</small></a>
+      <a data-amazon="mic" href="https://link.amazon/B059M44e3" target="_blank" rel="noopener sponsored"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4M9 21h6"/></svg></i><b>Fifine AM8</b><small>Microphone · Amazon</small></a>
+      <a data-amazon="mouse" href="https://link.amazon/B03Ky1cSb" target="_blank" rel="noopener sponsored"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="7" y="2" width="10" height="20" rx="5"/><path d="M12 2v7"/></svg></i><b>MCHOSE M7 Ultra</b><small>Mouse · Amazon</small></a>
+      <a data-amazon="ram" href="https://link.amazon/B038VnSL4" target="_blank" rel="noopener sponsored"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="10" rx="1"/><path d="M6 7V4M10 7V4M14 7V4M18 7V4"/></svg></i><b>Kingston FURY DDR5 32GB</b><small>RAM · Amazon</small></a>
+      <a data-amazon="keyboard" href="https://link.amazon/B0fbFJ1T8" target="_blank" rel="noopener sponsored"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h1M10 10h1M14 10h1M18 10h1M6 14h12"/></svg></i><b>AULA HERO 84 U75% Magnetic</b><small>Keyboard · Amazon</small></a>
+      <div><i><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg></i><b>Windows 11 Pro</b><small>License</small></div>
+    </div></section>
 
-    <section class="section reveal" id="discord">
-      <div class="section-title">
-        <span class="section-number">03</span>
-        <div>
-          <p data-en="LIVE COMMUNITY" data-ru="ЖИВОЕ СООБЩЕСТВО" data-de="LIVE-COMMUNITY">LIVE COMMUNITY</p>
-          <h2 data-en="Choose your Discord" data-ru="Выбери свой Discord" data-de="Wähle deinen Discord">Choose your Discord</h2>
-        </div>
-      </div>
+    <section id="partners" class="section reveal"><div class="section-heading"><span data-i18n="partners.tag">Партнёры</span><h2 data-i18n="partners.title">Промокоды и ссылки</h2></div><div class="partners">
+      <article class="gearup-card"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m13 2-9 12h6l-1 8 9-12h-6l1-8Z"/></svg></i><h3>GearUP</h3><p data-i18n="partners.gearup">Снижение пинга и стабильное соединение.</p><div class="promo-line"><span data-i18n="partners.promocode">Промокод:</span><code>GANZI</code></div><div class="gearup-buttons"><a href="https://gearup.sjv.io/GANZI" target="_blank" rel="noopener" class="button gearup-btn" data-i18n="partners.pc">ПК версия</a><a href="https://gearupapp.pxf.io/GANZI" target="_blank" rel="noopener" class="button gearup-btn" data-i18n="partners.mobile">Мобильная</a></div></article>
+      <article class="donatov-card"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-8-4.5-8-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-8 11-8 11a10 10 0 0 1-2 0Z"/></svg></i><h3>Donatovnet</h3><p data-i18n="partners.donatov">Платформа для поддержки стримеров.</p><a href="https://donatov.net/inv/987516" target="_blank" rel="noopener" class="button small donatov-btn" data-i18n="partners.open">Перейти</a></article>
+      <article><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg></i><h3 data-i18n="partners.slot">Партнёрский слот</h3><p data-i18n="partners.slottext">Твой бренд может быть здесь.</p><a href="#contact" class="button small" data-i18n="partners.contact">Связаться</a></article>
+    </div></section>
 
-      <div class="discord-servers-grid">
-        <article class="discord-server-card" data-guild-id="820446262972907541">
-          <div class="discord-card-glow"></div>
-          <div class="discord-card-top">
-            <div class="discord-server-icon"><i class="fab fa-discord"></i></div>
-            <div>
-              <span class="discord-server-type" data-en="MAIN COMMUNITY" data-ru="ОСНОВНОЕ СООБЩЕСТВО" data-de="HAUPT-COMMUNITY">MAIN COMMUNITY</span>
-              <h3 class="server-name">GANZISQUAD</h3>
-            </div>
-            <span class="discord-live-pill">
-              <span></span><b data-en="LIVE" data-ru="ОНЛАЙН" data-de="LIVE">LIVE</b>
-            </span>
-          </div>
-          <div class="discord-server-stats">
-            <div>
-              <span class="stat-online-dot"></span>
-              <strong class="server-online">...</strong>
-              <small data-en="online now" data-ru="онлайн сейчас" data-de="jetzt online">online now</small>
-            </div>
-            <div>
-              <i class="fa-solid fa-circle-info"></i>
-              <strong class="server-status" data-en="Open" data-ru="Открыт" data-de="Offen">Open</strong>
-              <small data-en="community" data-ru="сообщество" data-de="Community">community</small>
-            </div>
-          </div>
-          <a href="https://discord.com/invite/FrJbZvfPfm" target="_blank" rel="noopener" class="discord-server-join">
-            <i class="fab fa-discord"></i>
-            <span data-en="Join community" data-ru="Вступить в сообщество" data-de="Community beitreten">Join community</span>
-            <b>↗</b>
-          </a>
-        </article>
+    <section id="support" class="section reveal"><div class="section-heading"><span data-i18n="support.tag">Поддержка</span><h2 data-i18n="support.title">Поддержать GANZI SQUAD</h2><p data-i18n="support.text">Твоя поддержка помогает улучшать качество контента и покупать новое оборудование.</p></div><div class="goal"><h3 id="goalTitle">Сбор на новую камеру</h3><p id="goalDescription">Цель для улучшения качества стримов</p><div class="progress"><i id="goalBar"></i></div><div><span id="goalCollected">280€</span><span id="goalTarget">1000€</span></div></div><div class="donations">
+      <a href="https://paypal.me/ganzibank" target="_blank" rel="noopener"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 4h6a4 4 0 0 1 4 4c0 3-2 5-5 5H9l-1 6H5L7 4Z"/><path d="M11 9h5a4 4 0 0 1 4 4c0 3-2 5-5 5h-3"/></svg></i><b>PayPal</b><span data-i18n="support.paypal">Поддержка картой или балансом</span></a>
+      <a href="https://www.revolut.me/ganzi" target="_blank" rel="noopener"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 5h9a5 5 0 0 1 0 10h-4l6 4"/><path d="M5 5v14"/></svg></i><b>Revolut</b><span data-i18n="support.revolut">Быстрый перевод</span></a>
+      <a href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4Z"/><path d="m9 12 2 2 4-4"/></svg></i><b>DonationAlerts</b><span data-i18n="support.alerts">Карты, крипто и телефон</span></a>
+    </div></section>
 
-        <article class="discord-server-card delta-server" data-guild-id="1490463085029228614">
-          <div class="discord-card-glow"></div>
-          <div class="discord-card-top">
-            <div class="discord-server-icon"><i class="fa-solid fa-crosshairs"></i></div>
-            <div>
-              <span class="discord-server-type">DELTA FORCE CIS</span>
-              <h3 class="server-name">DELTA FORCE</h3>
-            </div>
-            <span class="discord-live-pill">
-              <span></span><b data-en="LIVE" data-ru="ОНЛАЙН" data-de="LIVE">LIVE</b>
-            </span>
-          </div>
-          <div class="discord-server-stats">
-            <div>
-              <span class="stat-online-dot"></span>
-              <strong class="server-online">...</strong>
-              <small data-en="online now" data-ru="онлайн сейчас" data-de="jetzt online">online now</small>
-            </div>
-            <div>
-              <i class="fa-solid fa-circle-info"></i>
-              <strong class="server-status" data-en="Open" data-ru="Открыт" data-de="Offen">Open</strong>
-              <small data-en="CIS server" data-ru="CIS сервер" data-de="CIS-Server">CIS server</small>
-            </div>
-          </div>
-          <a href="https://discord.gg/U347WWhjUj" target="_blank" rel="noopener" class="discord-server-join">
-            <i class="fab fa-discord"></i>
-            <span data-en="Join Delta Force" data-ru="Вступить в Delta Force" data-de="Delta Force beitreten">Join Delta Force</span>
-            <b>↗</b>
-          </a>
-        </article>
-      </div>
-    </section>
+    <section id="discord" class="section reveal"><div class="section-heading"><span>Discord</span><h2 data-i18n="discord.title">Мои сервера</h2></div><div class="discord">
+      <a href="https://discord.com/invite/FrJbZvfPfm" target="_blank" rel="noopener"><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 6.4A16.6 16.6 0 0 0 15.9 5l-.3.7a13 13 0 0 0-7.2 0L8.1 5A16.6 16.6 0 0 0 4 6.4C1.6 10 1 13.5 1.2 17a11 11 0 0 0 5.1 2l.8-1.4a9 9 0 0 1-1.4-.7l.4-.3a12 12 0 0 0 10 0l.3.3a9 9 0 0 1-1.4.7l.8 1.4a11 11 0 0 0 5.1-2c.3-4-.8-7.5-2.4-10.6ZM8.7 14.4c-.8 0-1.4-.8-1.4-1.7s.6-1.7 1.4-1.7 1.4.8 1.4 1.7-.6 1.7-1.4 1.7Zm6.6 0c-.8 0-1.4-.8-1.4-1.7s.6-1.7 1.4-1.7 1.4.8 1.4 1.7-.6 1.7-1.4 1.7Z"/></svg></i><div><b>GANZISQUAD</b><small data-discord="820446262972907541" data-i18n="discord.check">● проверка онлайна</small></div><span>→</span></a>
+      <a href="https://discord.gg/U347WWhjUj" target="_blank" rel="noopener"><i><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 6.4A16.6 16.6 0 0 0 15.9 5l-.3.7a13 13 0 0 0-7.2 0L8.1 5A16.6 16.6 0 0 0 4 6.4C1.6 10 1 13.5 1.2 17a11 11 0 0 0 5.1 2l.8-1.4a9 9 0 0 1-1.4-.7l.4-.3a12 12 0 0 0 10 0l.3.3a9 9 0 0 1-1.4.7l.8 1.4a11 11 0 0 0 5.1-2c.3-4-.8-7.5-2.4-10.6ZM8.7 14.4c-.8 0-1.4-.8-1.4-1.7s.6-1.7 1.4-1.7 1.4.8 1.4 1.7-.6 1.7-1.4 1.7Zm6.6 0c-.8 0-1.4-.8-1.4-1.7s.6-1.7 1.4-1.7 1.4.8 1.4 1.7-.6 1.7-1.4 1.7Z"/></svg></i><div><b>Delta Force CIS</b><small data-discord="1490463085029228614" data-i18n="discord.check">● проверка онлайна</small></div><span>→</span></a>
+    </div></section>
 
-    <section class="section reveal" id="content">
-      <div class="section-title">
-        <span class="section-number">04</span>
-        <div>
-          <p data-en="GANZI CONTENT" data-ru="КОНТЕНТ GANZI" data-de="GANZI CONTENT">GANZI CONTENT</p>
-          <h2 data-en="Enter the squad" data-ru="Войди в squad" data-de="Tritt dem Squad bei">Enter the squad</h2>
-        </div>
-      </div>
-
-      <div class="visual-grid">
-        <a class="visual-card large-card" href="https://discord.gg/U347WWhjUj" target="_blank" rel="noopener" style="background-image: url('assets/deltaforcecis.jpg?v=1');">
-          <div class="visual-overlay"></div>
-          <div class="visual-content">
-            <span class="visual-tag">DELTA FORCE CIS</span>
-            <h3 data-en="Find your squad" data-ru="Найди свой squad" data-de="Finde dein Squad">Find your squad</h3>
-            <p data-en="Join the Delta Force CIS Discord server." data-ru="Вступай в Discord-сервер Delta Force CIS." data-de="Tritt dem Delta Force CIS Discord-Server bei.">Join the Delta Force CIS Discord server.</p>
-            <span class="visual-link" data-en="Join Discord ↗" data-ru="Войти в Discord ↗" data-de="Discord beitreten ↗">Join Discord ↗</span>
-          </div>
-        </a>
-
-        <a class="visual-card stream-card" href="https://www.twitch.tv/ganzisquad" target="_blank" rel="noopener" style="background-image: url('assets/streamon.png?v=1');">
-          <div class="visual-overlay"></div>
-          <div class="visual-content">
-            <span class="visual-tag">LIVE</span>
-            <h3 data-en="Watch streams" data-ru="Смотри стримы" data-de="Streams ansehen">Watch streams</h3>
-            <span class="visual-link">Twitch ↗</span>
-          </div>
-        </a>
-
-        <a class="visual-card" href="#setup" target="_self" style="background-image: url('assets/my-pc.png?v=1');">
-          <div class="visual-overlay"></div>
-          <div class="visual-content">
-            <span class="visual-tag">LOADOUT</span>
-            <h3 data-en="My PC setup" data-ru="Мой ПК" data-de="Mein PC-Setup">My PC setup</h3>
-            <span class="visual-link" data-en="Explore ↗" data-ru="Смотреть ↗" data-de="Entdecken ↗">Explore ↗</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section reveal" id="partners">
-      <div class="section-title">
-        <span class="section-number">05</span>
-        <div>
-          <p data-en="PARTNERS" data-ru="ПАРТНЁРЫ" data-de="PARTNER">PARTNERS</p>
-          <h2 data-en="Boost your connection" data-ru="Улучши соединение" data-de="Verbessere deine Verbindung">Boost your connection</h2>
-        </div>
-      </div>
-
-      <div class="gearup-layout">
-        <a class="gearup-banner gradient-border" href="https://gearup.sjv.io/GANZI" target="_blank" rel="sponsored noopener">
-          <img src="assets/gearup.png?v=1" alt="GearUP Booster — GANZI partner offer">
-          <span class="gearup-banner-cta" data-en="Get GearUP for PC ↗" data-ru="Получить GearUP для ПК ↗" data-de="GearUP für PC holen ↗">Get GearUP for PC ↗</span>
-        </a>
-
-        <div class="partners-grid">
-          <a href="https://gearupapp.pxf.io/GANZI" target="_blank" rel="sponsored noopener" class="partner-card spotlight-card">
-            <div class="partner-icon"><img src="assets/logogearup.png" alt="GearUP"></div>
-            <div>
-              <strong>GearUP Mobile</strong>
-              <p data-en="Game booster for mobile games" data-ru="Бустер для мобильных игр" data-de="Game-Booster für mobile Spiele">Game booster for mobile games</p>
-            </div>
-            <span>↗</span>
-          </a>
-          <a href="https://gearup.sjv.io/GANZI" target="_blank" rel="sponsored noopener" class="partner-card spotlight-card">
-            <div class="partner-icon"><img src="assets/logogearup.png" alt="GearUP"></div>
-            <div>
-              <strong>GearUP PC</strong>
-              <p data-en="Lower ping and stable connection for PC games" data-ru="Низкий пинг и стабильное соединение для ПК" data-de="Niedriger Ping und stabile Verbindung für PC-Spiele">Lower ping and stable connection for PC games</p>
-            </div>
-            <span>↗</span>
-          </a>
+    <section id="social" class="social-page reveal">
+      <div class="social-page-inner">
+        <div class="social-page-heading"><span data-i18n="social.tag">Все площадки</span><h2 data-i18n="social.title">Найди меня везде</h2><p data-i18n="social.text">Стримы, короткие видео и новости — выбирай платформу.</p></div>
+        <div class="social-grid">
+          <a class="social-card twitch" href="https://www.twitch.tv/ganzisquad" target="_blank" rel="noopener"><div class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.3 2 3 5.7v14.6h5v2.7h2.9L13.6 20h4.4L23 15V2H4.3zm16.6 12-3 3h-4.6L11 19.4V17H6.7V4.3h14.2v9.7z"/><path d="M17.3 7.4h2v5h-2zm-5.4 0h2v5h-2z"/></svg></div><div class="social-info"><b>Twitch</b><span data-i18n="social.twitch">Прямые эфиры и live-чат</span></div><div class="social-handle">@ganzisquad</div></a>
+          <a class="social-card youtube" href="https://www.youtube.com/@Ganzisquad" target="_blank" rel="noopener"><div class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3.4-.4-5c-.3-1-1-1.7-2-2C17.8 4.5 12 4.5 12 4.5s-5.8 0-7.6.5c-1 .3-1.7 1-2 2C2 8.6 2 12 2 12s0 3.4.4 5c.3 1 1 1.7 2 2 1.8.5 7.6.5 7.6.5s5.8 0 7.6-.5c1-.3 1.7-1 2-2 .4-1.6.4-5 .4-5Z"/><path d="m10 15.5 5-3.5-5-3.5v7Z" fill="#07070a"/></svg></div><div class="social-info"><b>YouTube</b><span data-i18n="social.youtube">Видео, Shorts и обзоры</span></div><div class="social-handle">@Ganzisquad</div></a>
+          <a class="social-card tiktok" href="https://www.tiktok.com/@ganzisquad" target="_blank" rel="noopener"><div class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8a4.3 4.3 0 0 1-3.1-3.6h-3v13.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.8a5.9 5.9 0 0 0-.8-.1A5.9 5.9 0 1 0 13.5 15V9.5a7.3 7.3 0 0 0 4.3 1.4V7.6a4.3 4.3 0 0 1-1.2-1.8Z"/></svg></div><div class="social-info"><b>TikTok</b><span data-i18n="social.tiktok">Короткие ролики и клипы</span></div><div class="social-handle">@ganzisquad</div></a>
+          <a class="social-card telegram" href="https://t.me/ganzisquad" target="_blank" rel="noopener"><div class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.4 2.7 11.9c-1 .4-1 1.4.1 1.7l4.9 1.5 1.9 5.9c.2.7 1.1.9 1.6.4l2.7-2.6 5 3.6c.7.5 1.7.1 1.9-.7l3.5-16.4c.2-1-.7-1.7-1.4-1.4ZM8.6 14.9l9.4-6.9c.2-.1.4.1.2.3l-7.7 7.1-.3 3.1-1.6-3.6Z"/></svg></div><div class="social-info"><b>Telegram</b><span data-i18n="social.telegram">Новости и анонсы</span></div><div class="social-handle">@ganzisquad</div></a>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section class="section reveal" id="projects">
-      <div class="section-title">
-        <span class="section-number">06</span>
-        <div>
-          <p data-en="PROJECTS" data-ru="ПРОЕКТЫ" data-de="PROJEKTE">PROJECTS</p>
-          <h2 data-en="What is coming" data-ru="Что в разработке" data-de="Was kommt">What is coming</h2>
+    <section id="faq" class="section reveal"><div class="section-heading"><span data-i18n="faq.tag">FAQ</span><h2 data-i18n="faq.title">Частые вопросы</h2></div><div class="faq-list">
+      <div class="faq-item"><button class="faq-h"><span data-i18n="faq.q1">Как попасть на стрим?</span><i>+</i></button><div class="faq-b"><p data-i18n="faq.a1">Зайди на Twitch-канал во время эфира — ссылка в шапке сайта. Расписание обновляется еженедельно.</p></div></div>
+      <div class="faq-item"><button class="faq-h"><span data-i18n="faq.q2">Какое железо ты используешь?</span><i>+</i></button><div class="faq-b"><p data-i18n="faq.a2">Актуальный сетап есть в разделе «Мой ПК» — там все комплектующие с прямыми ссылками.</p></div></div>
+      <div class="faq-item"><button class="faq-h"><span data-i18n="faq.q3">Как заказать услугу?</span><i>+</i></button><div class="faq-b"><p data-i18n="faq.a3">Выбери услугу в разделе «Услуги» и нажми «Заказать» — форма отправит заявку прямо мне.</p></div></div>
+    </div></section>
+
+    <section id="contact" class="section reveal"><div class="section-heading"><span data-i18n="contact.tag">Контакты</span><h2 data-i18n="contact.title">Присоединяйся к GANZI SQUAD</h2><p data-i18n="contact.text">Опиши задачу — отвечу в Discord или по электронной почте.</p></div><form class="contact" id="contactForm"><input type="hidden" name="charset" value="utf-8"><input name="name" placeholder="Имя" required><input name="contact" placeholder="Discord или Email" required><textarea name="message" placeholder="Описание задачи" required></textarea><button class="button primary" type="submit" data-i18n="contact.send">Отправить заявку</button></form><div class="social-links"><a href="https://www.twitch.tv/ganzisquad" target="_blank">Twitch</a><a href="https://t.me/ganzisquad" target="_blank">Telegram</a><a href="https://www.youtube.com/@Ganzisquad" target="_blank">YouTube</a><a href="https://www.tiktok.com/@ganzisquad" target="_blank">TikTok</a><a href="https://discord.com/invite/FrJbZvfPfm" target="_blank">Discord</a></div></section>
+
+    <section id="legal" class="section legal-page reveal">
+      <div class="section-heading"><span data-i18n="legal.tag">Правовая информация</span><h2 data-i18n="legal.title">Юридическая информация</h2></div>
+      <div class="legal-accordion">
+        <div class="legal-item">
+          <button class="legal-h"><span data-i18n="legal.impressum.h">Impressum (§ 5 TMG)</span><i>+</i></button>
+          <div class="legal-b"><div class="legal-b-inner">
+            <p><b>GANZI SQUAD</b><br>Betreiber: GANZI (Andrei Garbuz)<br>Obermarkt 21<br>99998 Thüringen<br>Germany</p>
+            <p data-i18n="legal.impressum.contact">Kontakt</p>
+            <p>E-Mail: <a href="mailto:GanziDESpam@outlook.com">GanziDESpam@outlook.com</a><br>Discord: discord.gg/FrJbZvfPfm</p>
+            <p data-i18n="legal.impressum.rstv">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV: GANZI, Anschrift wie oben.</p>
+            <p data-i18n="legal.impressum.disclaimer">Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+          </div></div>
         </div>
-      </div>
-
-      <div class="projects-grid">
-        <div class="project-card spotlight-card">
-          <div class="project-icon">🎬</div>
-          <h3 data-en="Auto Shorts" data-ru="Авто Shorts" data-de="Auto Shorts">Auto Shorts</h3>
-          <p data-en="Automated clipping of stream highlights into vertical format for YouTube Shorts and TikTok." data-ru="Автоматическая нарезка хайлайтов стримов в вертикальный формат для YouTube Shorts и TikTok." data-de="Automatisches Clipping von Stream-Highlights ins vertikale Format für YouTube Shorts und TikTok.">Automated clipping of stream highlights into vertical format.</p>
-          <span class="project-status" data-en="In development" data-ru="В разработке" data-de="In Entwicklung">In development</span>
+        <div class="legal-item">
+          <button class="legal-h"><span data-i18n="legal.privacy.h">Datenschutzerklärung</span><i>+</i></button>
+          <div class="legal-b"><div class="legal-b-inner">
+            <p data-i18n="legal.privacy.p1">Verantwortlicher im Sinne der DSGVO: GANZI, Obermarkt 21, 99998 Thüringen, Germany, E-Mail: GanziDESpam@outlook.com.</p>
+            <p data-i18n="legal.privacy.p2">Wir verarbeiten personenbezogene Daten (z. B. Name, Kontaktdaten), die du uns über das Kontaktformular oder per E-Mail mitteilst, ausschließlich zur Bearbeitung deiner Anfrage. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b und f DSGVO.</p>
+            <p data-i18n="legal.privacy.p3">Diese Website nutzt keine Analyse-, Tracking- oder Werbe-Cookies. Externe Inhalte (Twitch-Player, Discord-Widgets) können beim Laden Daten an die jeweiligen Anbieter übertragen; deren Datenschutzerklärungen gelten zusätzlich.</p>
+            <p data-i18n="legal.privacy.p4">Deine Daten werden nur so lange gespeichert, wie es zur Bearbeitung deiner Anfrage nötig ist, maximal 6 Monate, sofern keine gesetzliche Aufbewahrungspflicht besteht.</p>
+            <p data-i18n="legal.privacy.p5">Du hast das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO) sowie das Recht auf Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO).</p>
+          </div></div>
         </div>
-
-        <div class="project-card spotlight-card">
-          <div class="project-icon">📚</div>
-          <h3 data-en="Guides & Wiki" data-ru="Гайды и база знаний" data-de="Guides & Wiki">Guides & Wiki</h3>
-          <p data-en="Structured guides for Delta Force and other tactical shooters with regular updates." data-ru="Структурированные гайды по Delta Force и другим тактическим шутерам с регулярными обновлениями." data-de="Strukturierte Guides für Delta Force und andere taktische Shooter mit regelmäßigen Updates.">Structured guides for Delta Force and other tactical shooters.</p>
-          <span class="project-status" data-en="Planned" data-ru="В планах" data-de="Geplant">Planned</span>
+        <div class="legal-item">
+          <button class="legal-h"><span data-i18n="legal.cookies.h">Cookie-Hinweis</span><i>+</i></button>
+          <div class="legal-b"><div class="legal-b-inner">
+            <p data-i18n="legal.cookies.p1">Diese Website verwendet ausschließlich technisch notwendige Speicherfunktionen (localStorage) zur Sprachauswahl. Es werden keine Tracking-, Marketing- oder Analyse-Cookies gesetzt.</p>
+            <p data-i18n="legal.cookies.p2">Bei zukünftiger Einbindung von Analyse- oder Werbediensten wird ein rechtskonformes Consent-Banner nach TTDSG ergänzt.</p>
+          </div></div>
         </div>
-
-        <div class="project-card spotlight-card">
-          <div class="project-icon">🌍</div>
-          <h3 data-en="Multilingual Subs" data-ru="Мультиязычные субтитры" data-de="Mehrsprachige Untertitel">Multilingual Subs</h3>
-          <p data-en="Auto subtitles in English and German to expand audience reach." data-ru="Автоматические субтитры на английском и немецком для расширения охвата аудитории." data-de="Automatische Untertitel auf Englisch und Deutsch zur Reichweitenerweiterung.">Auto subtitles in English and German to expand audience reach.</p>
-          <span class="project-status" data-en="Research" data-ru="Исследование" data-de="Recherche">Research</span>
-        </div>
-
-        <div class="project-card spotlight-card">
-          <div class="project-icon">🤝</div>
-          <h3 data-en="Collabs" data-ru="Коллаборации" data-de="Kollaborationen">Collabs</h3>
-          <p data-en="Joint streams and content with like-minded creators in the cooperative shooter niche." data-ru="Совместные стримы и контент с единомышленниками в нише кооперативных шутеров." data-de="Gemeinsame Streams und Content mit Gleichgesinnten in der Nische kooperativer Shooter.">Joint streams with like-minded creators.</p>
-          <span class="project-status" data-en="Open for offers" data-ru="Открыт для предложений" data-de="Offen für Angebote">Open for offers</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- SUPPORT / PRICING -->
-    <section class="section reveal" id="support">
-      <div class="section-title">
-        <span class="section-number">07</span>
-        <div>
-          <p data-en="SUPPORT" data-ru="ПОДДЕРЖКА" data-de="SUPPORT">SUPPORT</p>
-          <h2 data-en="Support the stream" data-ru="Поддержать стрим" data-de="Stream unterstützen">Support the stream</h2>
-        </div>
-      </div>
-
-      <div class="donate-alt" style="text-align:center;">
-        <p style="color:var(--sub); font-size:0.92rem; margin-bottom:0.8rem;"
-          data-en="Support with a one-time donation"
-          data-ru="Поддержи разовым донатом"
-          data-de="Unterstütze mit einer Einmalspende">
-          Support with a one-time donation
-        </p>
-        <div class="donate-grid">
-          <a href="https://paypal.me/ganzibank" target="_blank" rel="noopener" class="donate-card paypal">
-            <i class="fab fa-paypal"></i>
-            <span>PayPal</span>
-            <small data-en="Donate" data-ru="Донат" data-de="Spenden">Donate</small>
-          </a>
-          <a href="https://www.revolut.me/ganzi/" target="_blank" rel="noopener" class="donate-card revolut">
-            <i class="fa-solid fa-heart"></i>
-            <span>Revolut</span>
-            <small data-en="Donate" data-ru="Донат" data-de="Spenden">Donate</small>
-          </a>
-          <a href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener" class="donate-card donationalerts">
-            <i class="fa-solid fa-bolt"></i>
-            <span>DonationAlerts</span>
-            <small data-en="Donate" data-ru="Донат" data-de="Spenden">Donate</small>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section reveal" id="setup">
-      <div class="section-title">
-        <span class="section-number">08</span>
-        <div>
-          <p data-en="LOADOUT" data-ru="СЕТАП" data-de="SETUP">LOADOUT</p>
-          <h2 data-en="My PC setup" data-ru="Мой ПК" data-de="Mein PC-Setup">My PC setup</h2>
-        </div>
-      </div>
-
-      <p class="affiliate-note"
-        data-en="Affiliate links: I may receive a small commission at no extra cost to you."
-        data-ru="Партнёрские ссылки: я могу получить небольшую комиссию без доплаты для тебя."
-        data-de="Affiliate-Links: Ich kann eine kleine Provision erhalten, ohne Mehrkosten für dich.">
-        Affiliate links: I may receive a small commission at no extra cost to you.
-      </p>
-
-      <div class="gear-grid">
-        <a href="https://link.amazon/B0gexae8W" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>🎮</span><div><strong>RTX 5080</strong><small>GPU</small></div><b>Amazon ↗</b>
-        </a>
-        <a href="https://link.amazon/B009SceGY" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>⚡</span><div><strong>AMD Ryzen 7 9800X3D</strong><small>CPU</small></div><b>Amazon ↗</b>
-        </a>
-        <a href="https://link.amazon/B0cMjxMGE" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>🖥️</span><div><strong>MSI MAG 271QP QD-OLED</strong><small>Monitor</small></div><b>Amazon ↗</b>
-        </a>
-        <a href="https://link.amazon/B059M44e3" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>🎙️</span><div><strong>Fifine AM8</strong><small>Microphone</small></div><b>Amazon ↗</b>
-        </a>
-        <a href="https://link.amazon/B03Ky1cSb" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>🖱️</span><div><strong>MCHOSE M7 Ultra</strong><small>Mouse</small></div><b>Amazon ↗</b>
-        </a>
-        <a href="https://link.amazon/B038VnSL4" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>💾</span><div><strong>Kingston FURY DDR5 32GB</strong><small>RAM</small></div><b>Amazon ↗</b>
-        </a>
-        <a href="https://link.amazon/B0fbFJ1T8" target="_blank" rel="sponsored noopener" class="gear-card spotlight-card">
-          <span>⌨️</span><div><strong>AULA HERO 84U</strong><small>75% Magnetic</small></div><b>Amazon ↗</b>
-        </a>
-        <div class="gear-card no-link">
-          <span>🪟</span><div><strong>Windows 11 Pro</strong><small>OS</small></div>
+        <div class="legal-item">
+          <button class="legal-h"><span data-i18n="legal.terms.h">Nutzungsbedingungen</span><i>+</i></button>
+          <div class="legal-b"><div class="legal-b-inner">
+            <p data-i18n="legal.terms.p1">Mit der Nutzung dieser Website erklärst du dich mit den geltenden Gesetzen einverstanden und verpflichtest dich, den Betrieb der Seite nicht zu stören.</p>
+            <p data-i18n="legal.terms.p2">Alle Inhalte, Texte, Grafiken und das Design dieser Website sind Eigentum von GANZI SQUAD, soweit nicht anders gekennzeichnet. Eine Vervielfältigung ohne Zustimmung ist nicht gestattet.</p>
+            <p data-i18n="legal.terms.p3">Angebotene Dienstleistungen werden nach individueller Absprache erbracht; Preise auf dieser Seite sind unverbindliche Richtwerte.</p>
+          </div></div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand-col">
-        <div class="footer-logo">GANZI<span>SQUAD</span></div>
-        <p
-          data-en="Long-term project around streaming, community and gaming content. Cooperative shooters, tactics and MMO — together is better."
-          data-ru="Долгосрочный проект вокруг стриминга, комьюнити и игрового контента. Кооперативные шутеры, тактика и MMO — вместе интереснее."
-          data-de="Langfristiges Projekt rund um Streaming, Community und Gaming-Content. Kooperative Shooter, Taktik und MMO — zusammen ist es besser.">
-          Long-term project around streaming, community and gaming content.
-        </p>
-      </div>
-      <div class="footer-col">
-        <h4 data-en="NAVIGATION" data-ru="НАВИГАЦИЯ" data-de="NAVIGATION">NAVIGATION</h4>
-        <a href="#about" target="_self" data-en="About" data-ru="Обо мне" data-de="Über mich">About</a>
-        <a href="#socials" target="_self" data-en="Socials" data-ru="Соцсети" data-de="Socials">Socials</a>
-        <a href="#content" target="_self" data-en="Content" data-ru="Контент" data-de="Content">Content</a>
-        <a href="#projects" target="_self" data-en="Projects" data-ru="Проекты" data-de="Projekte">Projects</a>
-        <a href="#support" target="_self" data-en="Support" data-ru="Поддержка" data-de="Support">Support</a>
-        <a href="#setup" target="_self" data-en="Setup" data-ru="Сетап" data-de="Setup">Setup</a>
-      </div>
-      <div class="footer-col">
-        <h4 data-en="LEGAL" data-ru="ПРАВОВАЯ ИНФОРМАЦИЯ" data-de="RECHTLICHES">LEGAL</h4>
-        <a href="#" onclick="openModal('modal-privacy');return false;">Datenschutzerklärung</a>
-        <a href="#" onclick="openModal('modal-impressum');return false;">Impressum</a>
-        <a href="#" onclick="openModal('modal-terms');return false;">AGB</a>
-        <a href="#" onclick="showCookieBanner();return false;" data-en="Cookie Settings" data-ru="Настройки Cookie" data-de="Cookie-Einstellungen">Cookie Settings</a>
-      </div>
-      <div class="footer-col">
-        <h4 data-en="DONATE" data-ru="ДОНАТ" data-de="SPENDEN">DONATE</h4>
-        <a href="https://paypal.me/ganzibank" target="_blank" rel="noopener">PayPal</a>
-        <a href="https://www.revolut.me/ganzi/" target="_blank" rel="noopener">Revolut</a>
-        <a href="https://www.donationalerts.com/r/ganzisquad" target="_blank" rel="noopener">DonationAlerts</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 GANZISQUAD · Thüringen, Germany</p>
-      <div class="footer-legal">
-        <a href="#" onclick="openModal('modal-privacy');return false;" data-en="Privacy Policy" data-ru="Политика конфиденциальности" data-de="Datenschutz">Privacy Policy</a>
-        <a href="#" onclick="openModal('modal-terms');return false;" data-en="Terms of Use" data-ru="Условия использования" data-de="Nutzungsbedingungen">Terms of Use</a>
-      </div>
-    </div>
-  </footer>
-
-  <div class="cookie-banner" id="cookieBanner">
-    <div class="cookie-inner">
-      <p class="cookie-text">
-        <span
-          data-en="We use minimal cookies for site functionality. Optional categories are disabled by default."
-          data-ru="Мы используем минимальное количество cookie для работы сайта. Необязательные категории отключены по умолчанию."
-          data-de="Wir verwenden minimale Cookies für die Website-Funktionalität. Optionale Kategorien sind standardmäßig deaktiviert.">
-          We use minimal cookies for site functionality.
-        </span>
-        <a href="#" data-en="Learn more" data-ru="Подробнее" data-de="Mehr erfahren">Learn more</a>
-      </p>
-      <div class="cookie-buttons">
-        <button class="cookie-btn outline" onclick="acceptCookies(false)"
-          data-en="Essential only" data-ru="Только необходимые" data-de="Nur notwendige">
-          Essential only
-        </button>
-        <button class="cookie-btn primary" onclick="acceptCookies(true)"
-          data-en="Accept all" data-ru="Принять все" data-de="Alle akzeptieren">
-          Accept all
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js?v=9"></script>
-  <button class="scroll-top" id="scrollTop" aria-label="Вернуться в начало">
-    <i class="fa-solid fa-arrow-up"></i>
-    <span class="scroll-top-text" data-en="Back to top" data-ru="Вернуться в начало" data-de="Zurück nach oben">Back to top</span>
-  </button>
-
-
-<!-- ===== MODALS ===== -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeAllModals()"></div>
-
-<!-- Privacy Policy -->
-<dialog class="modal" id="modal-privacy" onclick="event.target===this&&closeAllModals()">
-  <button class="modal-close" onclick="closeAllModals()" aria-label="Close">×</button>
-  <h2 data-en="Privacy Policy" data-ru="Политика конфиденциальности" data-de="Datenschutzerklärung">Privacy Policy</h2>
-  <div class="modal-body">
-    <p data-en="Last updated: August 2026" data-ru="Последнее обновление: август 2026" data-de="Zuletzt aktualisiert: August 2026">Last updated: August 2026</p>
-    <h3 data-en="1. General Information" data-ru="1. Общие положения" data-de="1. Allgemeine Informationen">1. General Information</h3>
-    <p data-en="This website is operated by GANZISQUAD. We take the protection of your personal data very seriously and process it exclusively in accordance with the legal provisions (GDPR, TMG)."
-       data-ru="Этот сайт управляется GANZISQUAD. Мы серьёзно относимся к защите ваших персональных данных и обрабатываем их исключительно в соответствии с законодательством (GDPR, TMG)."
-       data-de="Diese Website wird von GANZISQUAD betrieben. Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst und verarbeiten sie ausschließlich nach den gesetzlichen Bestimmungen (DSGVO, TMG).">
-       This website is operated by GANZISQUAD. We take the protection of your personal data very seriously and process it exclusively in accordance with the legal provisions (GDPR, TMG).
-    </p>
-    <h3 data-en="2. Data Collection" data-ru="2. Сбор данных" data-de="2. Datenerfassung">2. Data Collection</h3>
-    <p data-en="We only collect personal data that you voluntarily provide (e.g., via Discord or donation links). When visiting the website, only technically necessary data such as IP address, browser type and access time are processed by our hosting provider."
-       data-ru="Мы собираем только те персональные данные, которые вы добровольно предоставляете (например, через Discord или ссылки для донатов). При посещении сайта наш хостинг-провайдер обрабатывает только технически необходимые данные, такие как IP-адрес, тип браузера и время доступа."
-       data-de="Wir erheben nur personenbezogene Daten, die Sie freiwillig angeben (z. B. über Discord oder Spendenlinks). Beim Besuch der Website werden nur technisch notwendige Daten wie IP-Adresse, Browsertyp und Zugriffszeit von unserem Hosting-Provider verarbeitet.">
-       We only collect personal data that you voluntarily provide (e.g., via Discord or donation links). When visiting the website, only technically necessary data such as IP address, browser type and access time are processed by our hosting provider.
-    </p>
-    <h3 data-en="3. Cookies" data-ru="3. Cookie" data-de="3. Cookies">3. Cookies</h3>
-    <p data-en="We use minimal cookies for language preference and cookie consent. Optional analytics cookies are disabled by default and only activated with your explicit consent."
-       data-ru="Мы используем минимальное количество cookie для сохранения языковых настроек и согласия на использование cookie. Опциональные аналитические cookie отключены по умолчанию и активируются только при вашем явном согласии."
-       data-de="Wir verwenden minimale Cookies für Spracheinstellungen und Cookie-Einwilligungen. Optionale Analyse-Cookies sind standardmäßig deaktiviert und werden nur bei Ihrer ausdrücklichen Zustimmung aktiviert.">
-       We use minimal cookies for language preference and cookie consent. Optional analytics cookies are disabled by default and only activated with your explicit consent.
-    </p>
-    <h3 data-en="4. Third-Party Services" data-ru="4. Сторонние сервисы" data-de="4. Drittanbieter-Dienste">4. Third-Party Services</h3>
-    <p data-en="This site contains links to external platforms (Twitch, YouTube, Discord, PayPal, Revolut, DonationAlerts, GearUP, Amazon). We have no influence on their data processing. Please refer to the respective privacy policies of these providers."
-       data-ru="На этом сайте есть ссылки на внешние платформы (Twitch, YouTube, Discord, PayPal, Revolut, DonationAlerts, GearUP, Amazon). Мы не влияем на их обработку данных. Пожалуйста, ознакомьтесь с политиками конфиденциальности этих провайдеров."
-       data-de="Diese Seite enthält Links zu externen Plattformen (Twitch, YouTube, Discord, PayPal, Revolut, DonationAlerts, GearUP, Amazon). Wir haben keinen Einfluss auf deren Datenverarbeitung. Bitte beachten Sie die jeweiligen Datenschutzrichtlinien dieser Anbieter.">
-       This site contains links to external platforms (Twitch, YouTube, Discord, PayPal, Revolut, DonationAlerts, GearUP, Amazon). We have no influence on their data processing. Please refer to the respective privacy policies of these providers.
-    </p>
-    <h3 data-en="5. Your Rights" data-ru="5. Ваши права" data-de="5. Ihre Rechte">5. Your Rights</h3>
-    <p data-en="You have the right to information, correction, deletion, restriction of processing, data portability and objection. To exercise these rights, please contact us via Discord or email."
-       data-ru="Вы имеете право на доступ, исправление, удаление, ограничение обработки, переносимость данных и возражение. Для осуществления этих прав свяжитесь с нами через Discord или email."
-       data-de="Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Um diese Rechte auszuüben, kontaktieren Sie uns bitte über Discord oder E-Mail.">
-       You have the right to information, correction, deletion, restriction of processing, data portability and objection. To exercise these rights, please contact us via Discord or email.
-    </p>
-    <h3 data-en="6. Contact" data-ru="6. Контакты" data-de="6. Kontakt">6. Contact</h3>
-    <p data-en="Operator: GANZISQUAD · Location: Thüringen, Germany · Contact: discord.gg/FrJbZvfPfm"
-       data-ru="Оператор: GANZISQUAD · Местоположение: Тюри́нгия , Германия · Контакт: discord.gg/FrJbZvfPfm"
-       data-de="Betreiber: GANZISQUAD · Standort: Thüringen, Deutschland · Kontakt: discord.gg/FrJbZvfPfm">
-       Operator: GANZISQUAD · Location: Dresden, Germany · Contact: discord.gg/FrJbZvfPfm
-    </p>
-  </div>
-</dialog>
-
-<!-- Impressum -->
-<dialog class="modal" id="modal-impressum" onclick="event.target===this&&closeAllModals()">
-  <button class="modal-close" onclick="closeAllModals()" aria-label="Close">×</button>
-  <h2 data-en="Legal Notice" data-ru="Правовая информация (Impressum)" data-de="Impressum">Legal Notice</h2>
-  <div class="modal-body">
-    <p data-en="Information in accordance with § 5 TMG (German Telemedia Act):"
-       data-ru="Информация в соответствии с § 5 TMG (Немецкий закон о телемедиа):"
-       data-de="Angaben gemäß § 5 TMG:">
-       Information in accordance with § 5 TMG (German Telemedia Act):
-    </p>
-    <div class="impressum-block">
-      <strong>GANZISQUAD</strong><br>
-      <span data-en="Represented by:" data-ru="Представитель:" data-de="Vertreten durch:">Represented by:</span> GANZI<br>
-      Obermarkt 21<br>
-      99998 Thüringen<br>
-      Germany<br><br>
-      <span data-en="Contact:" data-ru="Контакт:" data-de="Kontakt:">Contact:</span><br>
-      E-Mail: GanziDESpam@outlook.com<br>
-      Discord: discord.gg/FrJbZvfPfm
-    </div>
-    <p data-en="Responsible for content according to § 55 Abs. 2 RStV: GANZI (address as above)."
-       data-ru="Ответственный за контент согласно § 55 Abs. 2 RStV: GANZI (адрес указан выше)."
-       data-de="Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV: GANZI (Anschrift wie oben).">
-       Responsible for content according to § 55 Abs. 2 RStV: GANZI (address as above).
-    </p>
-    <h3 data-en="Disclaimer" data-ru="Отказ от ответственности" data-de="Haftungsausschluss">Disclaimer</h3>
-    <p data-en="Despite careful content control, we assume no liability for the content of external links. The operators of the linked pages are solely responsible for their content."
-       data-ru="Несмотря на тщательную проверку содержания, мы не несём ответственности за содержание внешних ссылок. За содержание связанных страниц ответственны исключительно их операторы."
-       data-de="Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.">
-       Despite careful content control, we assume no liability for the content of external links. The operators of the linked pages are solely responsible for their content.
-    </p>
-    <p data-en="All brand names, trademarks and logos mentioned on this site are the property of their respective owners."
-       data-ru="Все упомянутые на этом сайте торговые марки, бренды и логотипы являются собственностью их соответствующих владельцев."
-       data-de="Alle auf dieser Seite genannten Markennamen, Warenzeichen und Logos sind Eigentum ihrer jeweiligen Inhaber.">
-       All brand names, trademarks and logos mentioned on this site are the property of their respective owners.
-    </p>
-  </div>
-</dialog>
-
-<!-- Terms of Use / AGB -->
-<dialog class="modal" id="modal-terms" onclick="event.target===this&&closeAllModals()">
-  <button class="modal-close" onclick="closeAllModals()" aria-label="Close">×</button>
-  <h2 data-en="Terms of Use" data-ru="Условия использования" data-de="Allgemeine Geschäftsbedingungen (AGB)">Terms of Use</h2>
-  <div class="modal-body">
-    <p data-en="Last updated: August 2026" data-ru="Последнее обновление: август 2026" data-de="Zuletzt aktualisiert: August 2026">Last updated: August 2026</p>
-    <h3 data-en="1. Scope" data-ru="1. Область применения" data-de="1. Geltungsbereich">1. Scope</h3>
-    <p data-en="These terms of use apply to all visitors and users of the GANZISQUAD website. By using the website, you agree to these terms."
-       data-ru="Эти условия использования применяются ко всем посетителям и пользователям сайта GANZISQUAD. Используя сайт, вы соглашаетесь с этими условиями."
-       data-de="Diese Nutzungsbedingungen gelten für alle Besucher und Nutzer der GANZISQUAD-Website. Mit der Nutzung der Website stimmen Sie diesen Bedingungen zu.">
-       These terms of use apply to all visitors and users of the GANZISQUAD website. By using the website, you agree to these terms.
-    </p>
-    <h3 data-en="2. Content and Services" data-ru="2. Контент и услуги" data-de="2. Inhalte und Dienste">2. Content and Services</h3>
-    <p data-en="The website provides information about streaming activities, gaming content, community platforms and partner offers. All information is provided without guarantee."
-       data-ru="Сайт предоставляет информацию о стриминговой деятельности, игровом контенте, платформах сообщества и партнёрских предложениях. Вся информация предоставляется без гарантий."
-       data-de="Die Website bietet Informationen zu Streaming-Aktivitäten, Gaming-Content, Community-Plattformen und Partnerangeboten. Alle Informationen werden ohne Gewähr bereitgestellt.">
-       The website provides information about streaming activities, gaming content, community platforms and partner offers. All information is provided without guarantee.
-    </p>
-    <h3 data-en="3. Affiliate Links" data-ru="3. Партнёрские ссылки" data-de="3. Affiliate-Links">3. Affiliate Links</h3>
-    <p data-ru="Некоторые ссылки на этом сайте являются партнёрскими. При покупке через эти ссылки мы можем получить небольшую комиссию без дополнительных затрат для вас."
-       data-en="Some links on this site are affiliate links. When you purchase through these links, we may receive a small commission at no extra cost to you."
-       data-de="Einige Links auf dieser Seite sind Affiliate-Links. Bei einem Kauf über diese Links erhalten wir möglicherweise eine kleine Provision ohne zusätzliche Kosten für Sie.">
-       Some links on this site are affiliate links. When you purchase through these links, we may receive a small commission at no extra cost to you.
-    </p>
-    <h3 data-en="4. User Conduct" data-ru="4. Поведение пользователей" data-de="4. Nutzerverhalten">4. User Conduct</h3>
-    <p data-en="When using our Discord servers and community features, respectful and lawful behaviour is expected. Hate speech, harassment and illegal activities are prohibited and will result in immediate exclusion."
-       data-ru="При использовании наших Discord-серверов и функций сообщества ожидается уважительное и законное поведение. Речь ненависти, домогательства и незаконная деятельность запрещены и приведут к немедленному исключению."
-       data-de="Bei der Nutzung unserer Discord-Server und Community-Funktionen wird respektvolles und rechtmäßiges Verhalten erwartet. Hassrede, Belästigung und illegale Aktivitäten sind verboten und führen zum sofortigen Ausschluss.">
-       When using our Discord servers and community features, respectful and lawful behaviour is expected. Hate speech, harassment and illegal activities are prohibited and will result in immediate exclusion.
-    </p>
-    <h3 data-en="5. Changes to Terms" data-ru="5. Изменения условий" data-de="5. Änderungen der Bedingungen">5. Changes to Terms</h3>
-    <p data-en="We reserve the right to change these terms at any time. Continued use of the website after changes constitutes acceptance of the new terms."
-       data-ru="Мы оставляем за собой право изменять эти условия в любое время. Продолжение использования сайта после изменений означает принятие новых условий."
-       data-de="Wir behalten uns das Recht vor, diese Bedingungen jederzeit zu ändern. Die fortgesetzte Nutzung der Website nach Änderungen stellt die Annahme der neuen Bedingungen dar.">
-       We reserve the right to change these terms at any time. Continued use of the website after changes constitutes acceptance of the new terms.
-    </p>
-    <h3 data-en="6. Governing Law" data-ru="6. Применимое право" data-de="6. Anwendbares Recht">6. Governing Law</h3>
-    <p data-en="These terms are governed by the laws of the Federal Republic of Germany. Place of jurisdiction is Thüringen."
-       data-ru="Эти условия регулируются законодательством Федеративной Республики Германия. Местом юрисдикции является Тюри́нгия ."
-       data-de="Diese Bedingungen unterliegen dem Recht der Bundesrepublik Deutschland. Gerichtsstand ist Thüringen.">
-       These terms are governed by the laws of the Federal Republic of Germany. Place of jurisdiction is Thüringen.
-    </p>
-  </div>
-</dialog>
-
+  <footer><span>© 2026 GANZI SQUAD</span></footer>
+  <button id="btt" class="btt" aria-label="Наверх"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 15 7-7 7 7"/></svg></button>
 </body>
 </html>

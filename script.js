@@ -1,403 +1,698 @@
-const LANGS = ["en", "ru", "de"];
-let currentLang = localStorage.getItem("gz-lang") || "en";
+const CONFIG = {
+  twitch: { channel: "ganzisquad", clientId: "", accessToken: "" },
+  telegram: { username: "ganzisquad" },
+  donation: {
+    title: "Сбор на новую камеру",
+    description: "Цель для улучшения качества стримов",
+    collected: 280,
+    target: 1000,
+    currency: "€",
+  },
+  amazon: {
+    gpu: "https://link.amazon/B0gexae8W",
+    cpu: "https://link.amazon/B009SceGY",
+    monitor: "https://link.amazon/B0cMjxMGE",
+    mic: "https://link.amazon/B059M44e3",
+    mouse: "https://link.amazon/B03Ky1cSb",
+    ram: "https://link.amazon/B038VnSL4",
+    keyboard: "https://link.amazon/B0fbFJ1T8",
+  },
+  formEndpoint: null,
+};
 
-const prefersReducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)",
-).matches;
+const T = {
+  ru: {
+    "nav.about": "О нас",
+    "nav.schedule": "Расписание",
+    "nav.services": "Услуги",
+    "nav.setup": "ПК",
+    "nav.social": "Соцсети",
+    "nav.support": "Поддержка",
+    "nav.contact": "Контакты",
+    "hero.badge": "Личный бренд",
+    "hero.text":
+      "Креативное пространство для тех, кто создаёт будущее. Гейминг, стриминг, технологии и AI — на одном дыхании.",
+    "hero.twitch": "Смотреть Twitch",
+    "hero.support": "Поддержать",
+    "hero.bell": "Написать в Telegram",
+    "about.tag": "О проекте",
+    "about.title": "GANZI SQUAD",
+    "about.text":
+      "GANZI (Andrei Garbuz) — стример и разработчик из Лейпцига. Строю долгосрочный проект вокруг стриминга, живого комьюнити и игрового контента: с 2022 года совмещаю гейминг с технологиями и AI-автоматизацией.",
+    "about.text2":
+      "Основной формат — кооперативные стримы: тактические шутеры, MMO и игры с активным взаимодействием, а не соло-прохождения. Атмосфера канала — спокойная, дружелюбная и немного экспертная. Дополнительно — Shorts с автоматизацией, гайды и новости.",
+    "timeline.pastLabel": "Пройденный путь",
+    "timeline.futureLabel": "Планы и амбиции",
+    "timeline.one": "Первый стрим",
+    "timeline.two": "GearUP партнёрство",
+    "timeline.three": "50K подписчиков",
+    "timeline.four": "Запуск сайта",
+    "timeline.f1": "100K подписчиков",
+    "timeline.f2": "Стрим GTA VI в день выхода",
+    "timeline.f3": "Полная автоматизация Shorts",
+    "timeline.f4": "Субтитры на EN/DE",
+    "stats.followers": "Подписчиков",
+    "stats.views": "Просмотров",
+    "stats.streams": "Стримов",
+    "stats.active": "В движении",
+    "schedule.title": "Расписание стримов",
+    "schedule.fallback": "Статус Twitch появится после подключения API.",
+    "services.tag": "Услуги",
+    "services.title": "Помощь проектам",
+    "services.obs":
+      "OBS, звук, камеры, алерты, overlay и настройка трансляции.",
+    "services.pc": "FPS, задержки, Windows, драйверы и игровые настройки.",
+    "services.chat.title": "Оформление чата",
+    "services.chat":
+      "Twitch chat, overlay, алерты, авто-сообщения и команды ботов.",
+    "services.audit.title": "Аудит канала",
+    "services.audit":
+      "Разбор оформления и контента с понятным планом улучшений.",
+    "services.web": "Сайты, лендинги и веб-приложения с адаптивным дизайном.",
+    "services.brand": "Логотип, айдентика, overlay-пакет и стиль канала.",
+    "services.order": "Заказать",
+    "setup.tag": "Мой ПК",
+    "setup.title": "Комплектующие",
+    "setup.text":
+      "Клик по компоненту ведёт на Amazon через партнёрскую ссылку.",
+    "partners.tag": "Партнёры",
+    "partners.title": "Промокоды и ссылки",
+    "partners.gearup": "Снижение пинга и стабильное соединение.",
+    "partners.promocode": "Промокод:",
+    "partners.donatov": "Платформа для поддержки стримеров.",
+    "partners.pc": "ПК версия",
+    "partners.mobile": "Мобильная",
+    "partners.open": "Перейти",
+    "partners.slot": "Партнёрский слот",
+    "partners.slottext": "Твой бренд может быть здесь.",
+    "partners.contact": "Связаться",
+    "support.tag": "Поддержка",
+    "support.title": "Поддержать GANZI SQUAD",
+    "support.text":
+      "Твоя поддержка помогает улучшать качество контента и покупать новое оборудование.",
+    "support.paypal": "Поддержка картой или балансом",
+    "support.revolut": "Быстрый перевод",
+    "support.alerts": "Карты, крипто и телефон",
+    "discord.title": "Мои сервера",
+    "discord.check": "● проверка онлайна",
+    "social.tag": "Все площадки",
+    "social.title": "Найди меня везде",
+    "social.text": "Стримы, короткие видео и новости — выбирай платформу.",
+    "social.twitch": "Прямые эфиры и live-чат",
+    "social.youtube": "Видео, Shorts и обзоры",
+    "social.tiktok": "Короткие ролики и клипы",
+    "social.telegram": "Новости и анонсы",
+    "faq.tag": "FAQ",
+    "faq.title": "Частые вопросы",
+    "faq.q1": "Как попасть на стрим?",
+    "faq.a1":
+      "Зайди на Twitch-канал во время эфира — ссылка в шапке сайта. Расписание обновляется еженедельно.",
+    "faq.q2": "Какое железо ты используешь?",
+    "faq.a2":
+      "Актуальный сетап есть в разделе «Мой ПК» — там все комплектующие с прямыми ссылками.",
+    "faq.q3": "Как заказать услугу?",
+    "faq.a3":
+      "Выбери услугу в разделе «Услуги» и нажми «Заказать» — форма отправит заявку прямо мне.",
+    "contact.tag": "Контакты",
+    "contact.title": "Присоединяйся к GANZI SQUAD",
+    "contact.text": "Опиши задачу — отвечу в Discord или по электронной почте.",
+    "contact.send": "Отправить заявку",
+    "legal.tag": "Правовая информация",
+    "legal.title": "Юридическая информация",
+    "legal.impressum.h": "Impressum (§ 5 TMG)",
+    "legal.impressum.contact": "Контакт",
+    "legal.impressum.rstv":
+      "Ответственный за содержание согласно § 18 Abs. 2 MStV: GANZI, адрес указан выше.",
+    "legal.impressum.disclaimer":
+      "Несмотря на тщательную проверку контента, мы не несём ответственности за содержание внешних ссылок. За контент связанных сайтов несут ответственность исключительно их владельцы.",
+    "legal.privacy.h": "Политика конфиденциальности",
+    "legal.privacy.p1":
+      "Ответственный по смыслу GDPR: GANZI, Obermarkt 21, 99998 Thüringen, Germany, E-Mail: GanziDESpam@outlook.com.",
+    "legal.privacy.p2":
+      "Мы обрабатываем персональные данные (имя, контактные данные), которые вы сообщаете через контактную форму или email, исключительно для обработки вашего запроса. Правовое основание — Art. 6 Abs. 1 lit. b и f DSGVO.",
+    "legal.privacy.p3":
+      "Этот сайт не использует аналитические, трекинговые или рекламные cookies. Внешний контент (Twitch-плеер, Discord-виджеты) может передавать данные соответствующим провайдерам при загрузке; действуют их отдельные политики конфиденциальности.",
+    "legal.privacy.p4":
+      "Ваши данные хранятся только столько, сколько необходимо для обработки запроса, максимум 6 месяцев, если не установлена законная обязанность хранения.",
+    "legal.privacy.p5":
+      "Вы имеете право на доступ (Art. 15), исправление (Art. 16), удаление (Art. 17), ограничение обработки (Art. 18), перенос данных (Art. 20) и возражение (Art. 21 DSGVO), а также право на жалобу в надзорный орган (Art. 77 DSGVO).",
+    "legal.cookies.h": "Уведомление о Cookies",
+    "legal.cookies.p1":
+      "Этот сайт использует только технически необходимые функции хранения (localStorage) для выбора языка. Трекинговые, маркетинговые или аналитические cookies не устанавливаются.",
+    "legal.cookies.p2":
+      "При будущем подключении аналитики или рекламных сервисов будет добавлен полноценный cookie-баннер согласно TTDSG.",
+    "legal.terms.h": "Условия использования",
+    "legal.terms.p1":
+      "Используя этот сайт, вы соглашаетесь соблюдать действующее законодательство и не нарушать работу сайта.",
+    "legal.terms.p2":
+      "Весь контент, тексты, графика и дизайн этого сайта являются собственностью GANZI SQUAD, если не указано иное. Копирование без согласия не допускается.",
+    "legal.terms.p3":
+      "Предлагаемые услуги оказываются по индивидуальной договорённости; цены на этой странице являются ориентировочными.",
+  },
+  en: {
+    "nav.about": "About",
+    "nav.schedule": "Schedule",
+    "nav.services": "Services",
+    "nav.setup": "PC",
+    "nav.social": "Social",
+    "nav.support": "Support",
+    "nav.contact": "Contact",
+    "hero.badge": "Personal Brand",
+    "hero.text":
+      "A creative space for those building the future. Gaming, streaming, technology and AI — in one place.",
+    "hero.twitch": "Watch Twitch",
+    "hero.support": "Support",
+    "hero.bell": "Message on Telegram",
+    "about.tag": "About",
+    "about.title": "GANZI SQUAD",
+    "about.text":
+      "GANZI (Andrei Garbuz) is a streamer and developer from Leipzig, building a long-term project around streaming, live community and gaming content since 2022, blending gaming with tech and AI automation.",
+    "about.text2":
+      "Main format is co-op streaming: tactical shooters, MMOs and games with active player interaction, not solo playthroughs. Channel vibe is calm, friendly and slightly expert. Also: automated Shorts, guides and news.",
+    "timeline.pastLabel": "Journey so far",
+    "timeline.futureLabel": "Plans & ambitions",
+    "timeline.one": "First stream",
+    "timeline.two": "GearUP partnership",
+    "timeline.three": "50K followers",
+    "timeline.four": "Website launch",
+    "timeline.f1": "100K followers",
+    "timeline.f2": "Stream GTA VI on release day",
+    "timeline.f3": "Full Shorts automation",
+    "timeline.f4": "EN/DE subtitles",
+    "stats.followers": "Followers",
+    "stats.views": "Views",
+    "stats.streams": "Streams",
+    "stats.active": "Always active",
+    "schedule.title": "Stream Schedule",
+    "schedule.fallback": "Twitch status appears after API configuration.",
+    "services.tag": "Services",
+    "services.title": "Project Support",
+    "services.obs":
+      "OBS, sound, cameras, alerts, overlays and full stream setup.",
+    "services.pc": "FPS, latency, Windows, drivers and game settings.",
+    "services.chat.title": "Chat Design",
+    "services.chat":
+      "Twitch chat, overlay, alerts, auto messages and bot commands.",
+    "services.audit.title": "Channel Audit",
+    "services.audit":
+      "Channel and content review with a clear improvement plan.",
+    "services.web": "Websites, landing pages and responsive web apps.",
+    "services.brand": "Logo, identity, overlay package and channel style.",
+    "services.order": "Order",
+    "setup.tag": "My PC",
+    "setup.title": "Components",
+    "setup.text": "Click a component to buy it on Amazon via affiliate link.",
+    "partners.tag": "Partners",
+    "partners.title": "Promo codes & links",
+    "partners.gearup": "Lower ping and stable connection.",
+    "partners.promocode": "Promo code:",
+    "partners.donatov": "Platform for supporting streamers.",
+    "partners.pc": "PC version",
+    "partners.mobile": "Mobile",
+    "partners.open": "Open",
+    "partners.slot": "Partner slot",
+    "partners.slottext": "Your brand can be here.",
+    "partners.contact": "Contact",
+    "support.tag": "Support",
+    "support.title": "Support GANZI SQUAD",
+    "support.text":
+      "Your support improves content quality and helps buy new equipment.",
+    "support.paypal": "Card or balance support",
+    "support.revolut": "Fast transfer",
+    "support.alerts": "Cards, crypto and phone",
+    "discord.title": "My Servers",
+    "discord.check": "● checking online",
+    "social.tag": "All platforms",
+    "social.title": "Find me everywhere",
+    "social.text": "Streams, short videos and news — pick your platform.",
+    "social.twitch": "Live streams and chat",
+    "social.youtube": "Videos, Shorts and reviews",
+    "social.tiktok": "Short clips and highlights",
+    "social.telegram": "News and announcements",
+    "faq.tag": "FAQ",
+    "faq.title": "Frequently Asked",
+    "faq.q1": "How do I join the stream?",
+    "faq.a1":
+      "Visit the Twitch channel while live — link is in the header. Schedule updates weekly.",
+    "faq.q2": "What hardware do you use?",
+    "faq.a2":
+      'Current setup is listed in the "My PC" section with direct links.',
+    "faq.q3": "How do I order a service?",
+    "faq.a3":
+      'Pick a service in the "Services" section and click "Order" — the form sends the request directly to me.',
+    "contact.tag": "Contact",
+    "contact.title": "Join GANZI SQUAD",
+    "contact.text": "Describe the task — I will reply in Discord or by email.",
+    "contact.send": "Send request",
+    "legal.tag": "Legal Information",
+    "legal.title": "Legal Information",
+    "legal.impressum.h": "Impressum (§ 5 TMG)",
+    "legal.impressum.contact": "Contact",
+    "legal.impressum.rstv":
+      "Responsible for content per § 18 Abs. 2 MStV: GANZI, address as above.",
+    "legal.impressum.disclaimer":
+      "Despite careful content review, we assume no liability for the content of external links. The operators of linked pages are solely responsible for their content.",
+    "legal.privacy.h": "Privacy Policy",
+    "legal.privacy.p1":
+      "Controller under GDPR: GANZI, Obermarkt 21, 99998 Thüringen, Germany, Email: GanziDESpam@outlook.com.",
+    "legal.privacy.p2":
+      "We process personal data (name, contact details) you provide via the contact form or email solely to handle your request. Legal basis is Art. 6(1)(b) and (f) GDPR.",
+    "legal.privacy.p3":
+      "This site uses no analytics, tracking or advertising cookies. External content (Twitch player, Discord widgets) may transmit data to their providers on load; their own privacy policies apply additionally.",
+    "legal.privacy.p4":
+      "Your data is stored only as long as necessary to process your request, max. 6 months, unless a legal retention duty applies.",
+    "legal.privacy.p5":
+      "You have the right to access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction (Art. 18), data portability (Art. 20) and objection (Art. 21 GDPR), plus the right to lodge a complaint with a supervisory authority (Art. 77 GDPR).",
+    "legal.cookies.h": "Cookie Notice",
+    "legal.cookies.p1":
+      "This site uses only technically necessary storage (localStorage) for language selection. No tracking, marketing or analytics cookies are set.",
+    "legal.cookies.p2":
+      "If analytics or advertising services are added in the future, a compliant consent banner per TTDSG will be included.",
+    "legal.terms.h": "Terms of Use",
+    "legal.terms.p1":
+      "By using this site you agree to comply with applicable law and not to disrupt its operation.",
+    "legal.terms.p2":
+      "All content, text, graphics and design of this site are property of GANZI SQUAD unless stated otherwise. Reproduction without consent is not permitted.",
+    "legal.terms.p3":
+      "Offered services are provided by individual arrangement; prices on this page are non-binding estimates.",
+  },
+  de: {
+    "nav.about": "Über mich",
+    "nav.schedule": "Zeitplan",
+    "nav.services": "Dienste",
+    "nav.setup": "PC",
+    "nav.social": "Social",
+    "nav.support": "Support",
+    "nav.contact": "Kontakt",
+    "hero.badge": "Persönliche Marke",
+    "hero.text":
+      "Ein kreativer Raum für alle, die die Zukunft gestalten. Gaming, Streaming, Technik und KI an einem Ort.",
+    "hero.twitch": "Twitch ansehen",
+    "hero.support": "Unterstützen",
+    "hero.bell": "Auf Telegram schreiben",
+    "about.tag": "Über das Projekt",
+    "about.title": "GANZI SQUAD",
+    "about.text":
+      "GANZI (Andrei Garbuz) ist Streamer und Entwickler aus Leipzig. Seit 2022 baut er ein langfristiges Projekt rund um Streaming, lebendige Community und Gaming-Content — kombiniert mit Technik und KI-Automatisierung.",
+    "about.text2":
+      "Hauptformat ist Koop-Streaming: taktische Shooter, MMOs und Spiele mit aktiver Interaktion, keine Solo-Durchspiele. Die Kanal-Atmosphäre ist ruhig, freundlich und leicht fachkundig. Zusätzlich: automatisierte Shorts, Guides und News.",
+    "timeline.pastLabel": "Bisheriger Weg",
+    "timeline.futureLabel": "Pläne & Ambitionen",
+    "timeline.one": "Erster Stream",
+    "timeline.two": "GearUP Partnerschaft",
+    "timeline.three": "50K Follower",
+    "timeline.four": "Website-Start",
+    "timeline.f1": "100K Follower",
+    "timeline.f2": "GTA VI am Release-Tag streamen",
+    "timeline.f3": "Vollständige Shorts-Automatisierung",
+    "timeline.f4": "EN/DE-Untertitel",
+    "stats.followers": "Follower",
+    "stats.views": "Aufrufe",
+    "stats.streams": "Streams",
+    "stats.active": "Immer aktiv",
+    "schedule.title": "Stream-Zeitplan",
+    "schedule.fallback": "Twitch-Status erscheint nach API-Konfiguration.",
+    "services.tag": "Dienste",
+    "services.title": "Projektunterstützung",
+    "services.obs":
+      "OBS, Sound, Kameras, Alerts, Overlays und vollständiges Streaming-Setup.",
+    "services.pc": "FPS, Latenz, Windows, Treiber und Spieleinstellungen.",
+    "services.chat.title": "Chat-Design",
+    "services.chat":
+      "Twitch-Chat, Overlay, Alerts, Auto-Nachrichten und Bot-Befehle.",
+    "services.audit.title": "Kanal-Audit",
+    "services.audit":
+      "Kanal- und Content-Analyse mit klarem Verbesserungsplan.",
+    "services.web": "Websites, Landingpages und responsive Web-Apps.",
+    "services.brand": "Logo, Identität, Overlay-Paket und Kanalstil.",
+    "services.order": "Bestellen",
+    "setup.tag": "Mein PC",
+    "setup.title": "Komponenten",
+    "setup.text":
+      "Klicke auf eine Komponente, um sie über meinen Amazon-Link zu kaufen.",
+    "partners.tag": "Partner",
+    "partners.title": "Promo-Codes & Links",
+    "partners.gearup": "Weniger Ping und stabile Verbindung.",
+    "partners.promocode": "Promo-Code:",
+    "partners.donatov": "Plattform zur Unterstützung von Streamern.",
+    "partners.pc": "PC-Version",
+    "partners.mobile": "Mobil",
+    "partners.open": "Öffnen",
+    "partners.slot": "Partner-Slot",
+    "partners.slottext": "Deine Marke kann hier sein.",
+    "partners.contact": "Kontakt",
+    "support.tag": "Support",
+    "support.title": "GANZI SQUAD unterstützen",
+    "support.text":
+      "Deine Unterstützung verbessert die Content-Qualität und hilft bei neuem Equipment.",
+    "support.paypal": "Karte oder Guthaben",
+    "support.revolut": "Schnelle Überweisung",
+    "support.alerts": "Karten, Krypto und Telefon",
+    "discord.title": "Meine Server",
+    "discord.check": "● Online-Status wird geprüft",
+    "social.tag": "Alle Plattformen",
+    "social.title": "Finde mich überall",
+    "social.text": "Streams, kurze Videos und News — wähle die Plattform.",
+    "social.twitch": "Live-Streams und Chat",
+    "social.youtube": "Videos, Shorts und Reviews",
+    "social.tiktok": "Kurze Clips und Highlights",
+    "social.telegram": "News und Ankündigungen",
+    "faq.tag": "FAQ",
+    "faq.title": "Häufige Fragen",
+    "faq.q1": "Wie komme ich zum Stream?",
+    "faq.a1":
+      "Besuche den Twitch-Kanal während des Streams — Link im Header. Zeitplan wird wöchentlich aktualisiert.",
+    "faq.q2": "Welche Hardware nutzt du?",
+    "faq.a2":
+      'Das aktuelle Setup findest du im Bereich "Mein PC" mit direkten Links.',
+    "faq.q3": "Wie bestelle ich eine Dienstleistung?",
+    "faq.a3":
+      'Wähle einen Dienst im Bereich "Dienste" und klicke auf "Bestellen" — das Formular sendet die Anfrage direkt an mich.',
+    "contact.tag": "Kontakt",
+    "contact.title": "GANZI SQUAD beitreten",
+    "contact.text":
+      "Beschreibe deine Aufgabe — Antwort über Discord oder E-Mail.",
+    "contact.send": "Anfrage senden",
+    "legal.tag": "Rechtliche Hinweise",
+    "legal.title": "Rechtliche Hinweise",
+    "legal.impressum.h": "Impressum (§ 5 TMG)",
+    "legal.impressum.contact": "Kontakt",
+    "legal.impressum.rstv":
+      "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV: GANZI, Anschrift wie oben.",
+    "legal.impressum.disclaimer":
+      "Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.",
+    "legal.privacy.h": "Datenschutzerklärung",
+    "legal.privacy.p1":
+      "Verantwortlicher im Sinne der DSGVO: GANZI, Obermarkt 21, 99998 Thüringen, Germany, E-Mail: GanziDESpam@outlook.com.",
+    "legal.privacy.p2":
+      "Wir verarbeiten personenbezogene Daten (z. B. Name, Kontaktdaten), die du uns über das Kontaktformular oder per E-Mail mitteilst, ausschließlich zur Bearbeitung deiner Anfrage. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b und f DSGVO.",
+    "legal.privacy.p3":
+      "Diese Website nutzt keine Analyse-, Tracking- oder Werbe-Cookies. Externe Inhalte (Twitch-Player, Discord-Widgets) können beim Laden Daten an die jeweiligen Anbieter übertragen; deren Datenschutzerklärungen gelten zusätzlich.",
+    "legal.privacy.p4":
+      "Deine Daten werden nur so lange gespeichert, wie es zur Bearbeitung deiner Anfrage nötig ist, maximal 6 Monate, sofern keine gesetzliche Aufbewahrungspflicht besteht.",
+    "legal.privacy.p5":
+      "Du hast das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO) sowie das Recht auf Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO).",
+    "legal.cookies.h": "Cookie-Hinweis",
+    "legal.cookies.p1":
+      "Diese Website verwendet ausschließlich technisch notwendige Speicherfunktionen (localStorage) zur Sprachauswahl. Es werden keine Tracking-, Marketing- oder Analyse-Cookies gesetzt.",
+    "legal.cookies.p2":
+      "Bei zukünftiger Einbindung von Analyse- oder Werbediensten wird ein rechtskonformes Consent-Banner nach TTDSG ergänzt.",
+    "legal.terms.h": "Nutzungsbedingungen",
+    "legal.terms.p1":
+      "Mit der Nutzung dieser Website erklärst du dich mit den geltenden Gesetzen einverstanden und verpflichtest dich, den Betrieb der Seite nicht zu stören.",
+    "legal.terms.p2":
+      "Alle Inhalte, Texte, Grafiken und das Design dieser Website sind Eigentum von GANZI SQUAD, soweit nicht anders gekennzeichnet. Eine Vervielfältigung ohne Zustimmung ist nicht gestattet.",
+    "legal.terms.p3":
+      "Angebotene Dienstleistungen werden nach individueller Absprache erbracht; Preise auf dieser Seite sind unverbindliche Richtwerte.",
+  },
+};
 
-const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
-
-function setLang(lang) {
-  currentLang = lang;
-  localStorage.setItem("gz-lang", lang);
-  applyLang();
+function setLanguage(lang) {
+  localStorage.setItem("ganziLang", lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const value = T[lang][el.dataset.i18n];
+    if (value) el.textContent = value;
+  });
+  document
+    .querySelectorAll("[data-lang]")
+    .forEach((b) => b.classList.toggle("is-active", b.dataset.lang === lang));
 }
 
-function applyLang() {
-  document.querySelectorAll("[data-en]").forEach((element) => {
-    const translation =
-      element.getAttribute(`data-${currentLang}`) ||
-      element.getAttribute("data-en");
-
-    element.textContent = translation;
-  });
-
-  LANGS.forEach((lang) => {
-    document
-      .getElementById(`btn-${lang}`)
-      ?.classList.toggle("active", lang === currentLang);
-  });
-
-  document.documentElement.lang = currentLang;
+function buildSchedule() {
+  const data = [
+    ["Пн", "20:00", "Стрим"],
+    ["Вт", "20:00", "Стрим"],
+    ["Ср", "—", "Выходной"],
+    ["Чт", "21:00", "Стрим"],
+    ["Пт", "20:00", "Стрим"],
+    ["Сб", "18:00", "IRL"],
+    ["Вс", "—", "Выходной"],
+  ];
+  const day = (new Date().getDay() + 6) % 7;
+  document.getElementById("scheduleGrid").innerHTML = data
+    .map(
+      (x, i) =>
+        `<article class="${i === day ? "today" : ""}"><b>${x[0]}</b><strong>${x[1]}</strong><span>${x[2]}${i === day ? " · Сегодня" : ""}</span></article>`,
+    )
+    .join("");
 }
 
-async function loadDiscordWidget(card) {
-  const guildId = card.dataset.guildId;
-  const url = `https://discord.com/api/guilds/${guildId}/widget.json`;
-
+async function twitchStatus() {
+  const out = document.getElementById("twitchState");
   try {
-    const response = await fetch(url, { cache: "no-store" });
-
-    if (!response.ok) {
-      throw new Error("Discord widget unavailable");
-    }
-
-    const data = await response.json();
-
-    const onlineElement = card.querySelector(".server-online");
-    const nameElement = card.querySelector(".server-name");
-
-    if (onlineElement) {
-      onlineElement.textContent = data.presence_count ?? "—";
-    }
-
-    if (nameElement && data.name) {
-      nameElement.textContent = data.name;
-    }
-  } catch {
-    const onlineElement = card.querySelector(".server-online");
-
-    if (onlineElement) {
-      onlineElement.textContent = "—";
-    }
+    const r = await fetch("status.json?t=" + Date.now());
+    const j = await r.json();
+    const stream = j.data?.[0];
+    out.textContent = stream
+      ? `● LIVE · ${stream.game_name} · ${stream.viewer_count} viewers`
+      : "● OFFLINE";
+  } catch (e) {
+    out.textContent = "Статус временно недоступен";
   }
 }
 
-function setupRevealAnimation() {
-  const blocks = document.querySelectorAll(".reveal");
-
-  if (prefersReducedMotion) {
-    blocks.forEach((block) => block.classList.add("visible"));
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.1 },
-  );
-
-  blocks.forEach((block) => observer.observe(block));
+async function discordStatus() {
+  document.querySelectorAll("[data-discord]").forEach(async (el) => {
+    try {
+      const r = await fetch(
+        `https://discord.com/api/guilds/${el.dataset.discord}/widget.json`,
+      );
+      const j = await r.json();
+      el.textContent = `● ${j.presence_count || 0} online`;
+    } catch (e) {}
+  });
 }
 
-function setupCursorGlow() {
-  const glow = document.querySelector(".cursor-glow");
-
-  if (!glow || !hasFinePointer || prefersReducedMotion) return;
-
-  window.addEventListener(
-    "pointermove",
-    (event) => {
-      glow.style.left = `${event.clientX}px`;
-      glow.style.top = `${event.clientY}px`;
-    },
-    { passive: true },
+function applyConfig() {
+  document.querySelectorAll("[data-amazon]").forEach((el) => {
+    const link = CONFIG.amazon[el.dataset.amazon];
+    if (link && link !== "#") el.href = link;
+  });
+  const d = CONFIG.donation;
+  document.getElementById("goalTitle").textContent = d.title;
+  document.getElementById("goalDescription").textContent = d.description;
+  document.getElementById("goalCollected").textContent =
+    d.collected + d.currency;
+  document.getElementById("goalTarget").textContent = d.target + d.currency;
+  requestAnimationFrame(
+    () =>
+      (document.getElementById("goalBar").style.width =
+        Math.min(100, (d.collected / d.target) * 100) + "%"),
   );
 }
 
-function setupSpotlights() {
-  if (!hasFinePointer || prefersReducedMotion) return;
-
-  document.querySelectorAll(".spotlight-card").forEach((card) => {
-    card.addEventListener(
-      "pointermove",
-      (event) => {
-        const rect = card.getBoundingClientRect();
-
-        card.style.setProperty(
-          "--spotlight-x",
-          `${event.clientX - rect.left}px`,
-        );
-
-        card.style.setProperty(
-          "--spotlight-y",
-          `${event.clientY - rect.top}px`,
-        );
-      },
-      { passive: true },
-    );
-  });
-}
-
-function setupTilt() {
-  if (!hasFinePointer || prefersReducedMotion) return;
-
-  const cards = document.querySelectorAll(
-    ".social-card, .partner-card, .gear-card",
-  );
-
-  cards.forEach((card) => {
-    card.addEventListener(
-      "pointermove",
-      (event) => {
-        const rect = card.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-
-        const rotateX = ((y - rect.height / 2) / rect.height) * -7;
-        const rotateY = ((x - rect.width / 2) / rect.width) * 7;
-
-        card.style.transform =
-          `perspective(750px) rotateX(${rotateX}deg) ` +
-          `rotateY(${rotateY}deg) translateY(-4px)`;
-      },
-      { passive: true },
-    );
-
-    card.addEventListener("pointerleave", () => {
-      card.style.transform = "";
-    });
-  });
-}
-
-function setupHeroParticles() {
-  const canvas = document.getElementById("heroParticles");
-  const hero = document.querySelector(".hero");
-
-  if (!canvas || !hero || prefersReducedMotion) return;
-
-  const context = canvas.getContext("2d");
-
-  if (!context) return;
-
-  let width = 0;
-  let height = 0;
-  let particles = [];
-  let animationFrame = null;
-  let isDrawing = false;
-
-  const particleCount = window.innerWidth < 700 ? 16 : 34;
-
-  function resizeCanvas() {
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-
-    width = hero.clientWidth;
-    height = hero.clientHeight;
-
-    canvas.width = width * pixelRatio;
-    canvas.height = height * pixelRatio;
-
-    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-  }
-
-  function createParticles() {
-    particles = Array.from({ length: particleCount }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.22,
-      vy: (Math.random() - 0.5) * 0.22,
-      radius: Math.random() * 1.1 + 0.35,
-      alpha: Math.random() * 0.26 + 0.08,
-    }));
-  }
-
-  function drawParticles() {
-    if (!isDrawing) return;
-
-    context.clearRect(0, 0, width, height);
-
-    particles.forEach((particle) => {
-      particle.x += particle.vx;
-      particle.y += particle.vy;
-
-      if (particle.x < -5) particle.x = width + 5;
-      if (particle.x > width + 5) particle.x = -5;
-      if (particle.y < -5) particle.y = height + 5;
-      if (particle.y > height + 5) particle.y = -5;
-
-      context.beginPath();
-      context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-
-      context.fillStyle = `rgba(255, 170, 50, ${particle.alpha})`;
-      context.fill();
-    });
-
-    for (let i = 0; i < particles.length; i += 1) {
-      for (let j = i + 1; j < particles.length; j += 1) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance >= 92) continue;
-
-        context.beginPath();
-        context.moveTo(particles[i].x, particles[i].y);
-        context.lineTo(particles[j].x, particles[j].y);
-        context.strokeStyle = `rgba(146, 92, 255, ${0.06 * (1 - distance / 92)})`;
-        context.lineWidth = 0.45;
-        context.stroke();
-      }
-    }
-
-    animationFrame = requestAnimationFrame(drawParticles);
-  }
-
-  function restartParticles() {
-    resizeCanvas();
-    createParticles();
-  }
-
-  function startParticles() {
-    if (isDrawing) return;
-
-    isDrawing = true;
-    drawParticles();
-  }
-
-  function stopParticles() {
-    isDrawing = false;
-
-    if (animationFrame) {
-      cancelAnimationFrame(animationFrame);
+function animateCounter(el) {
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || "";
+  const decimals = parseInt(el.dataset.decimals || "0", 10);
+  const duration = 1800;
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const val = target * eased;
+    el.textContent =
+      (decimals > 0 ? val.toFixed(decimals) : Math.round(val)) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+    else {
+      el.textContent =
+        (decimals > 0 ? target.toFixed(decimals) : target) + suffix;
+      el.classList.add("counted");
     }
   }
-
-  restartParticles();
-  startParticles();
-
-  window.addEventListener("resize", restartParticles, { passive: true });
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      stopParticles();
-    } else {
-      startParticles();
-    }
-  });
+  requestAnimationFrame(tick);
 }
-
-/* ===== NEW: COOKIE BANNER ===== */
-function setupCookieBanner() {
-  const banner = document.getElementById("cookieBanner");
-  if (!banner) return;
-
-  const consent = localStorage.getItem("gz-cookie-consent");
-  if (consent) return;
-
-  setTimeout(() => {
-    banner.classList.add("show");
-  }, 1200);
-}
-
-function acceptCookies(all) {
-  const banner = document.getElementById("cookieBanner");
-  if (banner) banner.classList.remove("show");
-  localStorage.setItem("gz-cookie-consent", all ? "all" : "essential");
-}
-
-function setupActiveNav() {
-  const sections = document.querySelectorAll("section[id]");
-  const navLinks = document.querySelectorAll(".topbar-nav a");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navLinks.forEach((link) => {
-            link.classList.toggle(
-              "active",
-              link.getAttribute("href") === `#${entry.target.id}`,
-            );
-          });
-        }
-      });
-    },
-    { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
-  );
-
-  sections.forEach((section) => observer.observe(section));
-}
-
-/* ===== Scroll to top ===== */
-function setupScrollTop() {
-  const btn = document.getElementById("scrollTop");
-  if (!btn) return;
-
-  const toggle = () => {
-    if (window.scrollY > 500) {
-      btn.classList.add("visible");
-    } else {
-      btn.classList.remove("visible");
-    }
-  };
-
-  window.addEventListener("scroll", toggle, { passive: true });
-  toggle();
-
-  btn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: prefersReducedMotion ? "auto" : "smooth",
-    });
-  });
-}
-
-/* ===== MODALS ===== */
-function openModal(id) {
-  const modal = document.getElementById(id);
-  const overlay = document.getElementById("modalOverlay");
-  if (!modal) return;
-  if (overlay) overlay.classList.add("active");
-  modal.classList.add("active");
-  if (typeof modal.showModal === "function") modal.showModal();
-  document.body.style.overflow = "hidden";
-  applyLang();
-}
-
-function closeAllModals() {
-  document.querySelectorAll(".modal").forEach((m) => {
-    m.classList.remove("active");
-    if (typeof m.close === "function") m.close();
-  });
-  const overlay = document.getElementById("modalOverlay");
-  if (overlay) overlay.classList.remove("active");
-  document.body.style.overflow = "";
-}
-
-function showCookieBanner() {
-  const banner = document.getElementById("cookieBanner");
-  if (banner) {
-    banner.classList.add("show");
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-  }
-}
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeAllModals();
-});
 
 document.addEventListener("DOMContentLoaded", () => {
-  applyLang();
-  setupRevealAnimation();
+  setLanguage(localStorage.getItem("ganziLang") || "ru");
+  buildSchedule();
+  applyConfig();
+  twitchStatus();
+  discordStatus();
+  document
+    .querySelectorAll("[data-lang]")
+    .forEach((b) =>
+      b.addEventListener("click", () => setLanguage(b.dataset.lang)),
+    );
+  const io = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          io.unobserve(e.target);
+        }
+      }),
+    { threshold: 0.08 },
+  );
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  const menu = document.getElementById("mobileMenu");
+  document
+    .getElementById("menuBtn")
+    .addEventListener("click", () => menu.classList.toggle("open"));
+  menu
+    .querySelectorAll("a")
+    .forEach((a) =>
+      a.addEventListener("click", () => menu.classList.remove("open")),
+    );
 
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({
-          behavior: prefersReducedMotion ? "auto" : "smooth",
-        });
-        history.pushState(null, null, this.getAttribute("href"));
+  document.querySelectorAll(".faq-h").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const item = btn.closest(".faq-item");
+      const body = item.querySelector(".faq-b");
+      const isOpen = item.classList.contains("open");
+      document.querySelectorAll(".faq-item.open").forEach((o) => {
+        o.classList.remove("open");
+        o.querySelector(".faq-b").style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        body.style.maxHeight = body.scrollHeight + "px";
       }
     });
   });
 
-  document
-    .querySelectorAll(".discord-server-card[data-guild-id]")
-    .forEach(loadDiscordWidget);
+  document.querySelectorAll(".legal-h").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const item = btn.closest(".legal-item");
+      const body = item.querySelector(".legal-b");
+      const isOpen = item.classList.contains("open");
+      if (isOpen) {
+        item.classList.remove("open");
+        body.style.maxHeight = null;
+      } else {
+        item.classList.add("open");
+        body.style.maxHeight = body.scrollHeight + "px";
+      }
+    });
+  });
 
-  setupCursorGlow();
-  setupSpotlights();
-  setupTilt();
-  setupHeroParticles();
-  setupCookieBanner();
-  setupActiveNav();
-  setupScrollTop();
+  const btt = document.getElementById("btt");
+  addEventListener(
+    "scroll",
+    () => btt.classList.toggle("show", scrollY > 500),
+    { passive: true },
+  );
+  btt.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+
+  const bell = document.getElementById("telegramBell");
+  if (bell)
+    bell.addEventListener("click", () =>
+      window.open(
+        `https://t.me/${CONFIG.telegram.username}`,
+        "_blank",
+        "noopener",
+      ),
+    );
+
+  const cg = document.getElementById("cg");
+  if (cg && matchMedia("(hover:hover)").matches) {
+    addEventListener("mousemove", (e) => {
+      cg.style.left = e.clientX + "px";
+      cg.style.top = e.clientY + "px";
+      cg.style.opacity = 1;
+    });
+    addEventListener("mouseleave", () => (cg.style.opacity = 0));
+  }
+
+  const counters = document.querySelectorAll(".counter");
+  const cio = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          animateCounter(e.target);
+          cio.unobserve(e.target);
+        }
+      }),
+    { threshold: 0.4 },
+  );
+  counters.forEach((c) => cio.observe(c));
+
+  const form = document.getElementById("contactForm");
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const contact = form.contact.value.trim();
+      const message = form.message.value.trim();
+      if (CONFIG.formEndpoint) {
+        try {
+          const res = await fetch(CONFIG.formEndpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json;charset=UTF-8" },
+            body: JSON.stringify({ name, contact, message }),
+          });
+          if (res.ok) {
+            form.reset();
+            alert("Заявка отправлена!");
+            return;
+          }
+        } catch (err) {}
+      }
+      const subject = encodeURIComponent("Заявка с сайта GANZI SQUAD");
+      const body = encodeURIComponent(
+        `Имя: ${name}\nКонтакт: ${contact}\n\n${message}`,
+      );
+      window.location.href = `mailto:GanziDESpam@outlook.com?subject=${subject}&body=${body}`;
+    });
+  }
+
+  const canvas = document.getElementById("stars");
+  if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+    function resize() {
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+      stars = Array.from(
+        { length: Math.floor((innerWidth * innerHeight) / 9500) },
+        () => ({
+          x: Math.random() * innerWidth,
+          y: Math.random() * innerHeight,
+          r: Math.random() * 1.2 + 0.2,
+          a: Math.random(),
+          d: Math.random() * 0.004 + 0.0012,
+          dir: Math.random() > 0.5 ? 1 : -1,
+        }),
+      );
+    }
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach((s) => {
+        s.a += s.d * s.dir;
+        if (s.a <= 0.15 || s.a >= 1) s.dir *= -1;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, 6.283);
+        ctx.fillStyle = `rgba(242,239,232,${Math.max(0.12, Math.min(1, s.a))})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(draw);
+    }
+    resize();
+    addEventListener("resize", resize);
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) draw();
+    else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach((s) => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, 6.283);
+        ctx.fillStyle = "rgba(242,239,232,.5)";
+        ctx.fill();
+      });
+    }
+  }
+
+  const sections = document.querySelectorAll("main > section, .marquee");
+  function fadeOnScroll() {
+    const vh = innerHeight;
+    sections.forEach((s) => {
+      const r = s.getBoundingClientRect();
+      const mid = r.top + r.height / 2;
+      const dist = Math.abs(mid - vh / 2);
+      const fade = Math.max(0, 1 - dist / (vh * 0.9));
+      s.style.opacity = Math.max(0.4, fade);
+    });
+  }
+  addEventListener("scroll", fadeOnScroll, { passive: true });
+  fadeOnScroll();
 });
