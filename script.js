@@ -80,7 +80,7 @@ const T = {
     "partners.title": "Промокоды и ссылки",
     "partners.gearup": "Снижение пинга и стабильное соединение.",
     "partners.promocode": "Промокод:",
-    "partners.donatov": "Платформа для поддержки стримеров.",
+    "partners.donatov": "Платформа для пополнения баланса в играх.",
     "partners.pc": "ПК версия",
     "partners.mobile": "Мобильная",
     "partners.open": "Перейти",
@@ -209,7 +209,7 @@ const T = {
     "partners.title": "Promo codes & links",
     "partners.gearup": "Lower ping and a stable connection.",
     "partners.promocode": "Promo code:",
-    "partners.donatov": "Platform for supporting streamers.",
+    "partners.donatov": "Platform for adding funds to game accounts.",
     "partners.pc": "PC version",
     "partners.mobile": "Mobile",
     "partners.open": "Open",
@@ -338,7 +338,7 @@ const T = {
     "partners.title": "Promo-Codes & Links",
     "partners.gearup": "Weniger Ping und stabile Verbindung.",
     "partners.promocode": "Promo-Code:",
-    "partners.donatov": "Plattform zur Unterstützung von Streamern.",
+    "partners.donatov": "Plattform zum Aufladen des Guthabens in Spielen.",
     "partners.pc": "PC-Version",
     "partners.mobile": "Mobil",
     "partners.open": "Öffnen",
@@ -410,6 +410,29 @@ const T = {
       "Angebotene Dienstleistungen werden nach individueller Absprache erbracht; Preise auf dieser Seite sind unverbindliche Richtwerte.",
   },
 };
+
+async function discordIcons() {
+  const invites = {
+    "820446262972907541": "FrJbZvfPfm",
+    "1490463085029228614": "U347WWhjUj",
+  };
+  for (const [guildId, code] of Object.entries(invites)) {
+    try {
+      const r = await fetch(
+        `https://discord.com/api/v10/invites/${code}?with_counts=true`,
+      );
+      const j = await r.json();
+      const icon = j.guild?.icon;
+      if (icon) {
+        const ext = icon.startsWith("a_") ? "gif" : "png";
+        const url = `https://cdn.discordapp.com/icons/${guildId}/${icon}.${ext}`;
+        document
+          .querySelectorAll(`[data-discord-icon="${guildId}"]`)
+          .forEach((img) => (img.src = url));
+      }
+    } catch (e) {}
+  }
+}
 
 function setLanguage(lang) {
   localStorage.setItem("ganziLang", lang);
@@ -510,6 +533,8 @@ function animateCounter(el) {
 
 document.addEventListener("DOMContentLoaded", () => {
   setLanguage(localStorage.getItem("ganziLang") || "ru");
+  discordStatus();
+  discordIcons();
   buildSchedule();
   applyConfig();
   twitchStatus();
@@ -703,3 +728,22 @@ document.addEventListener("DOMContentLoaded", () => {
   addEventListener("scroll", fadeOnScroll, { passive: true });
   fadeOnScroll();
 });
+
+document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+document.addEventListener("keydown", (e) => {
+  if (
+    e.key === "F12" ||
+    (e.ctrlKey &&
+      e.shiftKey &&
+      ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+    (e.ctrlKey && e.key.toUpperCase() === "U")
+  ) {
+    e.preventDefault();
+  }
+});
+
+document.addEventListener("copy", (e) => e.preventDefault());
+document.addEventListener("cut", (e) => e.preventDefault());
+document.addEventListener("selectstart", (e) => e.preventDefault());
+document.addEventListener("dragstart", (e) => e.preventDefault());
