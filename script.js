@@ -2,9 +2,9 @@ const CONFIG = {
   twitch: { channel: "ganzisquad", clientId: "", accessToken: "" },
   telegram: { username: "ganzisquad" },
   donation: {
-    title: "Сбор на новую камеру",
-    description: "Цель для улучшения качества стримов",
-    collected: 280,
+    title: "Сбор на GTA 6 + PS 5 PRO + оборудование для стрима",
+    description: "Цель: для улучшения качества стримов и поднять онлайн",
+    collected: 144,
     target: 1000,
     currency: "€",
   },
@@ -22,14 +22,14 @@ const CONFIG = {
 
 const T = {
   ru: {
-    "nav.about": "О нас",
+    "nav.about": "Обо мне",
     "nav.schedule": "Расписание",
     "nav.services": "Услуги",
     "nav.setup": "ПК",
     "nav.social": "Соцсети",
     "nav.support": "Поддержка",
     "nav.contact": "Контакты",
-    "hero.badge": "Личный бренд",
+    "hero.badge": "Онлайн",
     "hero.text":
       "Креативное пространство для тех, кто создаёт будущее. Гейминг, стриминг, технологии и AI — на одном дыхании.",
     "hero.twitch": "Смотреть Twitch",
@@ -38,16 +38,16 @@ const T = {
     "about.tag": "О проекте",
     "about.title": "GANZI SQUAD",
     "about.text":
-      "GANZI (Andrei Garbuz) — стример и разработчик из Лейпцига. Строю долгосрочный проект вокруг стриминга, живого комьюнити и игрового контента: с 2022 года совмещаю гейминг с технологиями и AI-автоматизацией.",
+      "GANZI (Andrei) — стример, игрок в жизнь из Молдовы. Строю долгосрочный проект вокруг себя, живое комьюнити и игровой контент: с 2022 года совмещаю гейминг с технологиями и AI-автоматизацией.",
     "about.text2":
-      "Основной формат — кооперативные стримы: тактические шутеры, MMO и игры с активным взаимодействием, а не соло-прохождения. Атмосфера канала — спокойная, дружелюбная и немного экспертная. Дополнительно — Shorts с автоматизацией, гайды и новости.",
+      "Основной формат — кооперативные стримы: тактические шутеры, MMO и игры с активным взаимодействием, а не соло-прохождения. Атмосферу держим — дружелюбной, экспертной и адекватной. Хочется — Shorts с автоматизацией.",
     "timeline.pastLabel": "Пройденный путь",
     "timeline.futureLabel": "Планы и амбиции",
     "timeline.one": "Первый стрим",
     "timeline.two": "GearUP партнёрство",
-    "timeline.three": "50K подписчиков",
+    "timeline.three": "1.000 подписчиков",
     "timeline.four": "Запуск сайта",
-    "timeline.f1": "100K подписчиков",
+    "timeline.f1": "10K подписчиков",
     "timeline.f2": "Стрим GTA VI в день выхода",
     "timeline.f3": "Полная автоматизация Shorts",
     "timeline.f4": "Субтитры на EN/DE",
@@ -58,10 +58,11 @@ const T = {
     "schedule.title": "Расписание стримов",
     "schedule.fallback": "Статус Twitch появится после подключения API.",
     "services.tag": "Услуги",
-    "services.title": "Помощь проектам",
+    "services.title": "Моя подработка",
     "services.obs":
       "OBS, звук, камеры, алерты, overlay и настройка трансляции.",
-    "services.pc": "FPS, задержки, Windows, драйверы и игровые настройки.",
+    "services.pc":
+      "FPS, задержки, Windows оптимизация, драйверы и игровые настройки.",
     "services.chat.title": "Оформление чата",
     "services.chat":
       "Twitch chat, overlay, алерты, авто-сообщения и команды ботов.",
@@ -74,7 +75,7 @@ const T = {
     "setup.tag": "Мой ПК",
     "setup.title": "Комплектующие",
     "setup.text":
-      "Клик по компоненту ведёт на Amazon через партнёрскую ссылку.",
+      "Клик по компоненту ведёт на Amazon через партнёрскую ссылку что-бы поддержать меня.",
     "partners.tag": "Партнёры",
     "partners.title": "Промокоды и ссылки",
     "partners.gearup": "Снижение пинга и стабильное соединение.",
@@ -90,7 +91,7 @@ const T = {
     "support.title": "Поддержать GANZI SQUAD",
     "support.text":
       "Твоя поддержка помогает улучшать качество контента и покупать новое оборудование.",
-    "support.paypal": "Поддержка картой или балансом",
+    "support.paypal": "Поддержка картой или балансом PayPal",
     "support.revolut": "Быстрый перевод",
     "support.alerts": "Карты, крипто и телефон",
     "discord.title": "Мои сервера",
@@ -99,7 +100,7 @@ const T = {
     "social.title": "Найди меня везде",
     "social.text": "Стримы, короткие видео и новости — выбирай платформу.",
     "social.twitch": "Прямые эфиры и live-чат",
-    "social.youtube": "Видео, Shorts и обзоры",
+    "social.youtube": "Видео, Shorts, обзоры и Гайды",
     "social.tiktok": "Короткие ролики и клипы",
     "social.telegram": "Новости и анонсы",
     "faq.tag": "FAQ",
@@ -109,10 +110,10 @@ const T = {
       "Зайди на Twitch-канал во время эфира — ссылка в шапке сайта. Расписание обновляется еженедельно.",
     "faq.q2": "Какое железо ты используешь?",
     "faq.a2":
-      "Актуальный сетап есть в разделе «Мой ПК» — там все комплектующие с прямыми ссылками.",
+      "Актуальный сетап есть в разделе «ПК» — там все комплектующие с прямыми ссылками.",
     "faq.q3": "Как заказать услугу?",
     "faq.a3":
-      "Выбери услугу в разделе «Услуги» и нажми «Заказать» — форма отправит заявку прямо мне.",
+      "Выбери услугу в разделе «Услуги» и нажми «Заказать» — заполни форму и отправь заявку прямо мне.",
     "contact.tag": "Контакты",
     "contact.title": "Присоединяйся к GANZI SQUAD",
     "contact.text": "Опиши задачу — отвечу в Discord или по электронной почте.",
@@ -157,25 +158,25 @@ const T = {
     "nav.social": "Social",
     "nav.support": "Support",
     "nav.contact": "Contact",
-    "hero.badge": "Personal Brand",
+    "hero.badge": "Online",
     "hero.text":
-      "A creative space for those building the future. Gaming, streaming, technology and AI — in one place.",
+      "A creative space for those building the future. Gaming, streaming, technology and AI — in one breath.",
     "hero.twitch": "Watch Twitch",
     "hero.support": "Support",
     "hero.bell": "Message on Telegram",
-    "about.tag": "About",
+    "about.tag": "About the project",
     "about.title": "GANZI SQUAD",
     "about.text":
-      "GANZI (Andrei Garbuz) is a streamer and developer from Leipzig, building a long-term project around streaming, live community and gaming content since 2022, blending gaming with tech and AI automation.",
+      "GANZI (Andrei) is a streamer and a player in life from Moldova. Building a long-term project around himself, a live community and gaming content — since 2022 combining gaming with technology and AI automation.",
     "about.text2":
-      "Main format is co-op streaming: tactical shooters, MMOs and games with active player interaction, not solo playthroughs. Channel vibe is calm, friendly and slightly expert. Also: automated Shorts, guides and news.",
+      "The main format is co-op streaming: tactical shooters, MMOs and games with active interaction, not solo playthroughs. We keep the vibe friendly, expert and down-to-earth. Also aiming for automated Shorts.",
     "timeline.pastLabel": "Journey so far",
     "timeline.futureLabel": "Plans & ambitions",
     "timeline.one": "First stream",
     "timeline.two": "GearUP partnership",
-    "timeline.three": "50K followers",
+    "timeline.three": "1,000 followers",
     "timeline.four": "Website launch",
-    "timeline.f1": "100K followers",
+    "timeline.f1": "10K followers",
     "timeline.f2": "Stream GTA VI on release day",
     "timeline.f3": "Full Shorts automation",
     "timeline.f4": "EN/DE subtitles",
@@ -186,10 +187,11 @@ const T = {
     "schedule.title": "Stream Schedule",
     "schedule.fallback": "Twitch status appears after API configuration.",
     "services.tag": "Services",
-    "services.title": "Project Support",
+    "services.title": "My side gigs",
     "services.obs":
       "OBS, sound, cameras, alerts, overlays and full stream setup.",
-    "services.pc": "FPS, latency, Windows, drivers and game settings.",
+    "services.pc":
+      "FPS, latency, Windows optimization, drivers and game settings.",
     "services.chat.title": "Chat Design",
     "services.chat":
       "Twitch chat, overlay, alerts, auto messages and bot commands.",
@@ -201,23 +203,24 @@ const T = {
     "services.order": "Order",
     "setup.tag": "My PC",
     "setup.title": "Components",
-    "setup.text": "Click a component to buy it on Amazon via affiliate link.",
+    "setup.text":
+      "Clicking a component takes you to Amazon via an affiliate link to support me.",
     "partners.tag": "Partners",
     "partners.title": "Promo codes & links",
-    "partners.gearup": "Lower ping and stable connection.",
+    "partners.gearup": "Lower ping and a stable connection.",
     "partners.promocode": "Promo code:",
     "partners.donatov": "Platform for supporting streamers.",
     "partners.pc": "PC version",
     "partners.mobile": "Mobile",
     "partners.open": "Open",
     "partners.slot": "Partner slot",
-    "partners.slottext": "Your brand can be here.",
+    "partners.slottext": "Your brand could be here.",
     "partners.contact": "Contact",
     "support.tag": "Support",
     "support.title": "Support GANZI SQUAD",
     "support.text":
-      "Your support improves content quality and helps buy new equipment.",
-    "support.paypal": "Card or balance support",
+      "Your support helps improve content quality and buy new equipment.",
+    "support.paypal": "Support via PayPal card or balance",
     "support.revolut": "Fast transfer",
     "support.alerts": "Cards, crypto and phone",
     "discord.title": "My Servers",
@@ -226,55 +229,55 @@ const T = {
     "social.title": "Find me everywhere",
     "social.text": "Streams, short videos and news — pick your platform.",
     "social.twitch": "Live streams and chat",
-    "social.youtube": "Videos, Shorts and reviews",
+    "social.youtube": "Videos, Shorts, reviews and guides",
     "social.tiktok": "Short clips and highlights",
     "social.telegram": "News and announcements",
     "faq.tag": "FAQ",
-    "faq.title": "Frequently Asked",
+    "faq.title": "Frequently Asked Questions",
     "faq.q1": "How do I join the stream?",
     "faq.a1":
-      "Visit the Twitch channel while live — link is in the header. Schedule updates weekly.",
+      "Visit the Twitch channel while live — link is in the site header. Schedule updates weekly.",
     "faq.q2": "What hardware do you use?",
     "faq.a2":
-      'Current setup is listed in the "My PC" section with direct links.',
+      'The current setup is listed in the "PC" section, with direct links to everything.',
     "faq.q3": "How do I order a service?",
     "faq.a3":
-      'Pick a service in the "Services" section and click "Order" — the form sends the request directly to me.',
+      'Pick a service in the "Services" section and click "Order" — fill out the form and send the request directly to me.',
     "contact.tag": "Contact",
     "contact.title": "Join GANZI SQUAD",
-    "contact.text": "Describe the task — I will reply in Discord or by email.",
+    "contact.text": "Describe the task — I will reply on Discord or by email.",
     "contact.send": "Send request",
     "legal.tag": "Legal Information",
     "legal.title": "Legal Information",
     "legal.impressum.h": "Impressum (§ 5 TMG)",
     "legal.impressum.contact": "Contact",
     "legal.impressum.rstv":
-      "Responsible for content per § 18 Abs. 2 MStV: GANZI, address as above.",
+      "Responsible for content under § 18 Abs. 2 MStV: GANZI, address as stated above.",
     "legal.impressum.disclaimer":
-      "Despite careful content review, we assume no liability for the content of external links. The operators of linked pages are solely responsible for their content.",
+      "Despite careful content review, we assume no liability for the content of external links. The operators of linked sites are solely responsible for their content.",
     "legal.privacy.h": "Privacy Policy",
     "legal.privacy.p1":
-      "Controller under GDPR: GANZI, Obermarkt 21, 99998 Thüringen, Germany, Email: GanziDESpam@outlook.com.",
+      "Controller within the meaning of the GDPR: GANZI, Obermarkt 21, 99998 Thüringen, Germany, Email: GanziDESpam@outlook.com.",
     "legal.privacy.p2":
-      "We process personal data (name, contact details) you provide via the contact form or email solely to handle your request. Legal basis is Art. 6(1)(b) and (f) GDPR.",
+      "We process personal data (name, contact details) that you provide via the contact form or email solely to handle your request. The legal basis is Art. 6(1)(b) and (f) GDPR.",
     "legal.privacy.p3":
-      "This site uses no analytics, tracking or advertising cookies. External content (Twitch player, Discord widgets) may transmit data to their providers on load; their own privacy policies apply additionally.",
+      "This site does not use analytics, tracking or advertising cookies. External content (Twitch player, Discord widgets) may transmit data to their respective providers on load; their own separate privacy policies apply.",
     "legal.privacy.p4":
-      "Your data is stored only as long as necessary to process your request, max. 6 months, unless a legal retention duty applies.",
+      "Your data is stored only for as long as necessary to process your request, up to a maximum of 6 months, unless a legal retention obligation applies.",
     "legal.privacy.p5":
-      "You have the right to access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction (Art. 18), data portability (Art. 20) and objection (Art. 21 GDPR), plus the right to lodge a complaint with a supervisory authority (Art. 77 GDPR).",
+      "You have the right to access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20) and objection (Art. 21 GDPR), as well as the right to lodge a complaint with a supervisory authority (Art. 77 GDPR).",
     "legal.cookies.h": "Cookie Notice",
     "legal.cookies.p1":
-      "This site uses only technically necessary storage (localStorage) for language selection. No tracking, marketing or analytics cookies are set.",
+      "This site uses only technically necessary storage functions (localStorage) for language selection. No tracking, marketing or analytics cookies are set.",
     "legal.cookies.p2":
-      "If analytics or advertising services are added in the future, a compliant consent banner per TTDSG will be included.",
+      "If analytics or advertising services are added in the future, a full cookie consent banner compliant with TTDSG will be included.",
     "legal.terms.h": "Terms of Use",
     "legal.terms.p1":
-      "By using this site you agree to comply with applicable law and not to disrupt its operation.",
+      "By using this site, you agree to comply with applicable law and not to disrupt the operation of the site.",
     "legal.terms.p2":
-      "All content, text, graphics and design of this site are property of GANZI SQUAD unless stated otherwise. Reproduction without consent is not permitted.",
+      "All content, text, graphics and design of this site are the property of GANZI SQUAD unless stated otherwise. Reproduction without consent is not permitted.",
     "legal.terms.p3":
-      "Offered services are provided by individual arrangement; prices on this page are non-binding estimates.",
+      "The offered services are provided by individual arrangement; prices on this page are non-binding estimates.",
   },
   de: {
     "nav.about": "Über mich",
@@ -284,25 +287,25 @@ const T = {
     "nav.social": "Social",
     "nav.support": "Support",
     "nav.contact": "Kontakt",
-    "hero.badge": "Persönliche Marke",
+    "hero.badge": "Online",
     "hero.text":
-      "Ein kreativer Raum für alle, die die Zukunft gestalten. Gaming, Streaming, Technik und KI an einem Ort.",
+      "Ein kreativer Raum für alle, die die Zukunft gestalten. Gaming, Streaming, Technik und KI — in einem Atemzug.",
     "hero.twitch": "Twitch ansehen",
     "hero.support": "Unterstützen",
     "hero.bell": "Auf Telegram schreiben",
     "about.tag": "Über das Projekt",
     "about.title": "GANZI SQUAD",
     "about.text":
-      "GANZI (Andrei Garbuz) ist Streamer und Entwickler aus Leipzig. Seit 2022 baut er ein langfristiges Projekt rund um Streaming, lebendige Community und Gaming-Content — kombiniert mit Technik und KI-Automatisierung.",
+      "GANZI (Andrei) ist Streamer und ein Spieler im Leben, aus Moldawien. Er baut ein langfristiges Projekt rund um sich selbst, eine lebendige Community und Gaming-Content — seit 2022 kombiniert er Gaming mit Technik und KI-Automatisierung.",
     "about.text2":
-      "Hauptformat ist Koop-Streaming: taktische Shooter, MMOs und Spiele mit aktiver Interaktion, keine Solo-Durchspiele. Die Kanal-Atmosphäre ist ruhig, freundlich und leicht fachkundig. Zusätzlich: automatisierte Shorts, Guides und News.",
+      "Hauptformat ist Koop-Streaming: taktische Shooter, MMOs und Spiele mit aktiver Interaktion, keine Solo-Durchspiele. Die Atmosphäre bleibt freundlich, fachkundig und bodenständig. Angestrebt wird zudem automatisierter Shorts-Content.",
     "timeline.pastLabel": "Bisheriger Weg",
     "timeline.futureLabel": "Pläne & Ambitionen",
     "timeline.one": "Erster Stream",
     "timeline.two": "GearUP Partnerschaft",
-    "timeline.three": "50K Follower",
+    "timeline.three": "1.000 Follower",
     "timeline.four": "Website-Start",
-    "timeline.f1": "100K Follower",
+    "timeline.f1": "10K Follower",
     "timeline.f2": "GTA VI am Release-Tag streamen",
     "timeline.f3": "Vollständige Shorts-Automatisierung",
     "timeline.f4": "EN/DE-Untertitel",
@@ -313,10 +316,11 @@ const T = {
     "schedule.title": "Stream-Zeitplan",
     "schedule.fallback": "Twitch-Status erscheint nach API-Konfiguration.",
     "services.tag": "Dienste",
-    "services.title": "Projektunterstützung",
+    "services.title": "Meine Nebentätigkeit",
     "services.obs":
       "OBS, Sound, Kameras, Alerts, Overlays und vollständiges Streaming-Setup.",
-    "services.pc": "FPS, Latenz, Windows, Treiber und Spieleinstellungen.",
+    "services.pc":
+      "FPS, Latenz, Windows-Optimierung, Treiber und Spieleinstellungen.",
     "services.chat.title": "Chat-Design",
     "services.chat":
       "Twitch-Chat, Overlay, Alerts, Auto-Nachrichten und Bot-Befehle.",
@@ -329,7 +333,7 @@ const T = {
     "setup.tag": "Mein PC",
     "setup.title": "Komponenten",
     "setup.text":
-      "Klicke auf eine Komponente, um sie über meinen Amazon-Link zu kaufen.",
+      "Ein Klick auf eine Komponente führt über meinen Amazon-Affiliate-Link, um mich zu unterstützen.",
     "partners.tag": "Partner",
     "partners.title": "Promo-Codes & Links",
     "partners.gearup": "Weniger Ping und stabile Verbindung.",
@@ -339,39 +343,39 @@ const T = {
     "partners.mobile": "Mobil",
     "partners.open": "Öffnen",
     "partners.slot": "Partner-Slot",
-    "partners.slottext": "Deine Marke kann hier sein.",
+    "partners.slottext": "Deine Marke könnte hier stehen.",
     "partners.contact": "Kontakt",
     "support.tag": "Support",
     "support.title": "GANZI SQUAD unterstützen",
     "support.text":
-      "Deine Unterstützung verbessert die Content-Qualität und hilft bei neuem Equipment.",
-    "support.paypal": "Karte oder Guthaben",
+      "Deine Unterstützung verbessert die Content-Qualität und hilft beim Kauf neuer Ausrüstung.",
+    "support.paypal": "Unterstützung per PayPal-Karte oder Guthaben",
     "support.revolut": "Schnelle Überweisung",
     "support.alerts": "Karten, Krypto und Telefon",
     "discord.title": "Meine Server",
     "discord.check": "● Online-Status wird geprüft",
     "social.tag": "Alle Plattformen",
     "social.title": "Finde mich überall",
-    "social.text": "Streams, kurze Videos und News — wähle die Plattform.",
+    "social.text": "Streams, kurze Videos und News — wähle deine Plattform.",
     "social.twitch": "Live-Streams und Chat",
-    "social.youtube": "Videos, Shorts und Reviews",
+    "social.youtube": "Videos, Shorts, Reviews und Guides",
     "social.tiktok": "Kurze Clips und Highlights",
     "social.telegram": "News und Ankündigungen",
     "faq.tag": "FAQ",
     "faq.title": "Häufige Fragen",
     "faq.q1": "Wie komme ich zum Stream?",
     "faq.a1":
-      "Besuche den Twitch-Kanal während des Streams — Link im Header. Zeitplan wird wöchentlich aktualisiert.",
+      "Besuche den Twitch-Kanal während des Streams — Link im Header der Website. Der Zeitplan wird wöchentlich aktualisiert.",
     "faq.q2": "Welche Hardware nutzt du?",
     "faq.a2":
-      'Das aktuelle Setup findest du im Bereich "Mein PC" mit direkten Links.',
+      'Das aktuelle Setup findest du im Bereich "PC" mit direkten Links zu allem.',
     "faq.q3": "Wie bestelle ich eine Dienstleistung?",
     "faq.a3":
-      'Wähle einen Dienst im Bereich "Dienste" und klicke auf "Bestellen" — das Formular sendet die Anfrage direkt an mich.',
+      'Wähle einen Dienst im Bereich "Dienste" und klicke auf "Bestellen" — fülle das Formular aus und sende die Anfrage direkt an mich.',
     "contact.tag": "Kontakt",
     "contact.title": "GANZI SQUAD beitreten",
     "contact.text":
-      "Beschreibe deine Aufgabe — Antwort über Discord oder E-Mail.",
+      "Beschreibe deine Aufgabe — ich antworte über Discord oder per E-Mail.",
     "contact.send": "Anfrage senden",
     "legal.tag": "Rechtliche Hinweise",
     "legal.title": "Rechtliche Hinweise",
@@ -387,11 +391,11 @@ const T = {
     "legal.privacy.p2":
       "Wir verarbeiten personenbezogene Daten (z. B. Name, Kontaktdaten), die du uns über das Kontaktformular oder per E-Mail mitteilst, ausschließlich zur Bearbeitung deiner Anfrage. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b und f DSGVO.",
     "legal.privacy.p3":
-      "Diese Website nutzt keine Analyse-, Tracking- oder Werbe-Cookies. Externe Inhalte (Twitch-Player, Discord-Widgets) können beim Laden Daten an die jeweiligen Anbieter übertragen; deren Datenschutzerklärungen gelten zusätzlich.",
+      "Diese Website nutzt keine Analyse-, Tracking- oder Werbe-Cookies. Externe Inhalte (Twitch-Player, Discord-Widgets) können beim Laden Daten an die jeweiligen Anbieter übertragen; deren eigene Datenschutzerklärungen gelten zusätzlich.",
     "legal.privacy.p4":
       "Deine Daten werden nur so lange gespeichert, wie es zur Bearbeitung deiner Anfrage nötig ist, maximal 6 Monate, sofern keine gesetzliche Aufbewahrungspflicht besteht.",
     "legal.privacy.p5":
-      "Du hast das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO) sowie das Recht auf Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO).",
+      "Du hast das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO) sowie das Recht auf Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO).",
     "legal.cookies.h": "Cookie-Hinweis",
     "legal.cookies.p1":
       "Diese Website verwendet ausschließlich technisch notwendige Speicherfunktionen (localStorage) zur Sprachauswahl. Es werden keine Tracking-, Marketing- oder Analyse-Cookies gesetzt.",
@@ -421,12 +425,12 @@ function setLanguage(lang) {
 
 function buildSchedule() {
   const data = [
-    ["Пн", "20:00", "Стрим"],
-    ["Вт", "20:00", "Стрим"],
+    ["Пн", "17:00", "Стрим"],
+    ["Вт", "17:00", "Стрим"],
     ["Ср", "—", "Выходной"],
-    ["Чт", "21:00", "Стрим"],
-    ["Пт", "20:00", "Стрим"],
-    ["Сб", "18:00", "IRL"],
+    ["Чт", "17:00", "Стрим"],
+    ["Пт", "17:00", "Стрим"],
+    ["Сб", "18:00", "Стрим"],
     ["Вс", "—", "Выходной"],
   ];
   const day = (new Date().getDay() + 6) % 7;
